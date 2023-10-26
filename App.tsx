@@ -1,6 +1,7 @@
-import { Platform, UIManager } from 'react-native';
+import { Platform, StyleSheet, UIManager, View } from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import { theme } from './src/theme';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -10,8 +11,16 @@ if (Platform.OS === 'android') {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={globalTheme}>
       <BottomTabsNavigator />
     </NavigationContainer>
   );
 }
+
+const globalTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: theme.white,
+  },
+};
