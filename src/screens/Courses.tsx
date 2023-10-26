@@ -12,7 +12,7 @@ export const Courses = () => {
   return (
     <View style={styles.container}>
       {courses.map((course) => (
-        <CourseItem></CourseItem>
+        <CourseItem course={course} />
       ))}
     </View>
   );

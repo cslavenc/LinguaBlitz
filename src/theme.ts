@@ -1,7 +1,12 @@
 export const theme = {
-  purple: '#454C73',
+  // functional colors
   white: '#fff',
-  lavender: '#87677B',
-  blue: '#1D84B5',
   grey: '#8E9AAF',
+  // brand colors
+  turquoise: '#65D2B5',
+  orange: '#FFD6B1',
+  autumngreen: '#D3E466',
+  green: '#CAF1BE',
+  violet: '#B5B1FF',
+  blue: '#1D84B5',
 };
