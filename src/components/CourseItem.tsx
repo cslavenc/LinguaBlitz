@@ -24,7 +24,7 @@ export const CourseItem = ({ course }) => {
   }
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
-      <HomeIcon />
+      <HomeIcon size={64} />
       <Text style={styles.name}>{course}</Text>
     </View>
   );
