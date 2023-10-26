@@ -1,3 +1,5 @@
+import { Text } from 'react-native';
+
 export const Home = () => {
-  return '';
+  return <Text>home</Text>;
 };

@@ -1,3 +1,5 @@
+import { Text } from 'react-native';
+
 export const Courses = () => {
-  return;
+  return <Text>courses</Text>;
 };
