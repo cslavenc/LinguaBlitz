@@ -1,7 +1,8 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { HomeIcon } from './Icons';
 import { theme } from '../theme';
 
+// TODO : find a suitable ui component library
 export const CourseItem = ({ course }) => {
   let color = 'blue';
 
@@ -24,6 +25,7 @@ export const CourseItem = ({ course }) => {
   }
   return (
     <View style={[styles.container, { backgroundColor: color }]}>
+      <TouchableOpacity onPress={() => navigation.navigate('Course')} />
       <HomeIcon size={64} />
       <Text style={styles.name}>{course}</Text>
     </View>
