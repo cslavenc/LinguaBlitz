@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Text, UIManager, View } from 'react-native';
+import { Platform, UIManager } from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
 import { NavigationContainer } from '@react-navigation/native';
 
