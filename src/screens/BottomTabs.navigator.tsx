@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './Home';
 import { Courses } from './Courses';
-import { AnalyticsTab, HomeIcon } from '../components/Icons';
+import { HistoryTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 
 const BottomTabs = createBottomTabNavigator();
@@ -18,7 +18,7 @@ export const BottomTabsNavigator = () => {
             case 'Home':
               return <HomeIcon size={size} color={color} />;
             case 'Courses':
-              return <AnalyticsTab size={size} color={color} />;
+              return <HistoryTab size={size} color={color} />;
             default:
               return null;
           }

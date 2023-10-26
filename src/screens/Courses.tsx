@@ -1,5 +1,25 @@
-import { Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { CourseItem } from '../components/CourseItem';
 
 export const Courses = () => {
-  return <Text>courses</Text>;
+  const courses = [
+    'Business',
+    'Health',
+    'Environment',
+    'Science & Technology',
+    'Feelings & Emotions',
+  ];
+  return (
+    <View style={styles.container}>
+      {courses.map((course) => (
+        <CourseItem></CourseItem>
+      ))}
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 26,
+  },
+});
