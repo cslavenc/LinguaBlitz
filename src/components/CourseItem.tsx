@@ -4,8 +4,8 @@ import { getColor, getImageUrl } from '../utils';
 
 export const CourseItem = ({ course }) => {
   const navigation = useNavigation();
-  let color = getColor(course);
-  let imageUrl = getImageUrl(course);
+  const color = getColor(course);
+  const imageUrl = getImageUrl(course);
 
   return (
     <View>
@@ -24,6 +24,7 @@ export const CourseItem = ({ course }) => {
 
 const styles = StyleSheet.create({
   container: {
+    elevation: 5,
     height: 100,
     marginVertical: 12,
     borderRadius: 10,

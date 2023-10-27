@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
   title: {
     height: 150,
+    elevation: 5,
     marginVertical: 12,
     marginBottom: 25,
     padding: 10,

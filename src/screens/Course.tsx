@@ -27,6 +27,7 @@ export const Course = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     height: 150,
+    elevation: 5,
     marginHorizontal: 20,
     marginVertical: 12,
     padding: 10,
