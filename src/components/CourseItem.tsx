@@ -1,37 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { HomeIcon } from './Icons';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
+import { getColor, getImageUrl } from '../utils';
 
 export const CourseItem = ({ course }) => {
   const navigation = useNavigation();
-  let color = 'blue';
-  let imageUrl;
+  let color = getColor(course);
+  let imageUrl = getImageUrl(course);
 
-  // TODO : split these switch assignment into utility functions
-  // TODO : add a bottom type in case new things are added so nothing goes forgotten
-  switch (course) {
-    case 'Business':
-      color = theme.turquoise;
-      imageUrl = require('../../assets/category_business.png');
-      break;
-    case 'Health':
-      color = theme.autumngreen;
-      imageUrl = require('../../assets/category_health.png');
-      break;
-    case 'Environment':
-      color = theme.green;
-      imageUrl = require('../../assets/category_environment.png');
-      break;
-    case 'Science & Technology':
-      color = theme.violet;
-      imageUrl = require('../../assets/category_science.png');
-      break;
-    case 'Feelings & Emotions':
-      color = theme.orange;
-      imageUrl = require('../../assets/category_feelings.png');
-      break;
-  }
   return (
     <View>
       <TouchableOpacity

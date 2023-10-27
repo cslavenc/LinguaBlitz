@@ -1,29 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SpeechBubbleIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
+import { getImageUrl } from '../utils';
 
 export const Course = ({ route }) => {
   const navigation = useNavigation();
   const { course, color } = route.params;
 
-  let imageUrl;
-  switch (course) {
-    case 'Business':
-      imageUrl = require('../../assets/category_business.png');
-      break;
-    case 'Health':
-      imageUrl = require('../../assets/category_health.png');
-      break;
-    case 'Environment':
-      imageUrl = require('../../assets/category_environment.png');
-      break;
-    case 'Science & Technology':
-      imageUrl = require('../../assets/category_science.png');
-      break;
-    case 'Feelings & Emotions':
-      imageUrl = require('../../assets/category_feelings.png');
-      break;
-  }
+  let imageUrl = getImageUrl(course);
 
   return (
     <View>
