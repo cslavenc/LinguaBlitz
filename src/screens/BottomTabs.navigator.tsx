@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './Home';
-import { Courses } from './Courses';
+import { CourseOverview } from './CourseOverview';
 import { HistoryTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 
@@ -31,7 +31,7 @@ export const BottomTabsNavigator = () => {
       />
       <BottomTabs.Screen
         name="Courses"
-        component={Courses}
+        component={CourseOverview}
         options={{ headerTitleAlign: 'center' }}
       />
     </BottomTabs.Navigator>
