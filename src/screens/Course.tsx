@@ -1,7 +1,6 @@
-import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { HomeIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
-import { theme } from '../theme';
 
 export const Course = ({ route }) => {
   const navigation = useNavigation();
