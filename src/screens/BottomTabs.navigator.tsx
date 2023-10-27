@@ -6,6 +6,7 @@ import { theme } from '../theme';
 import { Course } from './Course';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CourseItem } from '../components/CourseItem';
+import { WordList } from './WordList';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
@@ -22,9 +23,10 @@ export const HomeStackScreen = () => {
 export const CourseStackScreen = () => {
   return (
     <CourseStack.Navigator>
-      <CourseStack.Screen name="CoursesOverview" component={CourseOverview} />
+      <CourseStack.Screen name="Overview" component={CourseOverview} />
       <CourseStack.Screen name="CourseItem" component={CourseItem} />
       <CourseStack.Screen name="Course" component={Course} />
+      <CourseStack.Screen name="Word list" component={WordList} />
     </CourseStack.Navigator>
   );
 };
