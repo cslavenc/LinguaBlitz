@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { HomeIcon } from '../components/Icons';
+import { SpeechBubbleIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
 
 export const Course = ({ route }) => {
@@ -33,7 +33,7 @@ export const Course = ({ route }) => {
         activeOpacity={1}
         style={[styles.container, { backgroundColor: color }]}
         onPress={() => navigation.navigate('Word list', { color })}>
-        <HomeIcon size={64} />
+        <SpeechBubbleIcon />
         <Text style={styles.name}>Word list</Text>
       </TouchableOpacity>
     </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, G, Path, Text } from 'react-native-svg';
 
 interface Icon {
   color?: string;
@@ -21,6 +21,35 @@ export const CourseOverviewTab: React.FC<Icon> = ({ color, size }) => {
       <Circle cx={4.029} cy={11.463} r={4.029} />
       <Circle cx={4.029} cy={30.062} r={4.029} />
       <Circle cx={4.029} cy={48.661} r={4.029} />
+    </Svg>
+  );
+};
+
+export const SpeechBubbleIcon: React.FC<Icon> = ({ color }) => {
+  return (
+    <Svg
+      width={122}
+      height={99}
+      viewBox="0 0 122 99"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <G filter="url(#filter0_d_18_116)">
+        <Path
+          d="M62.168.293C31.206-.421 5.673 18.026 5.131 41.508 4.898 51.644 9.37 61.031 16.997 68.506 14.022 78.743 4.657 87.708 4.545 87.808a1.544 1.544 0 00-.37 1.77c.271.62.876 1.002 1.577 1.018 14.517.335 25.55-5.913 31.03-9.794 7.102 2.679 15.017 4.313 23.425 4.507 30.962.714 56.495-17.733 57.037-41.215C117.785 20.612 93.13 1.007 62.168.293z"
+          fill="#000"
+          fillOpacity={0.51}
+          shapeRendering="crispEdges"
+        />
+        <Text
+          x="60"
+          y="55"
+          fill="white"
+          fontSize="36"
+          fontWeight="bold"
+          textAnchor="middle">
+          C1
+        </Text>
+      </G>
     </Svg>
   );
 };
