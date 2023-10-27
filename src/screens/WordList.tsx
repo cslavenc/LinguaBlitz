@@ -1,25 +1,30 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import data from '../../data/C1_english_vocabulary.json';
 
 export const WordList = ({ route }) => {
   const { color } = route.params;
   const navigation = useNavigation();
 
+  const word = data['2_1'].word;
+  const example = data['2_1'].example;
+  const description = data['2_1'].description;
+
   return (
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
-        <Text style={styles.name}>Word</Text>
+        <Text style={styles.name}>{word}</Text>
         <Text style={styles.name}>(part of speech)</Text>
       </View>
       <View style={styles.information}>
         <View>
           <View style={{ height: '33%' }}>
             <Text style={styles.heading}>Description</Text>
-            <Text>description goes here</Text>
+            <Text>{description}</Text>
           </View>
           <View style={{ height: '33%' }}>
             <Text style={styles.heading}>Example</Text>
-            <Text>examples go here</Text>
+            <Text>{example}</Text>
           </View>
           <View style={{ height: '33%' }}>
             <Text style={styles.heading}>Synonyms</Text>
