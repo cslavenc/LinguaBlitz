@@ -14,7 +14,9 @@ export const WordList = ({ route }) => {
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
         <Text style={styles.name}>{word}</Text>
-        <Text style={styles.name}>(part of speech)</Text>
+        <Text style={[styles.name, { fontStyle: 'italic' }]}>
+          (part of speech)
+        </Text>
       </View>
       <View style={styles.information}>
         <View>
