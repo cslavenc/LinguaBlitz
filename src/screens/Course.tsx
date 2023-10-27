@@ -1,12 +1,34 @@
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { HomeIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
+import { theme } from '../theme';
 
 export const Course = ({ route }) => {
   const navigation = useNavigation();
   const { course, color } = route.params;
+
+  let imageUrl;
+  switch (course) {
+    case 'Business':
+      imageUrl = require('../../assets/category_business.png');
+      break;
+    case 'Health':
+      imageUrl = require('../../assets/category_health.png');
+      break;
+    case 'Environment':
+      imageUrl = require('../../assets/category_environment.png');
+      break;
+    case 'Science & Technology':
+      imageUrl = require('../../assets/category_science.png');
+      break;
+    case 'Feelings & Emotions':
+      imageUrl = require('../../assets/category_feelings.png');
+      break;
+  }
+
   return (
     <View>
+      <Image resizeMode="contain" source={imageUrl} />
       <Text style={styles.name}>{course}</Text>
       <TouchableOpacity
         activeOpacity={1}
@@ -34,5 +56,6 @@ const styles = StyleSheet.create({
   name: {
     textAlign: 'center',
     fontSize: 24,
+    fontWeight: 'bold',
   },
 });
