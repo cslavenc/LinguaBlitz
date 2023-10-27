@@ -1,6 +1,6 @@
 import { theme } from './theme';
 
-export enum Cagegory {
+export enum Category {
   BUSINESS = 'Business',
   HEALTH = 'Health',
   ENVIRONMENT = 'Environment',
@@ -10,15 +10,15 @@ export enum Cagegory {
 
 export const getColor = (course: string) => {
   switch (course) {
-    case Cagegory.BUSINESS:
+    case Category.BUSINESS:
       return theme.turquoise;
-    case Cagegory.HEALTH:
+    case Category.HEALTH:
       return theme.autumngreen;
-    case Cagegory.ENVIRONMENT:
+    case Category.ENVIRONMENT:
       return theme.green;
-    case Cagegory.SCIENCE:
+    case Category.SCIENCE:
       return theme.violet;
-    case Cagegory.FEELINGS:
+    case Category.FEELINGS:
       return theme.orange;
     default:
       const exhaustiveCheck: never = course as any;
@@ -28,15 +28,15 @@ export const getColor = (course: string) => {
 
 export const getImageUrl = (course: string) => {
   switch (course) {
-    case Cagegory.BUSINESS:
+    case Category.BUSINESS:
       return require('../assets/category_business.png');
-    case Cagegory.HEALTH:
+    case Category.HEALTH:
       return require('../assets/category_health.png');
-    case Cagegory.ENVIRONMENT:
+    case Category.ENVIRONMENT:
       return require('../assets/category_environment.png');
-    case Cagegory.SCIENCE:
+    case Category.SCIENCE:
       return require('../assets/category_science.png');
-    case Cagegory.FEELINGS:
+    case Category.FEELINGS:
       return require('../assets/category_feelings.png');
     default:
       const exhaustiveCheck: never = course as any;
