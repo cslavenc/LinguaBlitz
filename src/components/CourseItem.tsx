@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { getColor, getImageUrl } from '../utils';
 

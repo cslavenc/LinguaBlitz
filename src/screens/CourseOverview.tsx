@@ -8,12 +8,8 @@ export const CourseOverview = () => {
     'Environment',
     'Science & Technology',
     'Feelings & Emotions',
-    'Business',
-    'Health',
-    'Environment',
-    'Science & Technology',
-    'Feelings & Emotions',
   ];
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
