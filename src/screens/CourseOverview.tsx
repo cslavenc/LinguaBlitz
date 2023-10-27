@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { CourseItem } from '../components/CourseItem';
 
 export const CourseOverview = () => {
@@ -8,12 +8,19 @@ export const CourseOverview = () => {
     'Environment',
     'Science & Technology',
     'Feelings & Emotions',
+    'Business',
+    'Health',
+    'Environment',
+    'Science & Technology',
+    'Feelings & Emotions',
   ];
   return (
     <View style={styles.container}>
-      {courses.map((course) => (
-        <CourseItem course={course} key={course} />
-      ))}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {courses.map((course) => (
+          <CourseItem course={course} key={course} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
