@@ -14,7 +14,7 @@ export const HomeIcon: React.FC<Icon> = ({ color, size }) => {
   );
 };
 
-export const HistoryTab: React.FC<Icon> = ({ color, size }) => {
+export const CourseOverviewTab: React.FC<Icon> = ({ color, size }) => {
   return (
     <Svg width={size} height={size} viewBox="0 0 60.123 60.123" fill={color}>
       <Path d="M57.124 51.893H16.92a3 3 0 110-6h40.203a3 3 0 01.001 6zM57.124 33.062H16.92a3 3 0 110-6h40.203a3 3 0 01.001 6zM57.124 14.231H16.92a3 3 0 110-6h40.203a3 3 0 01.001 6z" />

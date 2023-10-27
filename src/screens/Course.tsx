@@ -1,6 +1,7 @@
 import { Text } from 'react-native';
 
-export const Course = ({ course, color }) => {
+export const Course = ({ route }) => {
+  const { course, color } = route.params;
   return (
     <Text>
       {course} with color {color}

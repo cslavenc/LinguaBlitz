@@ -1,4 +1,5 @@
-import { Platform, StyleSheet, UIManager, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { Platform, UIManager } from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { theme } from './src/theme';

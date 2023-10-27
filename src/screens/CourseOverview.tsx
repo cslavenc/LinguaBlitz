@@ -12,7 +12,7 @@ export const CourseOverview = () => {
   return (
     <View style={styles.container}>
       {courses.map((course) => (
-        <CourseItem course={course} />
+        <CourseItem course={course} key={course} />
       ))}
     </View>
   );
