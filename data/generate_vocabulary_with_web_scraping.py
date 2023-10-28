@@ -44,43 +44,46 @@ if __name__ == '__main__':
             
             # extract data
             DOM = bs(content, 'html.parser')
-            sections = DOM.findAll('div', {'class': 'info sense'})
-            partOfSpeech = DOM.find('span', {'class': 'pos'}).text
+            headerWithSections = DOM.findAll('div', {'class': 'pos_section'})
             
-            if len(sections):
-                for idx, section in enumerate(sections):
-                    description = ''  # reset so that descriptions from a previous nuanced meaning do not fill up the next description
-                    word = section.findAll('div', {'class': 'sense_title'})[0].text
-                    blockquote = section.findAll('p', {'class': 'blockquote'})
-                    example = section.findAll('p', {'class': 'learnerexamp'})
-                    level = section.findAll('span', {'class': 'label'})
-                    
-                    # ignore those words without a level
-                    if len(level):
-                        level = level[0].text
-                    else:
-                        continue  # go to the next iteration
-                    
-                    
-                    # some words have more than one short blockquote
-                    for quote in blockquote:
-                        description += quote.text + '\n'
-                    description = description[:-2]  # remove last newline
-                    
-                    # some words are without a longer example
-                    if (len(example)):
-                        example = example[0].text.split(' (')[0]  # remove cite information
-                    else:
-                        example = ''
-                    
-                    data.append({
-                        'id': str(detailId)+'_'+str(idx),
-                        'word': word,
-                        'level': level, 
-                        'description': description,
-                        'example': example,
-                        'partOfSpeech': partOfSpeech
-                    })
+            for headerWithSection in headerWithSections:
+                sections = headerWithSection.findAll('div', {'class': 'info sense'})
+                partOfSpeech = headerWithSection.findAll('span', {'class': 'pos'})[0].text
+                
+                if len(sections):
+                    for idx, section in enumerate(sections):
+                        description = ''  # reset so that descriptions from a previous nuanced meaning do not fill up the next description
+                        word = section.findAll('div', {'class': 'sense_title'})[0].text
+                        blockquote = section.findAll('p', {'class': 'blockquote'})
+                        example = section.findAll('p', {'class': 'learnerexamp'})
+                        level = section.findAll('span', {'class': 'label'})
+                        
+                        # ignore those words without a level
+                        if len(level):
+                            level = level[0].text
+                        else:
+                            continue  # go to the next iteration
+                        
+                        
+                        # some words have more than one short blockquote
+                        for quote in blockquote:
+                            description += quote.text + '\n'
+                        description = description[:-2]  # remove last newline
+                        
+                        # some words are without a longer example
+                        if (len(example)):
+                            example = example[0].text.split(' (')[0]  # remove cite information
+                        else:
+                            example = ''
+                        
+                        data.append({
+                            'id': str(detailId)+'_'+str(idx),
+                            'word': word,
+                            'level': level, 
+                            'description': description,
+                            'example': example,
+                            'partOfSpeech': partOfSpeech
+                        })
     
     
     # save all of the data
