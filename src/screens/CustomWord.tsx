@@ -24,26 +24,28 @@ export const CustomWord = ({ route }) => {
   // TODO : use a form
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.text}>Word</Text>
-        <TextInput style={styles.input} underlineColorAndroid="transparent" />
-      </View>
-      <View>
-        <Text style={styles.text}>Part of speech</Text>
-        <TextInput style={styles.input} underlineColorAndroid="transparent" />
-      </View>
-      <View>
-        <Text style={styles.text}>Description</Text>
-        <TextInput style={styles.input} underlineColorAndroid="transparent" />
-      </View>
-      <View>
-        <Text style={styles.text}>Example</Text>
-        <TextInput style={styles.input} underlineColorAndroid="transparent" />
-      </View>
-      <View>
-        {/* TODO : use a dropdown or modal */}
-        <Text style={styles.text}>Category</Text>
-        <TextInput style={styles.input} underlineColorAndroid="transparent" />
+      <View style={styles.form}>
+        <View>
+          <Text style={styles.text}>Word</Text>
+          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+        </View>
+        <View>
+          <Text style={styles.text}>Part of speech</Text>
+          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+        </View>
+        <View>
+          <Text style={styles.text}>Description</Text>
+          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+        </View>
+        <View>
+          <Text style={styles.text}>Example</Text>
+          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+        </View>
+        <View>
+          {/* TODO : use a dropdown or modal */}
+          <Text style={styles.text}>Category</Text>
+          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+        </View>
       </View>
       <View style={styles.buttonGroup}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -63,9 +65,16 @@ export const CustomWord = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
     marginHorizontal: 36,
     display: 'flex',
     flexDirection: 'column',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'flex-start',
   },
   text: {
     fontSize: 18,
