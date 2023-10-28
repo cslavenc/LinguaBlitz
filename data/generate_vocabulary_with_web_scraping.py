@@ -31,7 +31,7 @@ def saveByLevel(level, data):
 if __name__ == '__main__':
     end = 6778
     detailIds = [i for i in range(1,end+1)]
-    data = {}
+    data = []
     
     for detailId in detailIds:
         print('Fetching ID: %i' %detailId)
@@ -45,8 +45,11 @@ if __name__ == '__main__':
             # extract data
             DOM = bs(content, 'html.parser')
             sections = DOM.findAll('div', {'class': 'info sense'})
+            partOfSpeech = DOM.find('span', {'class': 'pos'}).text
+            
             if len(sections):
                 for idx, section in enumerate(sections):
+                    description = ''  # reset so that descriptions from a previous nuanced meaning do not fill up the next description
                     word = section.findAll('div', {'class': 'sense_title'})[0].text
                     blockquote = section.findAll('p', {'class': 'blockquote'})
                     example = section.findAll('p', {'class': 'learnerexamp'})
@@ -70,12 +73,14 @@ if __name__ == '__main__':
                     else:
                         example = ''
                     
-                    data[str(detailId)+'_'+str(idx)] = {
+                    data.append({
+                        'id': str(detailId)+'_'+str(idx),
                         'word': word,
                         'level': level, 
                         'description': description,
-                        'example': example
-                    }
+                        'example': example,
+                        'partOfSpeech': partOfSpeech
+                    })
     
     
     # save all of the data
