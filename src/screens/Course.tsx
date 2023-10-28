@@ -2,13 +2,16 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SpeechBubbleIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
 import { getImageUrl } from '../utils';
+import { useEffect } from 'react';
 
 export const Course = ({ route }) => {
   const navigation = useNavigation();
   const { course, color } = route.params;
-  navigation.setOptions({ headerTitle: course });
-
   let imageUrl = getImageUrl(course);
+
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: course });
+  }, [course]);
 
   return (
     <View>
