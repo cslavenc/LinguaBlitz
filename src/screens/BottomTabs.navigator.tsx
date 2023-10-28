@@ -8,6 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CourseItem } from '../components/CourseItem';
 import { WordList } from './WordList';
 import { WordDetail } from './WordDetail';
+import { CustomCourse } from './CustomCourse';
+import { CustomWord } from './CustomWord';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
@@ -29,6 +31,8 @@ export const CourseStackScreen = () => {
       <CourseStack.Screen name="Course" component={Course} />
       <CourseStack.Screen name="Word list" component={WordList} />
       <CourseStack.Screen name="Word" component={WordDetail} />
+      <CourseStack.Screen name="Custom" component={CustomCourse} />
+      <CourseStack.Screen name="Custom word" component={CustomWord} />
     </CourseStack.Navigator>
   );
 };

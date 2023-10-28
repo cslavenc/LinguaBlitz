@@ -41,6 +41,9 @@ export const WordList = ({ route }) => {
       />
       <FlatList
         data={filteredWords}
+        keyExtractor={(item: WordDetail) =>
+          item.id + item.partOfSpeech + item.word
+        }
         renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
           <View style={styles.item}>
             <TouchableOpacity
