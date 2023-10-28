@@ -6,13 +6,13 @@ import { getImageUrl } from '../utils';
 export const Course = ({ route }) => {
   const navigation = useNavigation();
   const { course, color } = route.params;
+  navigation.setOptions({ headerTitle: course });
 
   let imageUrl = getImageUrl(course);
 
   return (
     <View>
       <Image resizeMode="contain" source={imageUrl} />
-      <Text style={styles.name}>{course}</Text>
       <TouchableOpacity
         activeOpacity={1}
         style={[styles.container, { backgroundColor: color }]}
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     height: 150,
     elevation: 5,
     marginHorizontal: 20,
-    marginVertical: 12,
+    marginVertical: 18,
     padding: 10,
     borderRadius: 10,
     display: 'flex',
