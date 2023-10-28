@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 export interface WordDetail {
   id: string;
@@ -18,6 +19,10 @@ export const WordDetail = ({ route }) => {
   const example = item.example;
   const description = item.description;
   const partOfSpeech = item.partOfSpeech;
+
+  useEffect(() => {
+    navigation.setOptions({ headerTitle: word.split(' (')[0] });
+  }, [word]);
 
   const handleNext = () => {
     const idx = data.findIndex((current: WordDetail) => current.id === item.id);
