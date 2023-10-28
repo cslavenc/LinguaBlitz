@@ -16,13 +16,13 @@ from bs4 import BeautifulSoup as bs
 @param data, raw dataset to be filtered
 """
 def saveByLevel(level, data):
-    extracted = {}
+    extracted = []
     
-    for key, value in data.items():
+    for value in data:
         currentLevel = value['level']
         
         if currentLevel == level:
-            extracted[key] = value
+            extracted.append(value)
     
     with open(level+'_english_vocabulary.json', 'w', encoding='utf-8') as f:
         json.dump(extracted, f, ensure_ascii=False, indent=4)
