@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export interface WordDetail {
   id: string;
@@ -10,12 +11,25 @@ export interface WordDetail {
 }
 
 export const WordDetail = ({ route }) => {
-  const { color, item } = route.params;
+  const { color, item, data } = route.params;
+  const navigation = useNavigation();
 
   const word = item.word;
   const example = item.example;
   const description = item.description;
   const partOfSpeech = item.partOfSpeech;
+
+  const handleNext = () => {
+    const idx = data.findIndex((current: WordDetail) => current.id === item.id);
+    const next = idx + 1 < data.length ? data[idx + 1] : data[0];
+    navigation.navigate('Word', { color, item: next, data });
+  };
+
+  const handlePrevious = () => {
+    const idx = data.findIndex((current: WordDetail) => current.id === item.id);
+    const previous = idx - 1 > 0 ? data[idx - 1] : data[data.length - 1];
+    navigation.navigate('Word', { color, item: previous, data });
+  };
 
   return (
     <View style={styles.container}>
@@ -31,23 +45,23 @@ export const WordDetail = ({ route }) => {
             <Text style={styles.heading}>Description</Text>
             <Text>{description}</Text>
           </View>
-          <View style={{ height: '33%' }}>
+          <View style={{ height: '37%' }}>
             <Text style={styles.heading}>Example</Text>
             <Text>{example}</Text>
           </View>
-          <View style={{ height: '33%' }}>
+          <View style={{ height: '30%' }}>
             <Text style={styles.heading}>Synonyms</Text>
             <Text>synonyms go here</Text>
           </View>
         </View>
       </View>
       <View style={styles.buttonGroup}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handlePrevious()}>
           <Text style={[styles.button, { backgroundColor: color }]}>
             Previous
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNext()}>
           <Text style={[styles.button, { backgroundColor: color }]}>Next</Text>
         </TouchableOpacity>
       </View>

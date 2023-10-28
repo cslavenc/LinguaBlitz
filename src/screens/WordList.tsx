@@ -47,7 +47,9 @@ export const WordList = ({ route }) => {
         renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
           <View style={styles.item}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Word', { color, item })}>
+              onPress={() =>
+                navigation.navigate('Word', { color, item, data: c1Data })
+              }>
               <Text style={styles.word}>{item.word}</Text>
             </TouchableOpacity>
           </View>
