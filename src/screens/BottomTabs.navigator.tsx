@@ -15,7 +15,7 @@ const CourseStack = createStackNavigator();
 export const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="Overview" component={Home} />
     </HomeStack.Navigator>
   );
 };
