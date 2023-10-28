@@ -44,6 +44,7 @@ export const WordList = ({ route }) => {
         keyExtractor={(item: WordDetail) =>
           item.id + item.partOfSpeech + item.word
         }
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
           <View style={styles.item}>
             <TouchableOpacity
