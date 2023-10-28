@@ -20,10 +20,7 @@ export const WordDetail = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
-        <Text style={styles.name}>
-          {partOfSpeech === 'verb' ? 'to ' : ''}
-          {word}
-        </Text>
+        <Text style={styles.name}>{word}</Text>
         <Text style={[styles.name, { fontStyle: 'italic' }]}>
           ({partOfSpeech})
         </Text>

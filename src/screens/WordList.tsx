@@ -45,10 +45,7 @@ export const WordList = ({ route }) => {
           <View style={styles.item}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Word', { color, item })}>
-              <Text style={styles.word}>
-                {item.partOfSpeech === 'verb' ? 'to ' : ''}
-                {item.word}
-              </Text>
+              <Text style={styles.word}>{item.word}</Text>
             </TouchableOpacity>
           </View>
         )}
