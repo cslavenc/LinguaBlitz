@@ -44,11 +44,11 @@ if __name__ == '__main__':
             
             # extract data
             DOM = bs(content, 'html.parser')
-            headerWithSections = DOM.findAll('div', {'class': 'pos_section'})
+            headersWithSections = DOM.findAll('div', {'class': 'pos_section'})
             
-            for headerWithSection in headerWithSections:
-                sections = headerWithSection.findAll('div', {'class': 'info sense'})
-                partOfSpeech = headerWithSection.findAll('span', {'class': 'pos'})[0].text
+            for headerIdx, headerWithSections in enumerate(headersWithSections):
+                sections = headerWithSections.findAll('div', {'class': 'info sense'})
+                partOfSpeech = headerWithSections.findAll('span', {'class': 'pos'})[0].text
                 
                 if len(sections):
                     for idx, section in enumerate(sections):
@@ -77,7 +77,7 @@ if __name__ == '__main__':
                             example = ''
                         
                         data.append({
-                            'id': str(detailId)+'_'+str(idx),
+                            'id': str(detailId)+'_'+str(headerIdx)+'_'+str(idx),
                             'word': word,
                             'level': level, 
                             'description': description,
