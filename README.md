@@ -12,3 +12,5 @@ For Android:
 
 - press "r" to reload
 - delete caches and `node_modules` and reinstall everything for a clean start
+- if the loading spinner is always shown or freezes, it makes sense to wipe the data from the Device Manager and restart
+  the simulator completely again which also install expo go again
