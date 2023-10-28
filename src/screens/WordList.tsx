@@ -1,100 +1,53 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import data from '../../data/C1_english_vocabulary.json';
+import c1Data from '../../data/C1_english_vocabulary.json';
+import { WordDetail } from './WordDetail';
 
 export const WordList = ({ route }) => {
   const { color } = route.params;
   const navigation = useNavigation();
 
-  const word = data['2_1'].word;
-  const example = data['2_1'].example;
-  const description = data['2_1'].description;
-
   return (
     <View style={styles.container}>
-      <View style={[styles.title, { backgroundColor: color }]}>
-        <Text style={styles.name}>{word}</Text>
-        <Text style={[styles.name, { fontStyle: 'italic' }]}>
-          (part of speech)
-        </Text>
-      </View>
-      <View style={styles.information}>
-        <View>
-          <View style={{ height: '33%' }}>
-            <Text style={styles.heading}>Description</Text>
-            <Text>{description}</Text>
+      <FlatList
+        data={c1Data}
+        renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
+          <View style={styles.item}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Word', { color, item })}>
+              <Text style={styles.word}>
+                {item.partOfSpeech === 'verb' ? 'to ' : ''}
+                {item.word}
+              </Text>
+            </TouchableOpacity>
           </View>
-          <View style={{ height: '33%' }}>
-            <Text style={styles.heading}>Example</Text>
-            <Text>{example}</Text>
-          </View>
-          <View style={{ height: '33%' }}>
-            <Text style={styles.heading}>Synonyms</Text>
-            <Text>synonyms go here</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity>
-          <Text style={[styles.button, { backgroundColor: color }]}>
-            Previous
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={[styles.button, { backgroundColor: color }]}>Next</Text>
-        </TouchableOpacity>
-      </View>
+        )}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 26,
+    marginHorizontal: 20,
     display: 'flex',
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
-  title: {
-    height: 150,
-    elevation: 5,
-    marginVertical: 12,
-    marginBottom: 25,
-    padding: 10,
-    borderRadius: 10,
+  item: {
+    paddingVertical: 10,
+    borderBottomWidth: 0.25,
+    borderStyle: 'solid',
+    borderColor: 'black',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  heading: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  name: {
-    textAlign: 'center',
-    fontSize: 24,
-  },
-  information: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    gap: 100,
-  },
-  buttonGroup: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  button: {
-    fontSize: 28,
-    width: 147,
-    height: 45,
-    borderRadius: 10,
-    textAlign: 'center',
-    verticalAlign: 'middle',
-  },
+  word: { textAlign: 'center', fontSize: 18 },
 });
