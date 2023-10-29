@@ -1,10 +1,10 @@
 export const theme = {
-  // functional colors
+  // brand colors
+  dark: '#000',
+  background: '#f1efe7',
   white: '#fff',
   grey: '#8E9AAF',
-  save: '#A5FFA8',
-  cancel: '#FE8383',
-  // brand colors
+
   turquoise: '#65D2B5',
   orange: '#FFD6B1',
   yellow: 'yellow',
@@ -13,4 +13,9 @@ export const theme = {
   violet: '#B5B1FF',
   lightblue: '#ACDBF5',
   blue: '#1D84B5',
+  // functional colors
+  active: '',
+  inactive: '',
+  save: '#A5FFA8',
+  cancel: '#FE8383',
 };

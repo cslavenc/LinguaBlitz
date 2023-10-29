@@ -17,7 +17,8 @@ const CategoryStack = createStackNavigator();
 
 export const HomeStackScreen = () => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
       <HomeStack.Screen name="Overview" component={Home} />
     </HomeStack.Navigator>
   );
@@ -25,7 +26,8 @@ export const HomeStackScreen = () => {
 
 export const CategoryStackScreen = () => {
   return (
-    <CategoryStack.Navigator>
+    <CategoryStack.Navigator
+      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
       <CategoryStack.Screen name="Overview" component={CategoryOverview} />
       <CategoryStack.Screen name="CategoryItem" component={CategoryItem} />
       <CategoryStack.Screen name="Category" component={Category} />
@@ -46,6 +48,8 @@ export const BottomTabsNavigator = () => {
         tabBarShowLabel: true,
         tabBarActiveTintColor: theme.blue,
         tabBarInactiveTintColor: theme.grey,
+        tabBarStyle: { backgroundColor: theme.background },
+        headerStyle: { backgroundColor: theme.background },
         tabBarIcon: ({ color, size }) => {
           switch (route.name) {
             case 'Home':
