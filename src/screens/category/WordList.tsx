@@ -38,6 +38,7 @@ export const WordList = ({ route }) => {
         style={styles.input}
         onChange={handleSetFilteredWords}
         underlineColorAndroid="transparent"
+        placeholder="Search for a word"
       />
       <FlatList
         data={filteredWords}
