@@ -14,11 +14,11 @@ export const Category = ({ route }) => {
   }, [category]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Image resizeMode="contain" source={imageUrl} />
       <TouchableOpacity
         activeOpacity={1}
-        style={[styles.container, { backgroundColor: color }]}
+        style={[styles.wordList, { backgroundColor: color }]}
         onPress={() => navigation.navigate('Word list', { color })}>
         <SpeechBubbleIcon />
         <Text style={styles.name}>Word list</Text>
@@ -28,10 +28,9 @@ export const Category = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  wordList: {
     height: 150,
     elevation: 5,
-    marginHorizontal: 20,
     marginVertical: 18,
     padding: 10,
     borderRadius: 10,
@@ -39,6 +38,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+  },
+  container: {
+    marginHorizontal: 20,
   },
   name: {
     textAlign: 'center',

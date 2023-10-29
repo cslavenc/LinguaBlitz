@@ -1,8 +1,7 @@
 import 'react-native-gesture-handler';
-import { Platform, UIManager } from 'react-native';
+import { ImageBackground, Platform, UIManager, View } from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { theme } from './src/theme';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -11,9 +10,23 @@ if (Platform.OS === 'android') {
 }
 
 export default function App() {
+  const backgroundImageUrl = require('./assets/background.png');
+
   return (
     <NavigationContainer theme={globalTheme}>
-      <BottomTabsNavigator />
+      <View style={{ flex: 1 }}>
+        <ImageBackground
+          source={backgroundImageUrl}
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+          resizeMode="cover">
+          <BottomTabsNavigator />
+        </ImageBackground>
+      </View>
     </NavigationContainer>
   );
 }
@@ -22,6 +35,6 @@ const globalTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: theme.white,
+    background: 'transparent',
   },
 };

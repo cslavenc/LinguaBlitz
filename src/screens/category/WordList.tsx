@@ -84,5 +84,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
-  word: { textAlign: 'center', fontSize: 18 },
+  word: { textAlign: 'center', fontSize: 18, fontWeight: 'bold' },
 });
