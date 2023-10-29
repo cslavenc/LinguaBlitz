@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
 export const CustomWord = ({ route }) => {
   const navigation = useNavigation();

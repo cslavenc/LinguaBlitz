@@ -2,21 +2,21 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getColor, getImageUrl } from '../utils';
 
-export const CourseItem = ({ course }) => {
+export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
-  const color = getColor(course);
-  const imageUrl = getImageUrl(course);
+  const color = getColor(category);
+  const imageUrl = getImageUrl(category);
 
   return (
     <View>
       <TouchableOpacity
         activeOpacity={1}
         style={[styles.container, { backgroundColor: color }]}
-        onPress={() => navigation.navigate('Course', { course, color })}>
+        onPress={() => navigation.navigate('Category', { category, color })}>
         <View style={styles.image}>
           <Image style={styles.image} resizeMode="stretch" source={imageUrl} />
         </View>
-        <Text style={styles.name}>{course}</Text>
+        <Text style={styles.name}>{category}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { SpeechBubbleIcon } from '../components/Icons';
-import { theme } from '../theme';
+import { SpeechBubbleIcon } from '../../components/Icons';
+import { theme } from '../../theme';
 
-export const CustomCourse = ({ route }) => {
+export const CustomCategory = ({ route }) => {
   const navigation = useNavigation();
   const { color } = route.params;
 

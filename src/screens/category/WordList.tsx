@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import c1Data from '../../data/C1_english_vocabulary.json';
+import c1Data from '../../../data/C1_english_vocabulary.json';
 import { WordDetail } from './WordDetail';
 import { useState } from 'react';
 

@@ -5,14 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CourseItem } from '../components/CourseItem';
+import { CategoryItem } from '../../components/CategoryItem';
 import { useNavigation } from '@react-navigation/native';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 
-export const CourseOverview = () => {
+export const CategoryOverview = () => {
   const navigation = useNavigation();
 
-  const courses = [
+  const categories = [
     'Business',
     'Health',
     'Environment',
@@ -23,8 +23,8 @@ export const CourseOverview = () => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {courses.map((course) => (
-          <CourseItem course={course} key={course} />
+        {categories.map((category) => (
+          <CategoryItem category={category} key={category} />
         ))}
       </ScrollView>
       <TouchableOpacity

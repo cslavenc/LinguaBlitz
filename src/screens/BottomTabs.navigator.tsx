@@ -1,19 +1,19 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './Home';
-import { CourseOverview } from './CourseOverview';
-import { CourseOverviewTab, HomeIcon } from '../components/Icons';
+import { CategoryOverview } from './category/CategoryOverview';
+import { CategoryOverviewTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
-import { Course } from './Course';
+import { Category } from './category/Category';
 import { createStackNavigator } from '@react-navigation/stack';
-import { CourseItem } from '../components/CourseItem';
-import { WordList } from './WordList';
-import { WordDetail } from './WordDetail';
-import { CustomCourse } from './CustomCourse';
-import { CustomWord } from './CustomWord';
+import { CategoryItem } from '../components/CategoryItem';
+import { WordList } from './category/WordList';
+import { WordDetail } from './category/WordDetail';
+import { CustomCategory } from './custom/CustomCategory';
+import { CustomWord } from './custom/CustomWord';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
-const CourseStack = createStackNavigator();
+const CategoryStack = createStackNavigator();
 
 export const HomeStackScreen = () => {
   return (
@@ -23,17 +23,17 @@ export const HomeStackScreen = () => {
   );
 };
 
-export const CourseStackScreen = () => {
+export const CategoryStackScreen = () => {
   return (
-    <CourseStack.Navigator>
-      <CourseStack.Screen name="Overview" component={CourseOverview} />
-      <CourseStack.Screen name="CourseItem" component={CourseItem} />
-      <CourseStack.Screen name="Course" component={Course} />
-      <CourseStack.Screen name="Word list" component={WordList} />
-      <CourseStack.Screen name="Word" component={WordDetail} />
-      <CourseStack.Screen name="Custom" component={CustomCourse} />
-      <CourseStack.Screen name="Custom word" component={CustomWord} />
-    </CourseStack.Navigator>
+    <CategoryStack.Navigator>
+      <CategoryStack.Screen name="Overview" component={CategoryOverview} />
+      <CategoryStack.Screen name="CategoryItem" component={CategoryItem} />
+      <CategoryStack.Screen name="Category" component={Category} />
+      <CategoryStack.Screen name="Word list" component={WordList} />
+      <CategoryStack.Screen name="Word" component={WordDetail} />
+      <CategoryStack.Screen name="Custom" component={CustomCategory} />
+      <CategoryStack.Screen name="Custom word" component={CustomWord} />
+    </CategoryStack.Navigator>
   );
 };
 
@@ -50,8 +50,8 @@ export const BottomTabsNavigator = () => {
           switch (route.name) {
             case 'Home':
               return <HomeIcon size={size} color={color} />;
-            case 'Courses':
-              return <CourseOverviewTab size={size} color={color} />;
+            case 'Categories':
+              return <CategoryOverviewTab size={size} color={color} />;
             default:
               return null;
           }
@@ -63,8 +63,8 @@ export const BottomTabsNavigator = () => {
         options={{ headerTitleAlign: 'center' }}
       />
       <BottomTabs.Screen
-        name="Courses"
-        component={CourseStackScreen}
+        name="Categories"
+        component={CategoryStackScreen}
         options={{ headerTitleAlign: 'center' }}
       />
     </BottomTabs.Navigator>
