@@ -69,12 +69,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   input: {
-    borderWidth: 0.1,
-    borderStyle: 'solid',
     borderRadius: 10,
     marginBottom: 24,
     paddingHorizontal: 12,
     fontSize: 18,
+    backgroundColor: 'white',
   },
   item: {
     paddingVertical: 10,
@@ -84,5 +83,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
   },
-  word: { textAlign: 'center', fontSize: 18, fontWeight: 'bold' },
+  word: { textAlign: 'center', fontSize: 18, fontWeight: 'normal' },
 });
