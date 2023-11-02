@@ -16,9 +16,12 @@ export const WordDetail = ({ route }) => {
   const navigation = useNavigation();
 
   const word = item.word;
-  const example = item.example;
-  const description = item.description;
   const partOfSpeech = item.partOfSpeech;
+  const description = item.description;
+  const example = item.example.trim();
+
+  console.log('my description: ', description.split('\n'));
+  const descriptions = description.split('\n');
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: word.split(' (')[0] });
@@ -48,7 +51,14 @@ export const WordDetail = ({ route }) => {
         <View>
           <View style={{ height: '33%' }}>
             <Text style={styles.heading}>Description</Text>
-            <Text style={styles.text}>{description}</Text>
+            {descriptions.map((content) => (
+              <View style={{ flexDirection: 'row' }}>
+                <Text>{'\u2022'}</Text>
+                <Text style={{ flex: 1, paddingLeft: 5 }}>
+                  {content.trim()}
+                </Text>
+              </View>
+            ))}
           </View>
           <View style={{ height: '37%' }}>
             <Text style={styles.heading}>Example</Text>
