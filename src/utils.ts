@@ -1,6 +1,7 @@
 import { theme } from './theme';
 
 export enum Category {
+  ALL = 'All Words',
   BUSINESS = 'Business',
   HEALTH = 'Health',
   ENVIRONMENT = 'Environment',
@@ -10,6 +11,8 @@ export enum Category {
 
 export const getColor = (course: string) => {
   switch (course) {
+    case Category.ALL:
+      return theme.turquoise;
     case Category.BUSINESS:
       return theme.turquoise;
     case Category.HEALTH:
@@ -28,6 +31,8 @@ export const getColor = (course: string) => {
 
 export const getImageUrl = (course: string) => {
   switch (course) {
+    case Category.ALL:
+      return require('../assets/category_business.png');
     case Category.BUSINESS:
       return require('../assets/category_business.png');
     case Category.HEALTH:

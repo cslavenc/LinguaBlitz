@@ -13,6 +13,7 @@ export const CategoryOverview = () => {
   const navigation = useNavigation();
 
   const categories = [
+    'All Words',
     'Business',
     'Health',
     'Environment',
