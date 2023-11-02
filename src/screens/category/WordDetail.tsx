@@ -17,11 +17,8 @@ export const WordDetail = ({ route }) => {
 
   const word = item.word;
   const partOfSpeech = item.partOfSpeech;
-  const description = item.description;
+  const descriptions = item.description.split('\n');
   const example = item.example.trim();
-
-  console.log('my description: ', description.split('\n'));
-  const descriptions = description.split('\n');
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: word.split(' (')[0] });
@@ -53,8 +50,8 @@ export const WordDetail = ({ route }) => {
             <Text style={styles.heading}>Description</Text>
             {descriptions.map((content) => (
               <View style={{ flexDirection: 'row' }}>
-                <Text>{'\u2022'}</Text>
-                <Text style={{ flex: 1, paddingLeft: 5 }}>
+                <Text style={styles.text}>{'\u2022'}</Text>
+                <Text style={[styles.text, styles.unorderedList]}>
                   {content.trim()}
                 </Text>
               </View>
@@ -114,6 +111,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+  },
+  unorderedList: {
+    flex: 1,
+    paddingLeft: 5,
   },
   information: {
     display: 'flex',
