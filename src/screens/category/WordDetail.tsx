@@ -48,15 +48,15 @@ export const WordDetail = ({ route }) => {
         <View>
           <View style={{ height: '33%' }}>
             <Text style={styles.heading}>Description</Text>
-            <Text>{description}</Text>
+            <Text style={styles.text}>{description}</Text>
           </View>
           <View style={{ height: '37%' }}>
             <Text style={styles.heading}>Example</Text>
-            <Text>{example}</Text>
+            <Text style={styles.text}>{example}</Text>
           </View>
           <View style={{ height: '30%' }}>
             <Text style={styles.heading}>Synonyms</Text>
-            <Text>synonyms go here</Text>
+            <Text style={styles.text}>synonyms go here</Text>
           </View>
         </View>
       </View>
@@ -101,6 +101,9 @@ const styles = StyleSheet.create({
   name: {
     textAlign: 'center',
     fontSize: 24,
+  },
+  text: {
+    fontSize: 18,
   },
   information: {
     display: 'flex',
