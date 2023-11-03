@@ -1,8 +1,8 @@
 export const theme = {
   // brand colors
   dark: '#000',
-  background: '#f1efe7',
   white: '#fff',
+  background: '#f1efe7',
   grey: '#8E9AAF',
 
   turquoise: '#65D2B5',
