@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import c1Data from '../../../data/C1_english_vocabulary.json';
 import { WordDetail } from './WordDetail';
 import { useState } from 'react';
+import { theme } from '../../theme';
 
 export const WordList = ({ route }) => {
   const { color } = route.params;
@@ -42,17 +43,17 @@ export const WordList = ({ route }) => {
       />
       <FlatList
         data={filteredWords}
-        keyExtractor={(item: WordDetail) =>
-          item.id + item.partOfSpeech + item.word
-        }
+        keyExtractor={(item: WordDetail) => item.id + item.word}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
-          <View style={styles.item}>
+          <View>
             <TouchableOpacity
+              style={styles.item}
               onPress={() =>
                 navigation.navigate('Word', { color, item, data: c1Data })
               }>
               <Text style={styles.word}>{item.word}</Text>
+              <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -81,7 +82,13 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: 'black',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  word: { textAlign: 'center', fontSize: 18, fontWeight: 'normal' },
+  word: { textAlign: 'left', fontSize: 18, fontWeight: 'normal' },
+  partOfSpeech: {
+    color: theme.grey,
+    fontStyle: 'italic',
+  },
 });
