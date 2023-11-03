@@ -35,7 +35,12 @@ export const CustomWord = ({ route }) => {
         </View>
         <View>
           <Text style={styles.text}>Description</Text>
-          <TextInput style={styles.input} underlineColorAndroid="transparent" />
+          <TextInput
+            textAlignVertical="top"
+            multiline={true}
+            style={[styles.input, { height: 120 }]}
+            underlineColorAndroid="transparent"
+          />
         </View>
         <View>
           <Text style={styles.text}>Example</Text>
@@ -82,8 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input: {
-    borderWidth: 0.25,
-    borderStyle: 'solid',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginBottom: 24,
     paddingHorizontal: 12,
