@@ -1,4 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 
@@ -43,8 +49,8 @@ export const WordDetail = ({ route }) => {
         <Text style={styles.partOfSpeech}>({partOfSpeech})</Text>
       </View>
       <View style={styles.information}>
-        <View>
-          <View style={{ height: '35%' }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ paddingBottom: 18 }}>
             <Text style={styles.heading}>Description</Text>
             {descriptions.map((content) => (
               <View style={{ flexDirection: 'row' }} key={content}>
@@ -55,15 +61,15 @@ export const WordDetail = ({ route }) => {
               </View>
             ))}
           </View>
-          <View style={{ height: '38%' }}>
+          <View style={{ paddingBottom: 24 }}>
             <Text style={styles.heading}>Example</Text>
             <Text style={styles.text}>{example}</Text>
           </View>
-          <View style={{ height: '27%' }}>
+          <View style={{ paddingBottom: 24 }}>
             <Text style={styles.heading}>Synonyms</Text>
             <Text style={styles.text}>synonyms go here</Text>
           </View>
-        </View>
+        </ScrollView>
       </View>
       <View style={styles.buttonGroup}>
         <TouchableOpacity onPress={() => handlePrevious()}>
@@ -117,19 +123,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontStyle: 'italic',
   },
-  text: {
-    fontSize: 18,
-  },
-  unorderedList: {
-    flex: 1,
-    paddingLeft: 5,
-  },
   information: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     gap: 100,
+  },
+  text: {
+    fontSize: 18,
+  },
+  unorderedList: {
+    flex: 1,
+    paddingLeft: 5,
   },
   buttonGroup: {
     display: 'flex',
