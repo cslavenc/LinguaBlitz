@@ -39,17 +39,15 @@ export const WordDetail = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
-        <Text style={[styles.name, { fontWeight: 'bold' }]}>{word}</Text>
-        <Text style={[styles.name, { fontStyle: 'italic' }]}>
-          ({partOfSpeech})
-        </Text>
+        <Text style={styles.word}>{word}</Text>
+        <Text style={styles.partOfSpeech}>({partOfSpeech})</Text>
       </View>
       <View style={styles.information}>
         <View>
-          <View style={{ height: '33%' }}>
+          <View style={{ height: '35%' }}>
             <Text style={styles.heading}>Description</Text>
             {descriptions.map((content) => (
-              <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row' }} key={content}>
                 <Text style={styles.text}>{'\u2022'}</Text>
                 <Text style={[styles.text, styles.unorderedList]}>
                   {content.trim()}
@@ -57,11 +55,11 @@ export const WordDetail = ({ route }) => {
               </View>
             ))}
           </View>
-          <View style={{ height: '37%' }}>
+          <View style={{ height: '38%' }}>
             <Text style={styles.heading}>Example</Text>
             <Text style={styles.text}>{example}</Text>
           </View>
-          <View style={{ height: '30%' }}>
+          <View style={{ height: '27%' }}>
             <Text style={styles.heading}>Synonyms</Text>
             <Text style={styles.text}>synonyms go here</Text>
           </View>
@@ -102,12 +100,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   name: {
     paddingTop: 18,
     fontSize: 24,
+  },
+  word: {
+    paddingTop: 18,
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  partOfSpeech: {
+    paddingTop: 18,
+    fontSize: 24,
+    fontStyle: 'italic',
   },
   text: {
     fontSize: 18,
