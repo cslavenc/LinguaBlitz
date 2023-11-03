@@ -14,6 +14,7 @@ import c1Data from '../../../data/C1_english_vocabulary.json';
 import { WordDetail } from './WordDetail';
 import { useState } from 'react';
 import { theme } from '../../theme';
+import { SearchIcon } from '../../components/Icons';
 
 export const WordList = ({ route }) => {
   const { color } = route.params;
@@ -35,12 +36,17 @@ export const WordList = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        onChange={handleSetFilteredWords}
-        underlineColorAndroid="transparent"
-        placeholder="Search for a word"
-      />
+      <View style={styles.searchBox}>
+        <View style={{ paddingRight: 4 }}>
+          <SearchIcon />
+        </View>
+        <TextInput
+          style={styles.input}
+          onChange={handleSetFilteredWords}
+          underlineColorAndroid="transparent"
+          placeholder="Search for a word"
+        />
+      </View>
       <FlatList
         data={filteredWords}
         keyExtractor={(item: WordDetail) => item.id + item.word}
@@ -69,12 +75,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
-  input: {
+  searchBox: {
     borderRadius: 10,
     marginBottom: 24,
     paddingHorizontal: 12,
+    backgroundColor: theme.white,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  input: {
+    flex: 1,
     fontSize: 18,
-    backgroundColor: 'white',
   },
   item: {
     paddingVertical: 10,
