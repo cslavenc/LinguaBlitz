@@ -9,9 +9,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { theme } from '../../theme';
 
-export const CustomWord = ({ route }) => {
+export const CustomWord = () => {
   const navigation = useNavigation();
-  const { color } = route.params;
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: 'Add your own word' });
