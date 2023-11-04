@@ -32,7 +32,7 @@ export const CategoryOverview = () => {
         style={styles.button}
         activeOpacity={0.9}
         onPress={() =>
-          navigation.navigate('Custom', { color: theme.lightblue })
+          navigation.navigate('Custom word', { color: theme.lightblue })
         }>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>

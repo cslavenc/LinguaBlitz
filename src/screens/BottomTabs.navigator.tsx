@@ -8,7 +8,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CategoryItem } from '../components/CategoryItem';
 import { WordList } from './category/WordList';
 import { WordDetail } from './category/WordDetail';
-import { CustomCategory } from './custom/CustomCategory';
 import { CustomWord } from './custom/CustomWord';
 
 // for stack based navigation, the navigator has to be informed about the screens
@@ -33,7 +32,6 @@ export const CategoryStackScreen = () => {
       <CategoryStack.Screen name="Category" component={Category} />
       <CategoryStack.Screen name="Word list" component={WordList} />
       <CategoryStack.Screen name="Word" component={WordDetail} />
-      <CategoryStack.Screen name="Custom" component={CustomCategory} />
       <CategoryStack.Screen name="Custom word" component={CustomWord} />
     </CategoryStack.Navigator>
   );
