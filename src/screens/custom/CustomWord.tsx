@@ -66,9 +66,9 @@ export const CustomWord = () => {
           <>
             <View>
               <Text style={styles.heading}>Word</Text>
-              <View style={styles.input}>
+              <View style={styles.inputGroup}>
                 <TextInput
-                  style={styles.text}
+                  style={[styles.input, errors.word ? styles.errorInput : null]}
                   underlineColorAndroid="transparent"
                   name="word"
                   onChangeText={handleChange('word')}
@@ -78,10 +78,10 @@ export const CustomWord = () => {
                 {errors.word && <Text style={styles.error}>{errors.word}</Text>}
               </View>
             </View>
-            <View style={styles.input}>
+            <View style={styles.inputGroup}>
               <Text style={styles.heading}>Part of speech</Text>
               <TextInput
-                style={styles.text}
+                style={styles.input}
                 underlineColorAndroid="transparent"
                 name="partOfSpeech"
                 onChangeText={handleChange('partOfSpeech')}
@@ -89,12 +89,16 @@ export const CustomWord = () => {
                 value={values.partOfSpeech}
               />
             </View>
-            <View style={styles.input}>
+            <View style={styles.inputGroup}>
               <Text style={styles.heading}>Description</Text>
               <TextInput
                 textAlignVertical="top"
                 multiline={true}
-                style={[styles.text, { height: 120 }]}
+                style={[
+                  styles.input,
+                  errors.description ? styles.errorInput : null,
+                  { height: 120 },
+                ]}
                 underlineColorAndroid="transparent"
                 name="description"
                 onChangeText={handleChange('description')}
@@ -105,10 +109,10 @@ export const CustomWord = () => {
                 <Text style={styles.error}>{errors.description}</Text>
               )}
             </View>
-            <View style={styles.input}>
+            <View style={styles.inputGroup}>
               <Text style={styles.heading}>Example</Text>
               <TextInput
-                style={styles.text}
+                style={styles.input}
                 underlineColorAndroid="transparent"
                 name="example"
                 onChangeText={handleChange('example')}
@@ -116,11 +120,14 @@ export const CustomWord = () => {
                 value={values.example}
               />
             </View>
-            <View style={styles.input}>
+            <View style={styles.inputGroup}>
               {/* TODO : use a dropdown or modal */}
               <Text style={styles.heading}>Category</Text>
               <TextInput
-                style={styles.text}
+                style={[
+                  styles.input,
+                  errors.category ? styles.errorInput : null,
+                ]}
                 underlineColorAndroid="transparent"
                 name="category"
                 onChangeText={handleChange('category')}
@@ -168,16 +175,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  input: {
-    marginBottom: 24,
+  inputGroup: {
+    marginBottom: 18,
   },
-  text: {
+  input: {
     backgroundColor: 'white',
     borderRadius: 10,
     paddingHorizontal: 12,
     fontSize: 18,
   },
+  errorInput: {
+    borderRadius: 10,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: 'red',
+  },
   error: {
+    fontStyle: 'italic',
     fontSize: 14,
     color: 'red',
   },
