@@ -1,4 +1,5 @@
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -33,23 +34,24 @@ export const CustomWord = () => {
     navigation.setOptions({ headerTitle: 'Add your own word' });
   }, []);
 
+  const initialValues: FormData = {
+    word: '',
+    partOfSpeech: '',
+    description: '',
+    example: '',
+    category: '',
+  };
+
   const handleSave = (values: FormikValues) => {
     console.log('save button pressed');
     console.log('my formdata: ', values);
   };
 
-  // TODO : use a form
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Formik
         style={styles.form}
-        initialValues={{
-          word: '', // TODO : move object into variable
-          partOfSpeech: '',
-          description: '',
-          example: '',
-          category: '',
-        }}
+        initialValues={initialValues}
         validationSchema={customWordValidationSchema}
         onSubmit={(values) => handleSave(values)}>
         {({
@@ -62,33 +64,23 @@ export const CustomWord = () => {
         }) => (
           <>
             <View>
-              <Text style={styles.text}>Word</Text>
-              {/* TODO : move error text up*/}
-              <View>
+              <Text style={styles.heading}>Word</Text>
+              <View style={styles.input}>
                 <TextInput
-                  style={styles.input}
+                  style={styles.text}
                   underlineColorAndroid="transparent"
                   name="word"
                   onChangeText={handleChange('word')}
                   onBlur={handleBlur('word')}
                   value={values.word}
                 />
-                {errors.word && (
-                  <Text
-                    style={{
-                      backgroundColor: 'aliceblue',
-                      fontSize: 14,
-                      color: 'red',
-                    }}>
-                    {errors.word}
-                  </Text>
-                )}
+                {errors.word && <Text style={styles.error}>{errors.word}</Text>}
               </View>
             </View>
-            <View>
-              <Text style={styles.text}>Part of speech</Text>
+            <View style={styles.input}>
+              <Text style={styles.heading}>Part of speech</Text>
               <TextInput
-                style={styles.input}
+                style={styles.text}
                 underlineColorAndroid="transparent"
                 name="partOfSpeech"
                 onChangeText={handleChange('partOfSpeech')}
@@ -96,23 +88,26 @@ export const CustomWord = () => {
                 value={values.partOfSpeech}
               />
             </View>
-            <View>
-              <Text style={styles.text}>Description</Text>
+            <View style={styles.input}>
+              <Text style={styles.heading}>Description</Text>
               <TextInput
                 textAlignVertical="top"
                 multiline={true}
-                style={[styles.input, { height: 120 }]}
+                style={[styles.text, { height: 120 }]}
                 underlineColorAndroid="transparent"
                 name="description"
                 onChangeText={handleChange('description')}
                 onBlur={handleBlur('description')}
                 value={values.description}
               />
+              {errors.description && (
+                <Text style={styles.error}>{errors.description}</Text>
+              )}
             </View>
-            <View>
-              <Text style={styles.text}>Example</Text>
+            <View style={styles.input}>
+              <Text style={styles.heading}>Example</Text>
               <TextInput
-                style={styles.input}
+                style={styles.text}
                 underlineColorAndroid="transparent"
                 name="example"
                 onChangeText={handleChange('example')}
@@ -120,17 +115,20 @@ export const CustomWord = () => {
                 value={values.example}
               />
             </View>
-            <View>
+            <View style={styles.input}>
               {/* TODO : use a dropdown or modal */}
-              <Text style={styles.text}>Category</Text>
+              <Text style={styles.heading}>Category</Text>
               <TextInput
-                style={styles.input}
+                style={styles.text}
                 underlineColorAndroid="transparent"
                 name="category"
                 onChangeText={handleChange('category')}
                 onBlur={handleBlur('category')}
                 value={values.category}
               />
+              {errors.category && (
+                <Text style={styles.error}>{errors.category}</Text>
+              )}
             </View>
             <View style={styles.buttonGroup}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -148,7 +146,7 @@ export const CustomWord = () => {
           </>
         )}
       </Formik>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -162,20 +160,26 @@ const styles = StyleSheet.create({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
+    //flex: 1,
     justifyContent: 'flex-start',
   },
-  text: {
+  heading: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   input: {
+    marginBottom: 24,
+  },
+  text: {
     backgroundColor: 'white',
     borderRadius: 10,
-    marginBottom: 24,
     paddingHorizontal: 12,
     fontSize: 18,
+  },
+  error: {
+    fontSize: 14,
+    color: 'red',
   },
   buttonGroup: {
     display: 'flex',
