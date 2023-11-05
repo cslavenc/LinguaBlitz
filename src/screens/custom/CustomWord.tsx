@@ -9,7 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { theme } from '../../theme';
-import { Formik, FormikValues } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 // TODO : use in formik if possible
@@ -43,40 +43,31 @@ export const CustomWord = () => {
   };
 
   // TODO : save it to AsyncStorage
-  const handleSave = (values: FormikValues) => {
+  const handleSave = (values: FormData) => {
     console.log('save button pressed');
     console.log('my formdata: ', values);
   };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Formik
+      <Formik<FormData>
         style={styles.form}
         initialValues={initialValues}
         validationSchema={customWordValidationSchema}
         onSubmit={(values) => handleSave(values)}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          isValid,
-        }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <>
-            <View>
+            <View style={styles.inputGroup}>
               <Text style={styles.heading}>Word</Text>
-              <View style={styles.inputGroup}>
-                <TextInput
-                  style={[styles.input, errors.word ? styles.errorInput : null]}
-                  underlineColorAndroid="transparent"
-                  name="word"
-                  onChangeText={handleChange('word')}
-                  onBlur={handleBlur('word')}
-                  value={values.word}
-                />
-                {errors.word && <Text style={styles.error}>{errors.word}</Text>}
-              </View>
+              <TextInput
+                style={[styles.input, errors.word ? styles.errorInput : null]}
+                underlineColorAndroid="transparent"
+                name="word"
+                onChangeText={handleChange('word')}
+                onBlur={handleBlur('word')}
+                value={values.word}
+              />
+              {errors.word && <Text style={styles.error}>{errors.word}</Text>}
             </View>
             <View style={styles.inputGroup}>
               <Text style={styles.heading}>Part of speech</Text>
