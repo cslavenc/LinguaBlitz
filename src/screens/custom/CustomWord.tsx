@@ -11,14 +11,16 @@ import { useEffect } from 'react';
 import { theme } from '../../theme';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// TODO : use in formik if possible
 export interface FormData {
   word: string;
   partOfSpeech: string;
   description: string;
   example: string;
   category: string;
+  bookmark: boolean;
+  flashcard: boolean;
 }
 
 const customWordValidationSchema = yup.object().shape({
@@ -26,6 +28,8 @@ const customWordValidationSchema = yup.object().shape({
   description: yup.string().required('Description is required'),
   category: yup.string().required('Category is required'),
 });
+
+export const CUSTOM_WORDS_KEY = 'custom:words';
 
 export const CustomWord = () => {
   const navigation = useNavigation();
@@ -40,12 +44,21 @@ export const CustomWord = () => {
     description: '',
     example: '',
     category: '',
+    bookmark: true,
+    flashcard: false,
   };
 
-  // TODO : save it to AsyncStorage
-  const handleSave = (values: FormData) => {
-    console.log('save button pressed');
-    console.log('my formdata: ', values);
+  const handleSave = async (values: FormData) => {
+    try {
+      const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
+      const customWords: FormData[] = rawCustomWords
+        ? JSON.parse(rawCustomWords)
+        : [];
+      customWords.push(values);
+      await AsyncStorage.setItem(CUSTOM_WORDS_KEY, JSON.stringify(customWords));
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   return (
