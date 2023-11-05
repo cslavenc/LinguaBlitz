@@ -42,6 +42,7 @@ export const CustomWord = () => {
     category: '',
   };
 
+  // TODO : save it to AsyncStorage
   const handleSave = (values: FormikValues) => {
     console.log('save button pressed');
     console.log('my formdata: ', values);
@@ -160,7 +161,6 @@ const styles = StyleSheet.create({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    //flex: 1,
     justifyContent: 'flex-start',
   },
   heading: {
