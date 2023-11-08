@@ -10,7 +10,6 @@ export const Home = () => {
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
-        console.log('navigate to my vocabulary...');
         navigation.navigate('My Vocabulary', {
           color: 'white',
           databaseKey: CUSTOM_WORDS_KEY,
