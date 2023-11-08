@@ -9,6 +9,7 @@ import { CategoryItem } from '../components/CategoryItem';
 import { WordList } from './category/WordList';
 import { WordDetail } from './category/WordDetail';
 import { CustomWord } from './custom/CustomWord';
+import { CustomWordList } from './custom/CustomWordList';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
@@ -19,6 +20,8 @@ export const HomeStackScreen = () => {
     <HomeStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
       <HomeStack.Screen name="Overview" component={Home} />
+      <HomeStack.Screen name="My Vocabulary" component={CustomWordList} />
+      <HomeStack.Screen name="Word" component={WordDetail} />
     </HomeStack.Navigator>
   );
 };

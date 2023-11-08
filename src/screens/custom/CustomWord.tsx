@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
 import {
   ScrollView,
   StyleSheet,
@@ -14,11 +16,13 @@ import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface FormData {
+  id: string;
   word: string;
   partOfSpeech: string;
   description: string;
   example: string;
   category: string;
+  level: string;
   bookmark: boolean;
   flashcard: boolean;
 }
@@ -39,16 +43,19 @@ export const CustomWord = () => {
   }, []);
 
   const initialValues: FormData = {
+    id: '',
     word: '',
     partOfSpeech: '',
     description: '',
     example: '',
     category: '',
+    level: 'custom',
     bookmark: true,
     flashcard: false,
   };
 
   const handleSave = async (values: FormData) => {
+    values.id = uuid();
     try {
       const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
       const customWords: FormData[] = rawCustomWords
@@ -58,6 +65,8 @@ export const CustomWord = () => {
       await AsyncStorage.setItem(CUSTOM_WORDS_KEY, JSON.stringify(customWords));
     } catch (error) {
       throw new Error(error);
+    } finally {
+      values.id = ''; // reset so that the next entry does not carry the id over
     }
   };
 

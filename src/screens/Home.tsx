@@ -1,5 +1,51 @@
-import { Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { theme } from '../theme';
+import { RightArrow, VocabularyIcon } from '../components/Icons';
+import { useNavigation } from '@react-navigation/native';
+import { CUSTOM_WORDS_KEY } from './custom/CustomWord';
 
 export const Home = () => {
-  return <Text>home</Text>;
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => {
+        console.log('navigate to my vocabulary...');
+        navigation.navigate('My Vocabulary', {
+          color: 'white',
+          databaseKey: CUSTOM_WORDS_KEY,
+        });
+      }}>
+      <View style={styles.icon}>
+        <VocabularyIcon />
+      </View>
+      <Text style={styles.text}>My Vocabulary</Text>
+      <View style={styles.arrow}>
+        <RightArrow />
+      </View>
+    </TouchableOpacity>
+  );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    height: 48,
+    backgroundColor: theme.white,
+    marginHorizontal: 24,
+    borderRadius: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  icon: {
+    marginLeft: 12,
+  },
+  text: {
+    marginLeft: -108, // TODO : is there a better way to move text to the left?
+    fontSize: 22,
+  },
+  arrow: {
+    marginRight: 12,
+  },
+});

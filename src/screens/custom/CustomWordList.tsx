@@ -9,29 +9,44 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import c1Data from '../../../data/C1_english_vocabulary.json';
-import { WordDetail } from './WordDetail';
-import { useState } from 'react';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FormData } from './CustomWord';
 
-export const WordList = ({ route }) => {
-  const { color } = route.params;
+export const CustomWordList = ({ route }) => {
+  const { color, databaseKey } = route.params;
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
-  const [filteredWords, setFilteredWords] = useState(c1Data);
-  console.log(c1Data);
+  const [filteredWords, setFilteredWords] = useState([]);
+
+  const fetchData = async () => {
+    if (databaseKey) {
+      const result = await AsyncStorage.getItem(databaseKey);
+      data = result ? JSON.parse(result) : [];
+    } else {
+      data = [];
+    }
+    setFilteredWords(data);
+  };
+
+  let data: FormData[];
+  useEffect(() => {
+    fetchData();
+  }, [isFocused]);
 
   const handleSetFilteredWords = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     if (event.nativeEvent.text.length > 1) {
-      let filtered = c1Data.filter((item: WordDetail) =>
+      let filtered = data.filter((item: FormData) =>
         item.word.startsWith(event.nativeEvent.text)
       );
       setFilteredWords(filtered);
     } else {
-      setFilteredWords(c1Data); // reset
+      setFilteredWords(data); // reset
     }
   };
 
@@ -50,14 +65,14 @@ export const WordList = ({ route }) => {
       </View>
       <FlatList
         data={filteredWords}
-        keyExtractor={(item: WordDetail) => item.id + item.word}
+        keyExtractor={(item: FormData) => item.id}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
+        renderItem={({ item }: ListRenderItemInfo<FormData>) => (
           <View>
             <TouchableOpacity
               style={styles.item}
               onPress={() =>
-                navigation.navigate('Word', { color, item, data: c1Data })
+                navigation.navigate('Word', { color, item, data: data })
               }>
               <Text style={styles.word}>{item.word}</Text>
               <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
