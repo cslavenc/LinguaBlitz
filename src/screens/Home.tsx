@@ -1,32 +1,43 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { theme } from '../theme';
-import { RightArrow, VocabularyIcon } from '../components/Icons';
+import { RightArrow, UserIcon, VocabularyIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
 import { CUSTOM_WORDS_KEY } from './custom/CustomWord';
 
 export const Home = () => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => {
-        navigation.navigate('My Vocabulary', {
-          color: 'white',
-          databaseKey: CUSTOM_WORDS_KEY,
-        });
-      }}>
-      <View style={styles.icon}>
-        <VocabularyIcon />
+    <View style={styles.container}>
+      <View style={styles.user}>
+        <UserIcon size={100} color="black" />
       </View>
-      <Text style={styles.text}>My Vocabulary</Text>
-      <View style={styles.arrow}>
-        <RightArrow />
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => {
+          navigation.navigate('My Vocabulary', {
+            color: 'white',
+            databaseKey: CUSTOM_WORDS_KEY,
+          });
+        }}>
+        <View style={styles.icon}>
+          <VocabularyIcon />
+        </View>
+        <Text style={styles.text}>My Vocabulary</Text>
+        <View style={styles.arrow}>
+          <RightArrow />
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  user: { alignSelf: 'center', paddingBottom: 24 },
   card: {
     height: 48,
     backgroundColor: theme.white,
