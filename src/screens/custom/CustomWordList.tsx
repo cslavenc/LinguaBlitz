@@ -21,18 +21,20 @@ export const CustomWordList = ({ route }) => {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   const [filteredWords, setFilteredWords] = useState([]);
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
+    let parsed: FormData[];
     if (databaseKey) {
       const result = await AsyncStorage.getItem(databaseKey);
-      data = result ? JSON.parse(result) : [];
+      parsed = result ? JSON.parse(result) : [];
     } else {
-      data = [];
+      parsed = [];
     }
-    setFilteredWords(data);
+    setData(parsed);
+    setFilteredWords(parsed);
   };
 
-  let data: FormData[];
   useEffect(() => {
     fetchData();
   }, [isFocused]);
