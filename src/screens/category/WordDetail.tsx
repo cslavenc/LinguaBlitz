@@ -46,7 +46,9 @@ export const WordDetail = ({ route }) => {
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
         <Text style={styles.word}>{word}</Text>
-        <Text style={styles.partOfSpeech}>({partOfSpeech})</Text>
+        <Text style={styles.partOfSpeech}>
+          {partOfSpeech ? `(${partOfSpeech})` : ''}
+        </Text>
       </View>
       <View style={styles.information}>
         <ScrollView showsVerticalScrollIndicator={false}>
