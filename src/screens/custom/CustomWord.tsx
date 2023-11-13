@@ -70,6 +70,7 @@ export const CustomWord = () => {
     }
   };
 
+  // TODO : only validate if fields that were touched, not all of them at the same time
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Formik<FormData>
@@ -77,7 +78,14 @@ export const CustomWord = () => {
         initialValues={initialValues}
         validationSchema={customWordValidationSchema}
         onSubmit={(values) => handleSave(values)}>
-        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+        }) => (
           <>
             <View style={styles.inputGroup}>
               <Text style={styles.heading}>Word</Text>
@@ -89,7 +97,9 @@ export const CustomWord = () => {
                 onBlur={handleBlur('word')}
                 value={values.word}
               />
-              {errors.word && <Text style={styles.error}>{errors.word}</Text>}
+              {errors.word && touched.word && (
+                <Text style={styles.error}>{errors.word}</Text>
+              )}
             </View>
             <View style={styles.inputGroup}>
               <Text style={styles.heading}>Part of speech</Text>
@@ -118,7 +128,7 @@ export const CustomWord = () => {
                 onBlur={handleBlur('description')}
                 value={values.description}
               />
-              {errors.description && (
+              {errors.description && touched.description && (
                 <Text style={styles.error}>{errors.description}</Text>
               )}
             </View>
@@ -147,7 +157,7 @@ export const CustomWord = () => {
                 onBlur={handleBlur('category')}
                 value={values.category}
               />
-              {errors.category && (
+              {errors.category && touched.category && (
                 <Text style={styles.error}>{errors.category}</Text>
               )}
             </View>
