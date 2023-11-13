@@ -9,6 +9,14 @@ export enum Category {
   FEELINGS = 'Feelings & Emotions',
 }
 
+export const CategoryData = () => {
+  let data = [];
+  const keys = Object.keys(Category);
+  const values = Object.values(Category);
+  keys.forEach((key, idx) => data.push({ label: values[idx], value: key }));
+  return data;
+};
+
 export const getColor = (course: string) => {
   switch (course) {
     case Category.ALL:

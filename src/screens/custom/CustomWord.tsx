@@ -9,11 +9,13 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Dropdown } from 'react-native-element-dropdown';
+import { CategoryData } from '../../utils';
 
 export interface FormData {
   id: string;
@@ -35,26 +37,30 @@ const customWordValidationSchema = yup.object().shape({
 
 export const CUSTOM_WORDS_KEY = 'custom:words';
 
+const initialValues: FormData = {
+  id: '',
+  word: '',
+  partOfSpeech: '',
+  description: '',
+  example: '',
+  category: '',
+  level: 'custom',
+  bookmark: true,
+  flashcard: false,
+};
+
 export const CustomWord = () => {
   const navigation = useNavigation();
+  const [categoryValue, setCategoryValue] = useState(null);
+  const [isCategoryFocused, setIsCategoryFocused] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: 'Add your own word' });
   }, []);
 
-  const initialValues: FormData = {
-    id: '',
-    word: '',
-    partOfSpeech: '',
-    description: '',
-    example: '',
-    category: '',
-    level: 'custom',
-    bookmark: true,
-    flashcard: false,
-  };
-
   const handleSave = async (values: FormData) => {
+    console.log(values);
+
     values.id = uuid();
     try {
       const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
@@ -70,7 +76,6 @@ export const CustomWord = () => {
     }
   };
 
-  // TODO : only validate if fields that were touched, not all of them at the same time
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Formik<FormData>
@@ -85,12 +90,17 @@ export const CustomWord = () => {
           values,
           touched,
           errors,
+          setFieldValue,
+          setFieldTouched,
         }) => (
           <>
             <View style={styles.inputGroup}>
               <Text style={styles.heading}>Word</Text>
               <TextInput
-                style={[styles.input, errors.word ? styles.errorInput : null]}
+                style={[
+                  styles.input,
+                  errors.word && touched.word ? styles.errorInput : null,
+                ]}
                 underlineColorAndroid="transparent"
                 name="word"
                 onChangeText={handleChange('word')}
@@ -119,7 +129,9 @@ export const CustomWord = () => {
                 multiline={true}
                 style={[
                   styles.input,
-                  errors.description ? styles.errorInput : null,
+                  errors.description && touched.description
+                    ? styles.errorInput
+                    : null,
                   { height: 120 },
                 ]}
                 underlineColorAndroid="transparent"
@@ -144,20 +156,32 @@ export const CustomWord = () => {
               />
             </View>
             <View style={styles.inputGroup}>
-              {/* TODO : use a dropdown or modal */}
               <Text style={styles.heading}>Category</Text>
-              <TextInput
+              <Dropdown
                 style={[
                   styles.input,
-                  errors.category ? styles.errorInput : null,
+                  errors.category && touched.category && !values.category
+                    ? styles.errorInput
+                    : null,
                 ]}
-                underlineColorAndroid="transparent"
                 name="category"
-                onChangeText={handleChange('category')}
-                onBlur={handleBlur('category')}
-                value={values.category}
+                data={CategoryData()}
+                labelField="label"
+                valueField="value"
+                search={false}
+                placeholder={!isCategoryFocused ? 'Select Category' : ''}
+                placeholderStyle={{ color: 'grey' }}
+                value={categoryValue}
+                onBlur={() => {
+                  setFieldTouched('category', true);
+                }}
+                onChange={(item) => {
+                  setCategoryValue(item.value);
+                  setFieldValue('category', item.label);
+                  setIsCategoryFocused(false);
+                }}
               />
-              {errors.category && touched.category && (
+              {errors.category && touched.category && !values.category && (
                 <Text style={styles.error}>{errors.category}</Text>
               )}
             </View>
