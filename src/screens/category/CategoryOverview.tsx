@@ -8,18 +8,12 @@ import {
 import { CategoryItem } from '../../components/CategoryItem';
 import { useNavigation } from '@react-navigation/native';
 import { theme } from '../../theme';
+import { Category } from '../../utils';
 
 export const CategoryOverview = () => {
   const navigation = useNavigation();
 
-  const categories = [
-    'All Words',
-    'Business',
-    'Health',
-    'Environment',
-    'Science & Technology',
-    'Feelings & Emotions',
-  ];
+  const categories = Object.values(Category);
 
   return (
     <View style={styles.container}>

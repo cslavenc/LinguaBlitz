@@ -7,6 +7,18 @@ export enum Category {
   ENVIRONMENT = 'Environment',
   SCIENCE = 'Science & Technology',
   FEELINGS = 'Feelings & Emotions',
+  ART = 'Art',
+  COMMUNICATION = 'Communication',
+  EDUCATION = 'Education',
+  FASHION = 'Fashion',
+  HISTORY = 'History',
+  INDUSTRY = 'Industry',
+  MOVEMENT = 'Movement',
+  RELIGION = 'Religion',
+  SOCIETY = 'Society',
+  ACTIVITIES = 'Activities',
+  PHILOSOPHY = 'Philosophy',
+  TRAVEL = 'Travel',
 }
 
 export const CategoryData = () => {
@@ -32,8 +44,9 @@ export const getColor = (course: string) => {
     case Category.FEELINGS:
       return theme.orange;
     default:
-      const exhaustiveCheck: never = course as any;
-      throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
+      // const exhaustiveCheck: never = course as any;
+      // throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
+      return theme.autumngreen;
   }
 };
 
@@ -52,7 +65,8 @@ export const getImageUrl = (course: string) => {
     case Category.FEELINGS:
       return require('../assets/category_feelings.png');
     default:
-      const exhaustiveCheck: never = course as any;
-      throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
+      // const exhaustiveCheck: never = course as any;
+      // throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
+      return require('../assets/category_feelings.png');
   }
 };
