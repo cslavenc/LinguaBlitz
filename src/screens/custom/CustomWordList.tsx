@@ -28,6 +28,7 @@ export const CustomWordList = ({ route }) => {
     if (databaseKey) {
       const result = await AsyncStorage.getItem(databaseKey);
       parsed = result ? JSON.parse(result) : [];
+      parsed = parsed.filter((item) => item.bookmark);
     } else {
       parsed = [];
     }
