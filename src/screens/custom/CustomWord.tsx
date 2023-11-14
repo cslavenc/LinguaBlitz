@@ -59,9 +59,13 @@ export const CustomWord = () => {
   }, []);
 
   const handleSave = async (values: FormData) => {
-    console.log(values);
-
     values.id = uuid();
+    Object.keys(values).map((key) => {
+      if (typeof values[key] === 'string') {
+        values[key] = values[key].trim();
+      }
+    });
+
     try {
       const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
       const customWords: FormData[] = rawCustomWords
