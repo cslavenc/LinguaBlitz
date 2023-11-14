@@ -20,7 +20,6 @@ export const WordList = ({ route }) => {
   const { color } = route.params;
   const navigation = useNavigation();
   const [filteredWords, setFilteredWords] = useState(c1Data);
-  console.log(c1Data);
 
   const handleSetFilteredWords = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
