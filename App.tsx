@@ -1,5 +1,11 @@
 import 'react-native-gesture-handler';
-import { ImageBackground, Platform, UIManager, View } from 'react-native';
+import {
+  Dimensions,
+  ImageBackground,
+  Platform,
+  UIManager,
+  View,
+} from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 
@@ -20,8 +26,8 @@ export default function App() {
           style={{
             flex: 1,
             justifyContent: 'center',
-            width: '100%',
-            height: '100%',
+            width: Dimensions.get('window').width,
+            height: Dimensions.get('window').height,
           }}
           resizeMode="cover">
           <BottomTabsNavigator />
