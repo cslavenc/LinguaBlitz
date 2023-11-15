@@ -7,7 +7,12 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { BookmarkFilledIcon, BookmarkPlusIcon } from '../../components/Icons';
+import {
+  BookmarkFilledIcon,
+  BookmarkPlusIcon,
+  FlashcardFilledIcon,
+  FlashcardIcon,
+} from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CUSTOM_WORDS_KEY, FormData } from '../custom/CustomWord';
 
@@ -29,6 +34,7 @@ export const WordDetail = ({ route }) => {
   const descriptions = item.description.split('\n');
   const example = item.example.trim();
   const [bookmark, setBookmark] = useState<boolean>(item.bookmark);
+  const [flashcard, setFlashcard] = useState<boolean>(item.flashcard);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: word.split(' (')[0] });
@@ -72,15 +78,41 @@ export const WordDetail = ({ route }) => {
     }
   };
 
+  const handleFlashcard = async () => {
+    setFlashcard(!flashcard);
+
+    if (item.level.toLowerCase().includes('custom')) {
+      try {
+        const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
+        const customWords: FormData[] = rawCustomWords
+          ? JSON.parse(rawCustomWords)
+          : [];
+
+        customWords.map((word) => {
+          if (word.id === item.id) {
+            word.flashcard = !flashcard;
+          }
+        });
+
+        await AsyncStorage.setItem(
+          CUSTOM_WORDS_KEY,
+          JSON.stringify(customWords)
+        );
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
         <View style={styles.icons}>
-          <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-            {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
+          <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+            {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
           </TouchableOpacity>
           <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-            <BookmarkPlusIcon />
+            {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
           </TouchableOpacity>
         </View>
         <Text style={styles.word}>{word}</Text>
