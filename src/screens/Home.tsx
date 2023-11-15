@@ -27,6 +27,22 @@ export const Home = () => {
           <RightArrow />
         </View>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => {
+          navigation.navigate('My Flashcards', {
+            color: 'yellow',
+            databaseKey: CUSTOM_WORDS_KEY,
+          });
+        }}>
+        <View style={styles.icon}>
+          <VocabularyIcon />
+        </View>
+        <Text style={styles.text}>My Flashcards</Text>
+        <View style={styles.arrow}>
+          <RightArrow />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -36,6 +52,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    gap: 12,
   },
   user: { alignSelf: 'center', paddingBottom: 24 },
   card: {
