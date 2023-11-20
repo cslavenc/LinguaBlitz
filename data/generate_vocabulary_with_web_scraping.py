@@ -82,7 +82,10 @@ if __name__ == '__main__':
                             'level': level, 
                             'description': description,
                             'example': example,
-                            'partOfSpeech': partOfSpeech
+                            'partOfSpeech': partOfSpeech,
+                            'category': '',
+                            'bookmark': False,
+                            'flashcard': False
                         })
     
     
