@@ -26,6 +26,49 @@ def saveByLevel(level, data):
     
     with open(level+'_english_vocabulary.json', 'w', encoding='utf-8') as f:
         json.dump(extracted, f, ensure_ascii=False, indent=4)
+
+
+def findSynonyms(word):
+    synonyms = []
+    maxNumberOfSynonyms = 3
+    url = "https://www.thesaurus.com/browse/"+word.split(" (")[0]
+    page = requests.get(url)
+    
+    if page.status_code == 200:
+        content = page.content
+        
+        # extract data
+        DOM = bs(content, "html.parser")
+        sections = DOM.find_all("div", {"data-type": "synonym-and-antonym-card"})
+        for href in sections:
+            if "Strongest match" in href.text or "Strongest matches" in href.text:
+                ul = href.find_all("ul")
+                for elem in ul:
+                    for li in elem.find_all("li"):
+                        if not li.text in synonyms and len(synonyms) < maxNumberOfSynonyms:
+                            synonyms.append(li.text)
+                    break
+            
+            # if none can be found, look for other strong matches
+            if len(synonyms) == 0:
+                if "Strong match" in href.text or "Strong matches" in href.text:
+                    ul = href.find_all("ul")
+                    for elem in ul:
+                        for li in elem.find_all("li"):
+                            if not li.text in synonyms and len(synonyms) < maxNumberOfSynonyms:
+                                synonyms.append(li.text)
+                        break
+            
+            # if no strong matches are found, try weak matches
+            if len(synonyms) == 0:
+                if "Weak match" in href.text or "Weak matches" in href.text:
+                    ul = href.find_all("ul")
+                    for elem in ul:
+                        for li in elem.find_all("li"):
+                            if not li.text in synonyms and len(synonyms) < maxNumberOfSynonyms:
+                                synonyms.append(li.text)
+                        break
+        return synonyms
     
 
 if __name__ == '__main__':
@@ -57,6 +100,7 @@ if __name__ == '__main__':
                         blockquote = section.findAll('p', {'class': 'blockquote'})
                         example = section.findAll('p', {'class': 'learnerexamp'})
                         level = section.findAll('span', {'class': 'label'})
+                        synonyms = findSynonyms(word)
                         
                         # ignore those words without a level
                         if len(level):
@@ -83,6 +127,7 @@ if __name__ == '__main__':
                             'description': description,
                             'example': example,
                             'partOfSpeech': partOfSpeech,
+                            'synonyms': synonyms,
                             'category': '',
                             'bookmark': False,
                             'flashcard': False
@@ -138,5 +183,4 @@ if __name__ == '__main__':
     #     json.dump(dataC1, f, ensure_ascii=False, indent=4)
     # with open('C2_english_vocabulary.json', 'w', encoding='utf-8') as f:
     #     json.dump(dataC2, f, ensure_ascii=False, indent=4)
-    
     
