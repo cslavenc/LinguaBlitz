@@ -28,9 +28,15 @@ def saveByLevel(level, data):
         json.dump(extracted, f, ensure_ascii=False, indent=4)
 
 
-def findSynonyms(word):
+def findSynonyms(word, partOfSpeech):
     synonyms = []
     maxNumberOfSynonyms = 3
+    
+    # only check for noun and verb, ignore other types, since the other website
+    # has different definitions and inconsistencies with the vocabulary data
+    if not (partOfSpeech == "noun" or partOfSpeech == "verb"):
+        partOfSpeech = ""
+    
     url = "https://www.thesaurus.com/browse/"+word.split(" (")[0]
     page = requests.get(url)
     
@@ -41,7 +47,7 @@ def findSynonyms(word):
         DOM = bs(content, "html.parser")
         sections = DOM.find_all("div", {"data-type": "synonym-and-antonym-card"})
         for href in sections:
-            if "Strongest match" in href.text or "Strongest matches" in href.text:
+            if partOfSpeech in href.text and ("Strongest match" in href.text or "Strongest matches" in href.text):
                 ul = href.find_all("ul")
                 for elem in ul:
                     for li in elem.find_all("li"):
@@ -51,7 +57,7 @@ def findSynonyms(word):
             
             # if none can be found, look for other strong matches
             if len(synonyms) == 0:
-                if "Strong match" in href.text or "Strong matches" in href.text:
+                if partOfSpeech in href.text and ("Strong match" in href.text or "Strong matches" in href.text):
                     ul = href.find_all("ul")
                     for elem in ul:
                         for li in elem.find_all("li"):
@@ -61,13 +67,14 @@ def findSynonyms(word):
             
             # if no strong matches are found, try weak matches
             if len(synonyms) == 0:
-                if "Weak match" in href.text or "Weak matches" in href.text:
+                if partOfSpeech in href.text and ("Weak match" in href.text or "Weak matches" in href.text):
                     ul = href.find_all("ul")
                     for elem in ul:
                         for li in elem.find_all("li"):
                             if not li.text in synonyms and len(synonyms) < maxNumberOfSynonyms:
                                 synonyms.append(li.text)
                         break
+        print(synonyms)
         return synonyms
     
 
@@ -100,7 +107,7 @@ if __name__ == '__main__':
                         blockquote = section.findAll('p', {'class': 'blockquote'})
                         example = section.findAll('p', {'class': 'learnerexamp'})
                         level = section.findAll('span', {'class': 'label'})
-                        synonyms = findSynonyms(word)
+                        synonyms = findSynonyms(word, partOfSpeech)
                         
                         # ignore those words without a level
                         if len(level):
