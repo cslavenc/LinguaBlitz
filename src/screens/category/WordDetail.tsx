@@ -113,7 +113,10 @@ export const WordDetail = ({ route }) => {
     <View style={styles.container}>
       <View style={[styles.title, { backgroundColor: color }]}>
         <View style={styles.icons}>
-          <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+          <TouchableOpacity
+            onPress={handleFlashcard}
+            activeOpacity={1}
+            style={{ paddingRight: 4 }}>
             {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
           </TouchableOpacity>
           <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
