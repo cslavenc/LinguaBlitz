@@ -14,7 +14,7 @@ import {
   FlashcardIcon,
 } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CUSTOM_WORDS_KEY, FormData } from '../custom/CustomWord';
+import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
 
 export interface WordDetail {
   id: string;
@@ -23,6 +23,10 @@ export interface WordDetail {
   description: string;
   example: string;
   partOfSpeech: string;
+  category: string;
+  synonyms: string[];
+  flashcard: boolean;
+  bookmark: boolean;
 }
 
 export const WordDetail = ({ route }) => {
@@ -33,6 +37,7 @@ export const WordDetail = ({ route }) => {
   const partOfSpeech = item.partOfSpeech;
   const descriptions = item.description.split('\n');
   const example = item.example.trim();
+  const synonyms = item.synonyms;
   const [bookmark, setBookmark] = useState<boolean>(item.bookmark);
   const [flashcard, setFlashcard] = useState<boolean>(item.flashcard);
 
@@ -58,7 +63,7 @@ export const WordDetail = ({ route }) => {
     if (item.level.toLowerCase().includes('custom')) {
       try {
         const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-        const customWords: FormData[] = rawCustomWords
+        const customWords: WordDetail[] = rawCustomWords
           ? JSON.parse(rawCustomWords)
           : [];
 
@@ -84,7 +89,7 @@ export const WordDetail = ({ route }) => {
     if (item.level.toLowerCase().includes('custom')) {
       try {
         const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-        const customWords: FormData[] = rawCustomWords
+        const customWords: WordDetail[] = rawCustomWords
           ? JSON.parse(rawCustomWords)
           : [];
 
@@ -139,7 +144,14 @@ export const WordDetail = ({ route }) => {
           </View>
           <View style={{ paddingBottom: 24 }}>
             <Text style={styles.heading}>Synonyms</Text>
-            <Text style={styles.text}>synonyms go here</Text>
+            {synonyms.map((synonym) => (
+              <View style={{ flexDirection: 'row' }} key={synonym}>
+                <Text style={styles.text}>{'\u2022'}</Text>
+                <Text style={[styles.text, styles.unorderedList]}>
+                  {synonym.trim()}
+                </Text>
+              </View>
+            ))}
           </View>
         </ScrollView>
       </View>

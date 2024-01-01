@@ -16,8 +16,9 @@ import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dropdown } from 'react-native-element-dropdown';
 import { CategoryData } from '../../utils';
+import { WordDetail } from '../category/WordDetail';
 
-export interface FormData {
+export interface WordDetail {
   id: string;
   word: string;
   partOfSpeech: string;
@@ -37,7 +38,7 @@ const customWordValidationSchema = yup.object().shape({
 
 export const CUSTOM_WORDS_KEY = 'custom:words';
 
-const initialValues: FormData = {
+const initialValues: WordDetail = {
   id: '',
   word: '',
   partOfSpeech: '',
@@ -45,6 +46,7 @@ const initialValues: FormData = {
   example: '',
   category: '',
   level: 'custom',
+  synonyms: [],
   bookmark: true,
   flashcard: false,
 };
@@ -58,7 +60,7 @@ export const CustomWord = () => {
     navigation.setOptions({ headerTitle: 'Add your own word' });
   }, []);
 
-  const handleSave = async (values: FormData) => {
+  const handleSave = async (values: WordDetail) => {
     values.id = uuid();
     Object.keys(values).map((key) => {
       if (typeof values[key] === 'string') {
@@ -68,7 +70,7 @@ export const CustomWord = () => {
 
     try {
       const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-      const customWords: FormData[] = rawCustomWords
+      const customWords: WordDetail[] = rawCustomWords
         ? JSON.parse(rawCustomWords)
         : [];
       customWords.push(values);
@@ -82,7 +84,7 @@ export const CustomWord = () => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Formik<FormData>
+      <Formik<WordDetail>
         style={styles.form}
         initialValues={initialValues}
         validationSchema={customWordValidationSchema}
