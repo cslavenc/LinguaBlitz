@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './Home';
 import { CategoryOverview } from './category/CategoryOverview';
-import { CategoryOverviewTab, HomeIcon } from '../components/Icons';
+import { BookIcon, CategoryOverviewTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 import { Category } from './category/Category';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,10 +11,12 @@ import { WordDetail } from './category/WordDetail';
 import { CustomWord } from './custom/CustomWord';
 import { CustomWordList } from './custom/CustomWordList';
 import { Flashcard } from './flashcard/Flashcard';
+import { Book } from './book/Book';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
 const CategoryStack = createStackNavigator();
+const BookStack = createStackNavigator();
 
 export const HomeStackScreen = () => {
   return (
@@ -42,6 +44,15 @@ export const CategoryStackScreen = () => {
   );
 };
 
+export const BookStackScreen = () => {
+  return (
+    <BookStack.Navigator
+      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
+      <BookStack.Screen name="Book" component={Book} />
+    </BookStack.Navigator>
+  );
+};
+
 const BottomTabs = createBottomTabNavigator();
 
 export const BottomTabsNavigator = () => {
@@ -59,6 +70,8 @@ export const BottomTabsNavigator = () => {
               return <HomeIcon size={size} color={color} />;
             case 'Categories':
               return <CategoryOverviewTab size={size} color={color} />;
+            case 'Recommended Books':
+              return <BookIcon size={size} color={color} />;
             default:
               return null;
           }
@@ -72,6 +85,11 @@ export const BottomTabsNavigator = () => {
       <BottomTabs.Screen
         name="Categories"
         component={CategoryStackScreen}
+        options={{ headerTitleAlign: 'center' }}
+      />
+      <BottomTabs.Screen
+        name="Recommended Books"
+        component={BookStackScreen}
         options={{ headerTitleAlign: 'center' }}
       />
     </BottomTabs.Navigator>
