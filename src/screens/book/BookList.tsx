@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { BookItem } from './BookItem';
 
-export const Book = () => {
+export const BookList = () => {
   return (
     <View style={styles.container}>
       <BookItem />

@@ -11,7 +11,7 @@ import { WordDetail } from './category/WordDetail';
 import { CustomWord } from './custom/CustomWord';
 import { CustomWordList } from './custom/CustomWordList';
 import { Flashcard } from './flashcard/Flashcard';
-import { Book } from './book/Book';
+import { BookList } from './book/BookList';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
@@ -48,7 +48,7 @@ export const BookStackScreen = () => {
   return (
     <BookStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
-      <BookStack.Screen name="English Study Books" component={Book} />
+      <BookStack.Screen name="English Study Books" component={BookList} />
     </BookStack.Navigator>
   );
 };
