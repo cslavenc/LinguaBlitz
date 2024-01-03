@@ -39,5 +39,6 @@ const styles = StyleSheet.create({
   image: { height: 150, width: 100 },
   text: {
     flexShrink: 1,
+    textAlign: 'justify',
   },
 });
