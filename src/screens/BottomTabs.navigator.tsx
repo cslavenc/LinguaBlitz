@@ -48,7 +48,7 @@ export const BookStackScreen = () => {
   return (
     <BookStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
-      <BookStack.Screen name="Book" component={Book} />
+      <BookStack.Screen name="English Study Books" component={Book} />
     </BookStack.Navigator>
   );
 };
