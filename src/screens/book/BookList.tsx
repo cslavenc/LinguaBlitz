@@ -1,12 +1,17 @@
 import { StyleSheet, View } from 'react-native';
 import { BookItem } from './BookItem';
+import { BookData } from './BookData';
 
 export const BookList = () => {
   return (
     <View style={styles.container}>
-      <BookItem />
-      <BookItem />
-      <BookItem />
+      {BookData.map((book) => (
+        <BookItem
+          description={book.description}
+          imageUrl={book.imageUrl}
+          bookUrl={book.bookUrl}
+        />
+      ))}
     </View>
   );
 };
