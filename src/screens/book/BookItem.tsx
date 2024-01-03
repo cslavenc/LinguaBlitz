@@ -30,6 +30,7 @@ export const BookItem: React.FC<BookItem> = ({
 
 const styles = StyleSheet.create({
   container: {
+    height: 150,
     gap: 16,
     display: 'flex',
     flexDirection: 'row',
