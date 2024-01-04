@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getColor, getImageUrl } from '../utils';
+import { getColor, getImageUrl } from '../../utils';
 
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();

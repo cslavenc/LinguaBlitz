@@ -5,7 +5,7 @@ import { BookIcon, CategoryOverviewTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';
 import { Category } from './category/Category';
 import { createStackNavigator } from '@react-navigation/stack';
-import { CategoryItem } from '../components/CategoryItem';
+import { CategoryItem } from './category/CategoryItem';
 import { WordList } from './category/WordList';
 import { WordDetail } from './category/WordDetail';
 import { CustomWord } from './custom/CustomWord';

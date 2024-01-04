@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CategoryItem } from '../../components/CategoryItem';
+import { CategoryItem } from './CategoryItem';
 import { useNavigation } from '@react-navigation/native';
 import { theme } from '../../theme';
 import { Category } from '../../utils';
