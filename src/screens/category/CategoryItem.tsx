@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getColor, getImageUrl } from '../../utils';
 
@@ -8,41 +8,39 @@ export const CategoryItem = ({ category }) => {
   const imageUrl = getImageUrl(category);
 
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={1}
-        style={[styles.container, { backgroundColor: color }]}
+        style={styles.image}
         onPress={() => navigation.navigate('Category', { category, color })}>
-        <View style={styles.image}>
-          <Image style={styles.image} resizeMode="stretch" source={imageUrl} />
-        </View>
-        <Text style={styles.name}>{category}</Text>
+        <Text style={{ textAlign: 'center' }}>ICON HERE</Text>
       </TouchableOpacity>
+      <Text style={styles.name}>{category}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 5,
-    height: 100,
-    marginVertical: 12,
-    borderRadius: 10,
+    height: 120,
+    width: 120,
+    marginVertical: 32,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    flex: 3,
-    // make image fit left card content properly
-    width: undefined,
-    height: undefined,
+    height: '100%',
+    width: '100%',
+    borderRadius: 10,
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    flex: 5,
-    textAlign: 'center',
+    fontSize: 20,
+    color: '#1520A6',
   },
 });
