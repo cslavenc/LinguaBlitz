@@ -10,6 +10,7 @@ export const BookList = () => {
           description={book.description}
           imageUrl={book.imageUrl}
           bookUrl={book.bookUrl}
+          key={book.bookUrl}
         />
       ))}
     </View>
