@@ -17,9 +17,13 @@ export const CategoryOverview = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}>
         {categories.map((category) => (
-          <CategoryItem category={category} key={category} />
+          <View style={styles.item}>
+            <CategoryItem category={category} key={category} />
+          </View>
         ))}
       </ScrollView>
       <TouchableOpacity
@@ -36,8 +40,20 @@ export const CategoryOverview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 26,
-    marginBottom: 12,
+    marginHorizontal: 44,
+    //marginBottom: 0,
+    paddingVertical: 40,
+  },
+  list: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    gap: 62,
+  },
+  item: {
+    //width: '50%',
+    backgroundColor: 'red',
   },
   button: {
     width: 50,

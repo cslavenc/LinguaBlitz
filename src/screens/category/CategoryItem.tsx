@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     height: 120,
     width: 120,
-    marginVertical: 32,
+    //marginVertical: 32,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   name: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#1520A6',
   },
 });
