@@ -34,7 +34,18 @@ export const CategoryStackScreen = () => {
   return (
     <CategoryStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
-      <CategoryStack.Screen name="Overview" component={CategoryOverview} />
+      <CategoryStack.Screen
+        name="Categories"
+        component={CategoryOverview}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: theme.primaryBlue,
+          },
+        }}
+      />
       <CategoryStack.Screen name="CategoryItem" component={CategoryItem} />
       <CategoryStack.Screen name="Category" component={Category} />
       <CategoryStack.Screen name="Word list" component={WordList} />
