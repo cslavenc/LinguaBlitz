@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getColor, getImageUrl } from '../../utils';
+import { theme } from '../../theme';
 
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
@@ -41,6 +42,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    color: '#1520A6',
+    color: theme.primaryBlue,
   },
 });
