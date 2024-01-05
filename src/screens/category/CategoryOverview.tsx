@@ -12,19 +12,33 @@ import { Category } from '../../utils';
 
 export const CategoryOverview = () => {
   const navigation = useNavigation();
-
   const categories = Object.values(Category);
 
   return (
-    <View style={styles.container}>
+    <View>
       <ScrollView
-        contentContainerStyle={styles.list}
+        contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}>
-        {categories.map((category) => (
-          <View style={styles.item}>
-            <CategoryItem category={category} key={category} />
-          </View>
-        ))}
+        <View style={styles.list}>
+          {categories
+            // categories with even index for left column
+            .filter((elem, index) => index % 2 === 0)
+            .map((category) => (
+              <View style={styles.item}>
+                <CategoryItem category={category} key={category} />
+              </View>
+            ))}
+        </View>
+        <View style={styles.list}>
+          {categories
+            // categories with odd index for right column
+            .filter((elem, index) => index % 2 !== 0)
+            .map((category) => (
+              <View style={styles.item}>
+                <CategoryItem category={category} key={category} />
+              </View>
+            ))}
+        </View>
       </ScrollView>
       <TouchableOpacity
         style={styles.button}
@@ -40,20 +54,20 @@ export const CategoryOverview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 44,
-    //marginBottom: 0,
-    paddingVertical: 40,
+    paddingHorizontal: 18,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   list: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    gap: 62,
+    justifyContent: 'space-around',
+    width: '50%',
   },
   item: {
-    //width: '50%',
-    backgroundColor: 'red',
+    marginVertical: 24,
   },
   button: {
     width: 50,
