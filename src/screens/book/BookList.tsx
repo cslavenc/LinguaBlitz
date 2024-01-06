@@ -19,7 +19,7 @@ export const BookList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 24,
+    gap: 30,
     marginHorizontal: 20,
     display: 'flex',
     flexDirection: 'column',
