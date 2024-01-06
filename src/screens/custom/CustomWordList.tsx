@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FormData } from './CustomWord';
 
 export const CustomWordList = ({ route }) => {
   const { color, databaseKey } = route.params;
@@ -24,7 +23,7 @@ export const CustomWordList = ({ route }) => {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    let parsed: FormData[];
+    let parsed: WordDetail[];
     if (databaseKey) {
       const result = await AsyncStorage.getItem(databaseKey);
       parsed = result ? JSON.parse(result) : [];
@@ -44,7 +43,7 @@ export const CustomWordList = ({ route }) => {
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     if (event.nativeEvent.text.length > 1) {
-      let filtered = data.filter((item: FormData) =>
+      let filtered = data.filter((item: WordDetail) =>
         item.word.startsWith(event.nativeEvent.text)
       );
       setFilteredWords(filtered);
@@ -68,9 +67,9 @@ export const CustomWordList = ({ route }) => {
       </View>
       <FlatList
         data={filteredWords}
-        keyExtractor={(item: FormData) => item.id}
+        keyExtractor={(item: WordDetail) => item.id}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }: ListRenderItemInfo<FormData>) => (
+        renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
           <View>
             <TouchableOpacity
               style={styles.item}
