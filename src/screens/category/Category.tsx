@@ -1,13 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SpeechBubbleIcon } from '../../components/Icons';
 import { useNavigation } from '@react-navigation/native';
-import { getImageUrl } from '../../utils';
 import { useEffect } from 'react';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
   const { category, color } = route.params;
-  let imageUrl = getImageUrl(category);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: category });
@@ -15,7 +13,6 @@ export const Category = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Image resizeMode="contain" source={imageUrl} />
       <TouchableOpacity
         activeOpacity={1}
         style={[styles.wordList, { backgroundColor: color }]}

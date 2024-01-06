@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, { Circle, G, Path, Text } from 'react-native-svg';
 
-interface Icon {
+export interface Icon {
   color?: string;
   size?: number;
 }

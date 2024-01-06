@@ -1,12 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getColor, getImageUrl } from '../../utils';
+import { getCategoryIcon, getColor } from '../../utils';
 import { theme } from '../../theme';
 
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
   const color = getColor(category);
-  const imageUrl = getImageUrl(category);
+  const categoryIcon = getCategoryIcon(category);
 
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ export const CategoryItem = ({ category }) => {
         activeOpacity={1}
         style={styles.image}
         onPress={() => navigation.navigate('Category', { category, color })}>
-        <Text style={{ textAlign: 'center' }}>ICON HERE</Text>
+        <View style={{ alignSelf: 'center' }}>{categoryIcon}</View>
       </TouchableOpacity>
       <Text style={styles.name}>{category}</Text>
     </View>
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   container: {
     height: 120,
     width: 120,
-    //marginVertical: 32,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
