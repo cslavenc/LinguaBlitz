@@ -11,6 +11,7 @@ import {
   FashionIcon,
   HealthIcon,
   IndustryIcon,
+  PhilosophyIcon,
   SocietyIcon,
   TechnologyIcon,
   TravelIcon,
@@ -90,7 +91,7 @@ export const getCategoryIcon = (course: string) => {
     case Category.ACTIVITIES:
       return <ActivitiesIcon />;
     case Category.PHILOSOPHY:
-      return null;
+      return <PhilosophyIcon />;
     case Category.TRAVEL:
       return <TravelIcon />;
     case Category.HEALTH:
