@@ -33,7 +33,9 @@ export const HomeStackScreen = () => {
 export const CategoryStackScreen = () => {
   return (
     <CategoryStack.Navigator
-      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.background },
+      }}>
       <CategoryStack.Screen
         name="Categories"
         component={CategoryOverview}
@@ -47,7 +49,18 @@ export const CategoryStackScreen = () => {
         }}
       />
       <CategoryStack.Screen name="CategoryItem" component={CategoryItem} />
-      <CategoryStack.Screen name="Category" component={Category} />
+      <CategoryStack.Screen
+        name="Category"
+        component={Category}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: theme.primaryBlue,
+          },
+        }}
+      />
       <CategoryStack.Screen name="Word list" component={WordList} />
       <CategoryStack.Screen name="Word" component={WordDetail} />
       <CategoryStack.Screen name="Custom word" component={CustomWord} />
@@ -96,7 +109,10 @@ export const BottomTabsNavigator = () => {
       <BottomTabs.Screen
         name="Categories"
         component={CategoryStackScreen}
-        options={{ headerTitleAlign: 'center' }}
+        options={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: { color: 'transparent' },
+        }}
       />
       <BottomTabs.Screen
         name="Recommended Books"

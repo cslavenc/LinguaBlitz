@@ -1,7 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { SpeechBubbleIcon } from '../../components/Icons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
+import {
+  FlashcardsIcon,
+  VocabularyListIcon,
+} from '../../components/CategoryIcons';
+import { theme } from '../../theme';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
@@ -15,10 +19,21 @@ export const Category = ({ route }) => {
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={1}
-        style={[styles.wordList, { backgroundColor: color }]}
+        style={styles.wordList}
         onPress={() => navigation.navigate('Word list', { color })}>
-        <SpeechBubbleIcon />
-        <Text style={styles.name}>Word list</Text>
+        <VocabularyListIcon />
+        <Text style={[styles.text, { color: theme.primaryBlue }]}>
+          Vocabulary
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.wordList}
+        onPress={() => navigation.navigate('Word list', { color })}>
+        <FlashcardsIcon />
+        <Text style={[styles.text, { color: theme.primaryRed }]}>
+          Flashcards
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -26,11 +41,12 @@ export const Category = ({ route }) => {
 
 const styles = StyleSheet.create({
   wordList: {
-    height: 150,
+    height: 120,
     elevation: 5,
     marginVertical: 18,
     padding: 10,
     borderRadius: 10,
+    backgroundColor: theme.white,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -39,9 +55,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
   },
-  name: {
+  text: {
+    fontSize: 30,
     textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 });
