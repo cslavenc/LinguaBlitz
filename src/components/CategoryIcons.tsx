@@ -132,7 +132,7 @@ export const ScienceIcon: React.FC<Icon> = () => {
       viewBox="0 0 24 24"
       fill={theme.dark}>
       <G>
-        <Rect fill={theme.dark} height="24" width="24" />
+        <Rect fill="none" height="24" width="24" />
       </G>
       <G>
         <G>
