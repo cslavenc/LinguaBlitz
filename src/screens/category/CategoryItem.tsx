@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    color: theme.primaryBlue,
+    color: theme.dark,
   },
 });
