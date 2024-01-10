@@ -1,12 +1,13 @@
 export const theme = {
   // brand colors
   dark: '#000',
-  white: '#fff',
-  background: '#f1efe7',
-  grey: '#8E9AAF',
   primaryBlue: '#1520A6',
   primaryRed: '#CF142B',
+  background: '#f1efe7',
+  white: '#fff',
+  grey: '#8E9AAF',
 
+  // TODO : are these colors still required
   turquoise: '#65D2B5',
   orange: '#FFD6B1',
   yellow: 'yellow',
@@ -18,6 +19,7 @@ export const theme = {
   // functional colors
   active: '',
   inactive: '',
+  // TODO : use brand colors here too?
   save: '#A5FFA8',
   cancel: '#FE8383',
 };
