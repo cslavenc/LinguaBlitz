@@ -9,7 +9,8 @@ import { theme } from '../../theme';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
-  const { category, color } = route.params;
+  const { category } = route.params;
+  const categories = Object.values(Category);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: category });
