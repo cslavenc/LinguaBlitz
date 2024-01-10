@@ -46,6 +46,7 @@ export const CategoryData = () => {
   return data;
 };
 
+// TODO : is this still required
 export const getColor = (course: string) => {
   switch (course) {
     case Category.ART:
