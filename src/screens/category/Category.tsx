@@ -15,6 +15,10 @@ export const Category = ({ route }) => {
     navigation.setOptions({ headerTitle: category });
   }, [category]);
 
+  const handleNext = () => {};
+
+  const handlePrevious = () => {};
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -35,6 +39,14 @@ export const Category = ({ route }) => {
           Flashcards
         </Text>
       </TouchableOpacity>
+      <View style={styles.buttonGroup}>
+        <TouchableOpacity onPress={() => handlePrevious()}>
+          <Text style={styles.button}>Previous</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleNext()}>
+          <Text style={styles.button}>Next</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -53,10 +65,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    marginHorizontal: 20,
+    marginHorizontal: 28,
   },
   text: {
     fontSize: 30,
     textAlign: 'center',
+  },
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  button: {
+    backgroundColor: theme.primaryButton,
+    fontSize: 28,
+    width: 147,
+    height: 45,
+    borderRadius: 10,
+    textAlign: 'center',
+    verticalAlign: 'middle',
   },
 });
