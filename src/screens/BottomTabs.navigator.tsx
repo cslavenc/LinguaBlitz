@@ -44,7 +44,7 @@ export const CategoryStackScreen = () => {
           headerTitleStyle: {
             fontSize: 30,
             fontWeight: 'bold',
-            color: theme.primaryBlue,
+            color: theme.dark,
           },
         }}
       />
@@ -57,7 +57,7 @@ export const CategoryStackScreen = () => {
           headerTitleStyle: {
             fontSize: 30,
             fontWeight: 'bold',
-            color: theme.primaryBlue,
+            color: theme.dark,
           },
         }}
       />
@@ -84,7 +84,7 @@ export const BottomTabsNavigator = () => {
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: true,
-        tabBarActiveTintColor: theme.blue,
+        tabBarActiveTintColor: theme.primaryBlue,
         tabBarInactiveTintColor: theme.grey,
         tabBarStyle: { backgroundColor: theme.background },
         headerStyle: { backgroundColor: theme.background },
