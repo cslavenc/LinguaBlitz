@@ -38,6 +38,8 @@ export enum Category {
   MY_VOCABULARY = 'My Vocabulary',
 }
 
+export const categoryValues = Object.values(Category);
+
 export const CategoryData = () => {
   let data = [];
   const keys = Object.keys(Category);

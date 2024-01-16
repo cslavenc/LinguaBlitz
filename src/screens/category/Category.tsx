@@ -6,26 +6,40 @@ import {
   VocabularyListIcon,
 } from '../../components/CategoryIcons';
 import { theme } from '../../theme';
+import { categoryValues } from '../../utils';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
   const { category } = route.params;
-  const categories = Object.values(Category);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: category });
   }, [category]);
 
-  const handleNext = () => {};
+  const handleNext = () => {
+    const idx = categoryValues.findIndex((current) => current === category);
+    const next =
+      idx + 1 < categoryValues.length
+        ? categoryValues[idx + 1]
+        : categoryValues[0];
+    navigation.navigate('Category', { category: next });
+  };
 
-  const handlePrevious = () => {};
+  const handlePrevious = () => {
+    const idx = categoryValues.findIndex((current) => current === category);
+    const previous =
+      idx - 1 > 0
+        ? categoryValues[idx - 1]
+        : categoryValues[categoryValues.length - 1];
+    navigation.navigate('Category', { category: previous });
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={1}
         style={styles.wordList}
-        onPress={() => navigation.navigate('Word list', { color })}>
+        onPress={() => navigation.navigate('Word list')}>
         <VocabularyListIcon />
         <Text style={[styles.text, { color: theme.primaryBlue }]}>
           Vocabulary
@@ -34,7 +48,7 @@ export const Category = ({ route }) => {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.wordList}
-        onPress={() => navigation.navigate('Word list', { color })}>
+        onPress={() => navigation.navigate('Word list')}>
         <FlashcardsIcon />
         <Text style={[styles.text, { color: theme.primaryRed }]}>
           Flashcards
