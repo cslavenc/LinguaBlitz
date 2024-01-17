@@ -6,7 +6,6 @@ import { theme } from '../../theme';
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
   const categoryIcon = getCategoryIcon(category);
-  console.log(categoryIcon);
 
   return (
     <View style={styles.container}>
