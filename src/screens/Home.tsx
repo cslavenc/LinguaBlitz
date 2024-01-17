@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
-        <UserIcon size={100} color="black" />
+        <UserIcon size={100} color="grey" />
       </View>
       <TouchableOpacity
         style={styles.card}
