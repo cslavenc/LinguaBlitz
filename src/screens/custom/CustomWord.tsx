@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: theme.white,
     borderRadius: 10,
     paddingHorizontal: 12,
     fontSize: 18,

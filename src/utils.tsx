@@ -1,4 +1,3 @@
-import { theme } from './theme';
 import {
   ActivitiesIcon,
   ArtIcon,
@@ -17,6 +16,7 @@ import {
   TechnologyIcon,
   TravelIcon,
 } from './components/CategoryIcons';
+import { StyleSheet, Text, View } from 'react-native';
 
 export enum Category {
   ART = 'Art',
@@ -46,28 +46,6 @@ export const CategoryData = () => {
   const values = Object.values(Category);
   keys.forEach((key, idx) => data.push({ label: values[idx], value: key }));
   return data;
-};
-
-// TODO : is this still required
-export const getColor = (course: string) => {
-  switch (course) {
-    case Category.ART:
-      return theme.turquoise;
-    case Category.BUSINESS:
-      return theme.turquoise;
-    case Category.HEALTH:
-      return theme.autumngreen;
-    case Category.ENVIRONMENT:
-      return theme.green;
-    case Category.SCIENCE:
-      return theme.violet;
-    case Category.EMOTIONS:
-      return theme.orange;
-    default:
-      // const exhaustiveCheck: never = course as any;
-      // throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
-      return theme.autumngreen;
-  }
 };
 
 export const getCategoryIcon = (course: string) => {
@@ -104,12 +82,22 @@ export const getCategoryIcon = (course: string) => {
       return <HealthIcon />;
     case Category.EMOTIONS:
       return <EmotionsIcon />;
-    // TODO : my vocabulary
-    //case Category.MY_VOCABULARY:
-    //  return null;
-    default: // TODO : remove default
-      // const exhaustiveCheck: never = course as any;
-      // throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
-      return <ArtIcon />;
+    case Category.MY_VOCABULARY:
+      return (
+        <View>
+          <Text style={styles.text}>My Vocabulary</Text>
+        </View>
+      );
+    default:
+      const exhaustiveCheck: never = course as any;
+      throw new Error(`Unhandled color case: ${exhaustiveCheck}`);
   }
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});

@@ -14,9 +14,10 @@ import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { WordDetail } from './CustomWord';
 
 export const CustomWordList = ({ route }) => {
-  const { color, databaseKey } = route.params;
+  const { databaseKey } = route.params;
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   const [filteredWords, setFilteredWords] = useState([]);
@@ -73,9 +74,7 @@ export const CustomWordList = ({ route }) => {
           <View>
             <TouchableOpacity
               style={styles.item}
-              onPress={() =>
-                navigation.navigate('Word', { color, item, data: data })
-              }>
+              onPress={() => navigation.navigate('Word', { item, data: data })}>
               <Text style={styles.word}>{item.word}</Text>
               <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
             </TouchableOpacity>
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 0.25,
     borderStyle: 'solid',
-    borderColor: 'black',
+    borderColor: theme.dark,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

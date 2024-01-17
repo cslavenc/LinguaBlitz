@@ -15,6 +15,7 @@ import {
 } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
+import { theme } from '../../theme';
 
 export interface WordDetail {
   id: string;
@@ -30,7 +31,7 @@ export interface WordDetail {
 }
 
 export const WordDetail = ({ route }) => {
-  const { color, item, data } = route.params;
+  const { item, data } = route.params;
   const navigation = useNavigation();
 
   const word = item.word;
@@ -48,13 +49,13 @@ export const WordDetail = ({ route }) => {
   const handleNext = () => {
     const idx = data.findIndex((current: WordDetail) => current.id === item.id);
     const next = idx + 1 < data.length ? data[idx + 1] : data[0];
-    navigation.navigate('Word', { color, item: next, data });
+    navigation.navigate('Word', { item: next, data });
   };
 
   const handlePrevious = () => {
     const idx = data.findIndex((current: WordDetail) => current.id === item.id);
     const previous = idx - 1 > 0 ? data[idx - 1] : data[data.length - 1];
-    navigation.navigate('Word', { color, item: previous, data });
+    navigation.navigate('Word', { item: previous, data });
   };
 
   const handleBookmark = async () => {
@@ -111,7 +112,7 @@ export const WordDetail = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.title, { backgroundColor: color }]}>
+      <View style={[styles.title, { backgroundColor: theme.secondaryBlue }]}>
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={handleFlashcard}
@@ -160,12 +161,16 @@ export const WordDetail = ({ route }) => {
       </View>
       <View style={styles.buttonGroup}>
         <TouchableOpacity onPress={() => handlePrevious()}>
-          <Text style={[styles.button, { backgroundColor: color }]}>
+          <Text
+            style={[styles.button, { backgroundColor: theme.primaryButton }]}>
             Previous
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleNext()}>
-          <Text style={[styles.button, { backgroundColor: color }]}>Next</Text>
+          <Text
+            style={[styles.button, { backgroundColor: theme.primaryButton }]}>
+            Next
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

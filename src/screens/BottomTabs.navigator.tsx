@@ -64,6 +64,7 @@ export const CategoryStackScreen = () => {
       <CategoryStack.Screen name="Word list" component={WordList} />
       <CategoryStack.Screen name="Word" component={WordDetail} />
       <CategoryStack.Screen name="Custom word" component={CustomWord} />
+      <CategoryStack.Screen name="My Vocabulary" component={CustomWordList} />
     </CategoryStack.Navigator>
   );
 };

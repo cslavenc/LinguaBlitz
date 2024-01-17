@@ -1,11 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getCategoryIcon } from '../../utils';
+import { Category, getCategoryIcon } from '../../utils';
 import { theme } from '../../theme';
 
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
   const categoryIcon = getCategoryIcon(category);
+  console.log(categoryIcon);
 
   return (
     <View style={styles.container}>
@@ -15,7 +16,9 @@ export const CategoryItem = ({ category }) => {
         onPress={() => navigation.navigate('Category', { category })}>
         <View style={{ alignSelf: 'center' }}>{categoryIcon}</View>
       </TouchableOpacity>
-      <Text style={styles.name}>{category}</Text>
+      {category !== Category.MY_VOCABULARY ? (
+        <Text style={styles.name}>{category}</Text>
+      ) : null}
     </View>
   );
 };

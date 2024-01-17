@@ -6,7 +6,8 @@ import {
   VocabularyListIcon,
 } from '../../components/CategoryIcons';
 import { theme } from '../../theme';
-import { categoryValues } from '../../utils';
+import { Category as CategoryEnum, categoryValues } from '../../utils';
+import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
@@ -39,7 +40,13 @@ export const Category = ({ route }) => {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.wordList}
-        onPress={() => navigation.navigate('Word list')}>
+        onPress={() =>
+          category !== CategoryEnum.MY_VOCABULARY
+            ? navigation.navigate('Word list')
+            : navigation.navigate('My Vocabulary', {
+                databaseKey: CUSTOM_WORDS_KEY,
+              })
+        }>
         <VocabularyListIcon />
         <Text style={[styles.text, { color: theme.primaryBlue }]}>
           Vocabulary

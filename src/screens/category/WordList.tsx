@@ -16,8 +16,7 @@ import { useState } from 'react';
 import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
 
-export const WordList = ({ route }) => {
-  const { color } = route.params;
+export const WordList = () => {
   const navigation = useNavigation();
   const [filteredWords, setFilteredWords] = useState(c1Data);
 
@@ -56,7 +55,7 @@ export const WordList = ({ route }) => {
             <TouchableOpacity
               style={styles.item}
               onPress={() =>
-                navigation.navigate('Word', { color, item, data: c1Data })
+                navigation.navigate('Word', { item, data: c1Data })
               }>
               <Text style={styles.word}>{item.word}</Text>
               <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 0.25,
     borderStyle: 'solid',
-    borderColor: 'black',
+    borderColor: theme.dark,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

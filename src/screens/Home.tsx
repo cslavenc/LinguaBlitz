@@ -4,6 +4,7 @@ import { RightArrow, UserIcon, VocabularyIcon } from '../components/Icons';
 import { useNavigation } from '@react-navigation/native';
 import { CUSTOM_WORDS_KEY } from './custom/CustomWord';
 
+// TODO : add a dropdown where the level is chosen is saved into localStorage
 export const Home = () => {
   const navigation = useNavigation();
   return (
@@ -15,7 +16,6 @@ export const Home = () => {
         style={styles.card}
         onPress={() => {
           navigation.navigate('My Vocabulary', {
-            color: 'white',
             databaseKey: CUSTOM_WORDS_KEY,
           });
         }}>
@@ -31,7 +31,7 @@ export const Home = () => {
         style={styles.card}
         onPress={() => {
           navigation.navigate('My Flashcards', {
-            color: 'yellow',
+            color: 'white',
             databaseKey: CUSTOM_WORDS_KEY,
           });
         }}>
