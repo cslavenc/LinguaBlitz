@@ -15,7 +15,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dropdown } from 'react-native-element-dropdown';
-import { CategoryData } from '../../utils';
+import { CategoryData, CUSTOM_WORDS_KEY } from '../../utils';
 import { WordDetail } from '../category/WordDetail';
 
 export interface WordDetail {
@@ -35,8 +35,6 @@ const customWordValidationSchema = yup.object().shape({
   description: yup.string().required('Description is required'),
   category: yup.string().required('Category is required'),
 });
-
-export const CUSTOM_WORDS_KEY = 'custom:words';
 
 const initialValues: WordDetail = {
   id: '',

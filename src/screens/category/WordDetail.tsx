@@ -14,8 +14,8 @@ import {
   FlashcardIcon,
 } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
 import { theme } from '../../theme';
+import { CUSTOM_WORDS_KEY } from '../../utils';
 
 export interface WordDetail {
   id: string;

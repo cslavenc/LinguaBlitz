@@ -18,6 +18,8 @@ import {
 } from './components/CategoryIcons';
 import { StyleSheet, Text, View } from 'react-native';
 
+export const CUSTOM_WORDS_KEY = 'custom:words';
+
 export enum Category {
   ART = 'Art',
   ENTERTAINMENT = 'Entertainment',
