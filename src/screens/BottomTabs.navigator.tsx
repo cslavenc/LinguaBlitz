@@ -12,11 +12,9 @@ import { CustomWord } from './custom/CustomWord';
 import { CustomWordList } from './custom/CustomWordList';
 import { Flashcard } from './flashcard/Flashcard';
 import { BookList } from './book/BookList';
-import {
-  LevelScreen,
-  NameScreen,
-  WelcomeScreen,
-} from './welcome/WelcomeScreen';
+import { Level, Name, Welcome } from './welcome/Welcome';
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
@@ -24,10 +22,34 @@ const CategoryStack = createStackNavigator();
 const BookStack = createStackNavigator();
 const WelcomeStack = createStackNavigator();
 
+export const FIRST_LAUNCH_KEY = 'isFirstLaunch';
+
 export const HomeStackScreen = () => {
+  // TODO : if initial state is true, it shows welcome screen for a short moment, if false, then no
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+
+  useEffect(() => {
+    AsyncStorage.getItem(FIRST_LAUNCH_KEY).then((result) => {
+      if (result !== null) {
+        setIsFirstLaunch(true); // TODO : set to false for proper behaviour
+      } else {
+        AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'true');
+      }
+    });
+  }, []);
+
   return (
     <HomeStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
+      {isFirstLaunch ? (
+        <HomeStack.Screen name="Welcome" component={Welcome} />
+      ) : null}
+      {isFirstLaunch ? (
+        <HomeStack.Screen name="Choose Name" component={Name} />
+      ) : null}
+      {isFirstLaunch ? (
+        <HomeStack.Screen name="Choose Level" component={Level} />
+      ) : null}
       <HomeStack.Screen name="Overview" component={Home} />
       <HomeStack.Screen name="My Vocabulary" component={CustomWordList} />
       <HomeStack.Screen name="My Flashcards" component={Flashcard} />
@@ -85,11 +107,10 @@ export const BookStackScreen = () => {
 
 export const WelcomeStackScreen = () => {
   return (
-    <WelcomeStack.Navigator
-      screenOptions={{ headerStyle: { display: 'none' } }}>
-      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} />
-      <WelcomeStack.Screen name="Name" component={NameScreen} />
-      <WelcomeStack.Screen name="Level" component={LevelScreen} />
+    <WelcomeStack.Navigator>
+      <WelcomeStack.Screen name="Welcome" component={Welcome} />
+      <WelcomeStack.Screen name="Name" component={Name} />
+      <WelcomeStack.Screen name="Level" component={Level} />
     </WelcomeStack.Navigator>
   );
 };
@@ -118,6 +139,7 @@ export const BottomTabsNavigator = () => {
           }
         },
       })}>
+      {/*<BottomTabs.Screen name="WELCOME" component={WelcomeStackScreen} />*/}
       <BottomTabs.Screen
         name="Home"
         component={HomeStackScreen}
@@ -136,7 +158,6 @@ export const BottomTabsNavigator = () => {
         component={BookStackScreen}
         options={{ headerTitleAlign: 'center' }}
       />
-      <BottomTabs.Screen name="" component={WelcomeStackScreen} />
     </BottomTabs.Navigator>
   );
 };
