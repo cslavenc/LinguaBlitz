@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import { BottomTabsNavigator } from './src/screens/BottomTabs.navigator';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
+import { WelcomeScreen } from './src/screens/welcome/WelcomeScreen';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -17,6 +20,18 @@ if (Platform.OS === 'android') {
 
 export default function App() {
   const backgroundImageUrl = require('./assets/background.png');
+
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+
+  useEffect(() => {
+    AsyncStorage.getItem('isFirstLaunch').then((result) => {
+      if (result !== null) {
+        setIsFirstLaunch(true); // TODO : uncomment to skip launch screen
+      } else {
+        AsyncStorage.setItem('isFirstLaunch', 'true');
+      }
+    });
+  }, []);
 
   return (
     <NavigationContainer theme={globalTheme}>
@@ -30,7 +45,7 @@ export default function App() {
             height: Dimensions.get('window').height,
           }}
           resizeMode="cover">
-          <BottomTabsNavigator />
+          {isFirstLaunch ? <WelcomeScreen /> : <BottomTabsNavigator />}
         </ImageBackground>
       </View>
     </NavigationContainer>

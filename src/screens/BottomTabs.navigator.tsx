@@ -12,11 +12,17 @@ import { CustomWord } from './custom/CustomWord';
 import { CustomWordList } from './custom/CustomWordList';
 import { Flashcard } from './flashcard/Flashcard';
 import { BookList } from './book/BookList';
+import {
+  LevelScreen,
+  NameScreen,
+  WelcomeScreen,
+} from './welcome/WelcomeScreen';
 
 // for stack based navigation, the navigator has to be informed about the screens
 const HomeStack = createStackNavigator();
 const CategoryStack = createStackNavigator();
 const BookStack = createStackNavigator();
+const WelcomeStack = createStackNavigator();
 
 export const HomeStackScreen = () => {
   return (
@@ -29,7 +35,6 @@ export const HomeStackScreen = () => {
     </HomeStack.Navigator>
   );
 };
-
 export const CategoryStackScreen = () => {
   return (
     <CategoryStack.Navigator
@@ -78,6 +83,17 @@ export const BookStackScreen = () => {
   );
 };
 
+export const WelcomeStackScreen = () => {
+  return (
+    <WelcomeStack.Navigator
+      screenOptions={{ headerStyle: { display: 'none' } }}>
+      <WelcomeStack.Screen name="Welcome" component={WelcomeScreen} />
+      <WelcomeStack.Screen name="Name" component={NameScreen} />
+      <WelcomeStack.Screen name="Level" component={LevelScreen} />
+    </WelcomeStack.Navigator>
+  );
+};
+
 const BottomTabs = createBottomTabNavigator();
 
 export const BottomTabsNavigator = () => {
@@ -120,6 +136,7 @@ export const BottomTabsNavigator = () => {
         component={BookStackScreen}
         options={{ headerTitleAlign: 'center' }}
       />
+      <BottomTabs.Screen name="" component={WelcomeStackScreen} />
     </BottomTabs.Navigator>
   );
 };
