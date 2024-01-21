@@ -7,8 +7,7 @@ export const theme = {
   secondaryBlue: '#4999e9',
   primaryRed: '#CF142B',
   secondaryRed: '#ed4545',
-  primaryButton: '#E5AA12',
-  secondaryButton: '#eeb011',
+  primaryButton: '#eeb011',
   disabled: '#f6d788',
   background: '#f1efe7',
 

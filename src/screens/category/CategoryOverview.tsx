@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderRadius: 45,
     color: 'black',
-    backgroundColor: theme.secondaryButton,
+    backgroundColor: theme.primaryButton,
   },
   plus: {
     fontSize: 32,
