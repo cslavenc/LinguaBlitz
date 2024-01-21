@@ -63,7 +63,7 @@ export const FlashcardsIcon: React.FC<Icon> = () => {
   );
 };
 
-export const ArtIcon: React.FC<Icon> = ({ size }) => {
+export const ArtIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="73"
@@ -83,7 +83,7 @@ export const ArtIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const BusinessIcon: React.FC<Icon> = ({ size }) => {
+export const BusinessIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -103,7 +103,7 @@ export const BusinessIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const EducationIcon: React.FC<Icon> = ({ size }) => {
+export const EducationIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -145,7 +145,7 @@ export const ScienceIcon: React.FC<Icon> = () => {
   );
 };
 
-export const EntertainmentIcon: React.FC<Icon> = ({ size }) => {
+export const EntertainmentIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -161,7 +161,7 @@ export const EntertainmentIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const FashionIcon: React.FC<Icon> = ({ size }) => {
+export const FashionIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -177,7 +177,7 @@ export const FashionIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const IndustryIcon: React.FC<Icon> = ({ size }) => {
+export const IndustryIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -199,7 +199,7 @@ export const IndustryIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const TechnologyIcon: React.FC<Icon> = ({ size }) => {
+export const TechnologyIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="61"
@@ -235,7 +235,7 @@ export const TechnologyIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const CommunicationIcon: React.FC<Icon> = ({ size }) => {
+export const CommunicationIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +249,7 @@ export const CommunicationIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const SocietyIcon: React.FC<Icon> = ({ size }) => {
+export const SocietyIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +262,7 @@ export const SocietyIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const EmotionsIcon: React.FC<Icon> = ({ size }) => {
+export const EmotionsIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +276,7 @@ export const EmotionsIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const TravelIcon: React.FC<Icon> = ({ size }) => {
+export const TravelIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -290,7 +290,7 @@ export const TravelIcon: React.FC<Icon> = ({ size }) => {
   );
 };
 
-export const EnvironmentIcon: React.FC<Icon> = ({ size }) => {
+export const EnvironmentIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -303,7 +303,7 @@ export const EnvironmentIcon: React.FC<Icon> = ({ size }) => {
     </Svg>
   );
 };
-export const ActivitiesIcon: React.FC<Icon> = ({ size }) => {
+export const ActivitiesIcon: React.FC<Icon> = () => {
   return (
     <Svg
       width="72"
@@ -318,7 +318,7 @@ export const ActivitiesIcon: React.FC<Icon> = ({ size }) => {
     </Svg>
   );
 };
-export const PhilosophyIcon: React.FC<Icon> = ({ size }) => {
+export const PhilosophyIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +330,7 @@ export const PhilosophyIcon: React.FC<Icon> = ({ size }) => {
     </Svg>
   );
 };
-export const HealthIcon: React.FC<Icon> = ({ size }) => {
+export const HealthIcon: React.FC<Icon> = () => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
