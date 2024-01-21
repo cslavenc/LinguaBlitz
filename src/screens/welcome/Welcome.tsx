@@ -46,7 +46,6 @@ export const Name = () => {
   const [name, setName] = useState('');
 
   const saveName = async (name: string) => {
-    console.log('name saved: ', name);
     setName(name);
     await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
   };
@@ -70,14 +69,11 @@ export const Name = () => {
   );
 };
 
-// TODO : block next while level is empty
-// TODO : navigate to word list
 export const Level = () => {
   const navigation = useNavigation();
   const [level, setLevel] = useState('');
 
   const saveLevel = async (level: string) => {
-    console.log('level saved: ', level);
     setLevel(level);
     await AsyncStorage.setItem(LEVEL_KEY, JSON.stringify(level));
   };
