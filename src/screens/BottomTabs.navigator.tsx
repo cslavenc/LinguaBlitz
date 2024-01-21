@@ -25,18 +25,22 @@ const WelcomeStack = createStackNavigator();
 export const FIRST_LAUNCH_KEY = 'isFirstLaunch';
 
 export const HomeStackScreen = () => {
-  const [isFirstLaunch, setIsFirstLaunch] = useState(false);
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+
+  const getIsFirstLaunch = async () => {
+    return await AsyncStorage.getItem(FIRST_LAUNCH_KEY);
+  };
 
   useEffect(() => {
-    AsyncStorage.getItem(FIRST_LAUNCH_KEY).then((result) => {
-      if (result !== null) {
-        setIsFirstLaunch(false);
-      } else {
-        AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'true');
+    getIsFirstLaunch().then((firstLaunch) => {
+      if (firstLaunch === null) {
+        AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'false');
         setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
       }
     });
-  }, []);
+  }, [isFirstLaunch]);
 
   return (
     <HomeStack.Navigator
