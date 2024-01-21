@@ -19,7 +19,6 @@ import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from './welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 
-// TODO : add a dropdown where the level is chosen is saved into localStorage
 export const Home = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
