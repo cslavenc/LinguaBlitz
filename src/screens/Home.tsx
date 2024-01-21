@@ -108,9 +108,9 @@ export const Home = () => {
           valueField="label"
           search={false}
           onChange={(item) => saveLevel(item.value)}
-          containerStyle={{ borderBottomWidth: 0 }}
           placeholder={level}
-          placeholderStyle={{ fontSize: 18 }}
+          placeholderStyle={{ fontSize: 22, paddingLeft: 5 }}
+          selectedTextStyle={{ fontSize: 22, paddingLeft: 5 }}
           iconColor={theme.dark}
           itemContainerStyle={styles.level}
           showsVerticalScrollIndicator={false}
@@ -165,9 +165,8 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   level: {
-    width: 220,
+    width: '85%',
     textAlign: 'center',
-    borderBottomWidth: 1,
     borderBottomColor: theme.dark,
     paddingHorizontal: 12,
   },
