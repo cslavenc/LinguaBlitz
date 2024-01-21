@@ -1,4 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { theme } from '../theme';
 import {
   EditIcon,
@@ -9,8 +15,9 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { CUSTOM_WORDS_KEY } from '../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ACCOUNT_NAME_KEY, LEVEL_KEY } from './welcome/Welcome';
+import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from './welcome/Welcome';
 import { useEffect, useState } from 'react';
+import { Dropdown } from 'react-native-element-dropdown';
 
 // TODO : add a dropdown where the level is chosen is saved into localStorage
 export const Home = () => {
@@ -33,13 +40,28 @@ export const Home = () => {
     getLevel().then((level) => setLevel(level));
   }, []);
 
+  const saveName = async (name: string) => {
+    setName(name);
+    await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
+  };
+
+  const saveLevel = async (level: string) => {
+    setLevel(level);
+    await AsyncStorage.setItem(LEVEL_KEY, JSON.stringify(level));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.user}>
         <UserIcon size={100} color="grey" />
       </View>
       <View style={styles.edit}>
-        <Text style={styles.name}>{name}</Text>
+        <TextInput
+          style={styles.name}
+          value={name}
+          underlineColorAndroid="transparent"
+          onChangeText={(name) => saveName(name)}
+        />
         <View style={styles.editIcon}>
           <EditIcon />
         </View>
@@ -79,7 +101,20 @@ export const Home = () => {
         <View style={styles.icon}>
           <VocabularyIcon />
         </View>
-        <Text style={[styles.text, { marginLeft: 18 }]}>Level: {level}</Text>
+        <Dropdown
+          data={Levels}
+          style={styles.level}
+          labelField="value"
+          valueField="label"
+          search={false}
+          onChange={(item) => saveLevel(item.value)}
+          containerStyle={{ borderBottomWidth: 0 }}
+          placeholder={level}
+          placeholderStyle={{ fontSize: 18 }}
+          iconColor={theme.dark}
+          itemContainerStyle={styles.level}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </View>
   );
@@ -128,5 +163,12 @@ const styles = StyleSheet.create({
   },
   arrow: {
     marginRight: 12,
+  },
+  level: {
+    width: 220,
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: theme.dark,
+    paddingHorizontal: 12,
   },
 });
