@@ -3,8 +3,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { FlashcardsIcon, VocabularyListIcon } from './CategoryIcons';
 import { theme } from '../../theme';
-import { Category as CategoryEnum, categoryValues } from '../../utils';
-import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
+import {
+  Category as CategoryEnum,
+  categoryValues,
+  CUSTOM_WORDS_KEY,
+} from '../../utils';
 
 export const Category = ({ route }) => {
   const navigation = useNavigation();
