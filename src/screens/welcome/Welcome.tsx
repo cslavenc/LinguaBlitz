@@ -11,11 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
-export interface DropdownData {
-  label: string;
-  value: string;
-}
-
 export const LEVEL_KEY = 'CURRENT_LEVEL';
 export const ACCOUNT_NAME_KEY = 'CURRENT_ACCOUNT_NAME';
 
