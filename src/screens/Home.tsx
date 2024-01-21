@@ -7,7 +7,9 @@ import {
 } from 'react-native';
 import { theme } from '../theme';
 import {
+  DownArrow,
   EditIcon,
+  LevelIcon,
   RightArrow,
   UserIcon,
   VocabularyIcon,
@@ -98,7 +100,7 @@ export const Home = () => {
       </TouchableOpacity>
       <View style={[styles.card, { justifyContent: 'flex-start' }]}>
         <View style={styles.icon}>
-          <VocabularyIcon />
+          <LevelIcon />
         </View>
         <Dropdown
           data={Levels}
@@ -113,6 +115,7 @@ export const Home = () => {
           iconColor={theme.dark}
           itemContainerStyle={styles.level}
           showsVerticalScrollIndicator={false}
+          renderRightIcon={DownArrow}
         />
       </View>
     </View>
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   level: {
-    width: '85%',
+    width: '90%',
     textAlign: 'center',
     borderBottomColor: theme.dark,
     paddingHorizontal: 12,
