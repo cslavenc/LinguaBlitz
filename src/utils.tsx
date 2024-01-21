@@ -15,7 +15,7 @@ import {
   SocietyIcon,
   TechnologyIcon,
   TravelIcon,
-} from './components/CategoryIcons';
+} from './screens/category/CategoryIcons';
 import { StyleSheet, Text, View } from 'react-native';
 
 export const CUSTOM_WORDS_KEY = 'custom:words';

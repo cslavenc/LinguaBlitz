@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, { Circle, ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
-import { Icon } from './Icons';
-import { theme } from '../theme';
+import { Icon } from '../../components/Icons';
+import { theme } from '../../theme';
 
 export const VocabularyListIcon: React.FC<Icon> = () => {
   return (

@@ -1,10 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-import {
-  FlashcardsIcon,
-  VocabularyListIcon,
-} from '../../components/CategoryIcons';
+import { FlashcardsIcon, VocabularyListIcon } from './CategoryIcons';
 import { theme } from '../../theme';
 import { Category as CategoryEnum, categoryValues } from '../../utils';
 import { CUSTOM_WORDS_KEY } from '../custom/CustomWord';
