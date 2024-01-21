@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     verticalAlign: 'middle',
   },
-  disabled: { backgroundColor: '#f6d788', color: 'grey' },
+  disabled: { backgroundColor: theme.disabled, color: 'grey' },
   name: {
     width: 120,
     textAlign: 'center',

@@ -41,11 +41,9 @@ export const CategoryOverview = () => {
         </View>
       </ScrollView>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, { marginBottom: 28, marginRight: 14 }]}
         activeOpacity={0.9}
-        onPress={() =>
-          navigation.navigate('Custom word', { color: theme.lightblue })
-        }>
+        onPress={() => navigation.navigate('Custom word')}>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>
     </View>
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     borderRadius: 45,
     color: 'black',
-    backgroundColor: 'yellow',
+    backgroundColor: theme.secondaryButton,
   },
   plus: {
     fontSize: 32,
