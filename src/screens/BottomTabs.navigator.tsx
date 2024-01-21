@@ -25,15 +25,15 @@ const WelcomeStack = createStackNavigator();
 export const FIRST_LAUNCH_KEY = 'isFirstLaunch';
 
 export const HomeStackScreen = () => {
-  // TODO : if initial state is true, it shows welcome screen for a short moment, if false, then no
-  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+  const [isFirstLaunch, setIsFirstLaunch] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(FIRST_LAUNCH_KEY).then((result) => {
       if (result !== null) {
-        setIsFirstLaunch(true); // TODO : set to false for proper behaviour
+        setIsFirstLaunch(false);
       } else {
         AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'true');
+        setIsFirstLaunch(true);
       }
     });
   }, []);
