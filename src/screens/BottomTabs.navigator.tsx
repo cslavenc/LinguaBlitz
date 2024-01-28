@@ -42,6 +42,7 @@ export const HomeStackScreen = () => {
     });
   }, [isFirstLaunch]);
 
+  // TODO : might need to do a switch navigator with resetRoot (see latest added link)
   return (
     <HomeStack.Navigator
       screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
