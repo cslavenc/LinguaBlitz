@@ -48,14 +48,12 @@ export const Name = () => {
   };
 
   const handleSave = (name: string) => {
-    console.log(name);
     if (name.length <= maxNameLength) {
       setErrorMessage('');
       saveName(name);
     } else {
       setErrorMessage('Name is too long');
     }
-    console.log(errorMessage);
   };
 
   return (
