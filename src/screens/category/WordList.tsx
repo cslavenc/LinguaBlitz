@@ -83,7 +83,6 @@ export const WordList = () => {
             <TouchableOpacity
               style={styles.item}
               onPress={() =>
-                // TODO : state necessary for vocab data?
                 navigation.navigate('Word', { item, data: vocabulary })
               }>
               <Text style={styles.word}>{item.word}</Text>
