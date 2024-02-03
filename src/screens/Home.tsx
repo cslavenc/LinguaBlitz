@@ -25,6 +25,8 @@ export const Home = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const maxNameLength = 15;
 
   const getName = async () => {
     const rawName = await AsyncStorage.getItem(ACCOUNT_NAME_KEY);
@@ -42,8 +44,13 @@ export const Home = () => {
   }, []);
 
   const saveName = async (name: string) => {
-    setName(name);
-    await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
+    if (name.length <= maxNameLength) {
+      setErrorMessage('');
+      setName(name);
+      await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
+    } else {
+      setErrorMessage('Name is too long');
+    }
   };
 
   const saveLevel = async (level: string) => {
@@ -67,6 +74,9 @@ export const Home = () => {
           <EditIcon />
         </View>
       </View>
+      {errorMessage !== '' && (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      )}
       <TouchableOpacity
         style={styles.card}
         onPress={() => {
@@ -172,5 +182,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderBottomColor: theme.dark,
     paddingHorizontal: 12,
+  },
+  errorMessage: {
+    textAlign: 'center',
+    marginTop: -32,
+    color: theme.primaryRed,
   },
 });
