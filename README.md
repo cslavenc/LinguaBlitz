@@ -8,6 +8,10 @@ For Android:
   it not in the list yet) and press "a" (for Android)
   &rarr; this will automatically display your app when you run it from IntelliJ
 
+## Development
+
+- `npx depcheck` to check for unused dependencies
+
 ## Troubleshooting
 
 - press "r" to reload
