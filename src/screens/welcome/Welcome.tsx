@@ -15,12 +15,12 @@ export const LEVEL_KEY = 'CURRENT_LEVEL';
 export const ACCOUNT_NAME_KEY = 'CURRENT_ACCOUNT_NAME';
 
 export const Levels: any[] = [
-  { label: 'a1', value: 'A1 (Beginner)' },
-  { label: 'a2', value: 'A2 (Elementary)' },
-  { label: 'b1', value: 'B1 (Intermediate)' },
-  { label: 'b2', value: 'B2 (Upper-Intermediate)' },
-  { label: 'c1', value: 'C1 (Advanced)' },
-  { label: 'c2', value: 'C2 (Expert)' },
+  { label: 'A1', value: 'A1 (Beginner)' },
+  { label: 'A2', value: 'A2 (Elementary)' },
+  { label: 'B1', value: 'B1 (Intermediate)' },
+  { label: 'B2', value: 'B2 (Upper-Intermediate)' },
+  { label: 'C1', value: 'C1 (Advanced)' },
+  { label: 'C2', value: 'C2 (Expert)' },
 ];
 
 export const Welcome = () => {
