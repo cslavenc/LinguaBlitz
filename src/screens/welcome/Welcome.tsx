@@ -39,10 +39,23 @@ export const Welcome = () => {
 export const Name = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const maxNameLength = 15;
 
   const saveName = async (name: string) => {
     setName(name);
     await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
+  };
+
+  const handleSave = (name: string) => {
+    console.log(name);
+    if (name.length <= maxNameLength) {
+      setErrorMessage('');
+      saveName(name);
+    } else {
+      setErrorMessage('Name is too long');
+    }
+    console.log(errorMessage);
   };
 
   return (
@@ -51,12 +64,17 @@ export const Name = () => {
       <TextInput
         style={styles.name}
         underlineColorAndroid="transparent"
-        onChangeText={(name) => saveName(name)}
+        onChangeText={(name) => handleSave(name)}
       />
+      {errorMessage !== '' && (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      )}
+
       <TouchableOpacity
         disabled={name === ''}
         onPress={() => navigation.navigate('Choose Level')}>
-        <Text style={[styles.button, name === '' ? styles.disabled : null]}>
+        <Text
+          style={[styles.button, errorMessage !== '' ? styles.disabled : null]}>
           Next
         </Text>
       </TouchableOpacity>
@@ -120,7 +138,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     verticalAlign: 'middle',
   },
-  disabled: { backgroundColor: theme.disabled, color: 'grey' },
+  errorMessage: {
+    marginTop: -18,
+    color: theme.primaryRed,
+  },
+  disabled: {
+    backgroundColor: theme.disabled,
+    color: 'grey',
+  },
   name: {
     width: 120,
     textAlign: 'center',
