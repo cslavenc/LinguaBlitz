@@ -24,8 +24,8 @@ export const CategoryOverview = () => {
             // categories with even index for left column
             .filter((elem, index) => index % 2 === 0)
             .map((category) => (
-              <View style={styles.item}>
-                <CategoryItem category={category} key={category} />
+              <View style={styles.item} key={category}>
+                <CategoryItem category={category} />
               </View>
             ))}
         </View>
