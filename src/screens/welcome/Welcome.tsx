@@ -84,7 +84,9 @@ export const Level = () => {
         search={false}
         onChange={(item) => saveLevel(item.value)}
         placeholder={'Level'}
-        placeholderStyle={{ color: 'grey' }}
+        placeholderStyle={{ color: 'grey', fontSize: 22, paddingLeft: 5 }}
+        selectedTextStyle={{ fontSize: 22, paddingLeft: 5 }}
+        itemTextStyle={{ fontSize: 20 }}
         showsVerticalScrollIndicator={false}
       />
       <TouchableOpacity onPress={() => navigation.navigate('Overview')}>

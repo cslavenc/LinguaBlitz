@@ -114,6 +114,7 @@ export const Home = () => {
           selectedTextStyle={{ fontSize: 22, paddingLeft: 5 }}
           iconColor={theme.dark}
           itemContainerStyle={styles.level}
+          itemTextStyle={{ fontSize: 20 }}
           showsVerticalScrollIndicator={false}
           renderRightIcon={DownArrow}
         />
