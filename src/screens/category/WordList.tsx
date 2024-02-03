@@ -24,6 +24,7 @@ export const WordList = () => {
   const [level, setLevel] = useState('');
   const [vocabulary, setVocabulary] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
+  const maxWordLength = 32;
 
   useEffect(() => {
     const getCurrentLevel = async () => {
@@ -40,7 +41,6 @@ export const WordList = () => {
   }, [level, isFocused]);
 
   useEffect(() => {
-    console.log(allVocabularyData[0]);
     const filteredVocabulary = allVocabularyData.filter((word: WordDetail) => {
       return word.level.includes(level.split(' ')[0]);
     });
@@ -86,7 +86,11 @@ export const WordList = () => {
               onPress={() =>
                 navigation.navigate('Word', { item, data: vocabulary })
               }>
-              <Text style={styles.word}>{item.word}</Text>
+              <Text style={styles.word}>
+                {item.word.length < maxWordLength
+                  ? item.word
+                  : item.word.split(' (')[0]}
+              </Text>
               <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
             </TouchableOpacity>
           </View>
