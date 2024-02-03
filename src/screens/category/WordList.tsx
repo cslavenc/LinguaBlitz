@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import allVocabularyData from '../../../data/all_levels_english_vocabulary.json';
 import { WordDetail } from './WordDetail';
 import { useEffect, useState } from 'react';
@@ -20,6 +20,7 @@ import { LEVEL_KEY } from '../welcome/Welcome';
 
 export const WordList = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const [level, setLevel] = useState('');
   const [vocabulary, setVocabulary] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
@@ -36,7 +37,7 @@ export const WordList = () => {
       }
     };
     getCurrentLevel();
-  }, [level]);
+  }, [level, isFocused]);
 
   useEffect(() => {
     console.log(allVocabularyData[0]);
