@@ -20,7 +20,7 @@ import { CUSTOM_WORDS_KEY } from '../../utils';
 export interface WordDetail {
   id: string;
   word: string;
-  level: string; // TODO : use an enum?
+  level: string;
   description: string;
   example: string;
   partOfSpeech: string;
@@ -148,7 +148,7 @@ export const WordDetail = ({ route }) => {
           </View>
           <View style={{ paddingBottom: 24 }}>
             <Text style={styles.heading}>Synonyms</Text>
-            {synonyms.map((synonym) => (
+            {synonyms?.map((synonym) => (
               <View style={{ flexDirection: 'row' }} key={synonym}>
                 <Text style={styles.text}>{'\u2022'}</Text>
                 <Text style={[styles.text, styles.unorderedList]}>
