@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import allVocabularyData from '../../../data/C1_english_vocabulary.json';
+import allVocabularyData from '../../../data/all_levels_english_vocabulary.json';
 import { WordDetail } from './WordDetail';
 import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
@@ -21,51 +21,43 @@ import { LEVEL_KEY } from '../welcome/Welcome';
 export const WordList = () => {
   const navigation = useNavigation();
   const [level, setLevel] = useState('');
+  const [vocabulary, setVocabulary] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
-
-  // TODO : is this even necessary? simply use filtered words?
-  let vocabularyData: WordDetail[] = [];
-  const getVocabularyData = async (): Promise<WordDetail[]> => {
-    const filteredVocabulary = allVocabularyData.filter(
-      (word: WordDetail) => word.level === level
-    );
-  };
 
   useEffect(() => {
     const getCurrentLevel = async () => {
       try {
         const currentLevel = await AsyncStorage.getItem(LEVEL_KEY);
-        console.log('my current level', currentLevel);
         if (currentLevel != null) {
-          setLevel(JSON.parse(currentLevel));
+          setLevel(JSON.parse(currentLevel).split(' ')[0]);
         }
       } catch (error) {
         console.log(error);
       }
     };
     getCurrentLevel();
-    console.log('my set level: ', level);
   }, [level]);
 
   useEffect(() => {
+    console.log(allVocabularyData[0]);
     const filteredVocabulary = allVocabularyData.filter((word: WordDetail) => {
-      return word.level === level.split(' ')[0];
+      return word.level.includes(level.split(' ')[0]);
     });
     // set the filtered vocabulary by level
     setFilteredWords(filteredVocabulary);
-    console.log('my level set voc: ', filteredVocabulary);
+    setVocabulary(filteredVocabulary);
   }, [level]);
 
   const handleSetFilteredWords = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     if (event.nativeEvent.text.length > 1) {
-      let filtered = vocabularyData.filter((item: WordDetail) =>
+      let filtered = filteredWords.filter((item: WordDetail) =>
         item.word.startsWith(event.nativeEvent.text)
       );
       setFilteredWords(filtered);
     } else {
-      setFilteredWords(vocabularyData); // reset
+      setFilteredWords(vocabulary); // reset
     }
   };
 
@@ -92,7 +84,7 @@ export const WordList = () => {
               style={styles.item}
               onPress={() =>
                 // TODO : state necessary for vocab data?
-                navigation.navigate('Word', { item, data: vocabularyData })
+                navigation.navigate('Word', { item, data: vocabulary })
               }>
               <Text style={styles.word}>{item.word}</Text>
               <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
