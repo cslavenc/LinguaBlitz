@@ -131,32 +131,38 @@ export const WordDetail = ({ route }) => {
       </View>
       <View style={styles.information}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ paddingBottom: 18 }}>
-            <Text style={styles.heading}>Description</Text>
-            {descriptions.map((content) => (
-              <View style={{ flexDirection: 'row' }} key={content}>
-                <Text style={styles.text}>{'\u2022'}</Text>
-                <Text style={[styles.text, styles.unorderedList]}>
-                  {content.trim()}
-                </Text>
-              </View>
-            ))}
-          </View>
-          <View style={{ paddingBottom: 24 }}>
-            <Text style={styles.heading}>Example</Text>
-            <Text style={styles.text}>{example}</Text>
-          </View>
-          <View style={{ paddingBottom: 24 }}>
-            <Text style={styles.heading}>Synonyms</Text>
-            {synonyms?.map((synonym) => (
-              <View style={{ flexDirection: 'row' }} key={synonym}>
-                <Text style={styles.text}>{'\u2022'}</Text>
-                <Text style={[styles.text, styles.unorderedList]}>
-                  {synonym.trim()}
-                </Text>
-              </View>
-            ))}
-          </View>
+          {descriptions.length > 0 ? (
+            <View style={{ paddingBottom: 18 }}>
+              <Text style={styles.heading}>Description</Text>
+              {descriptions.map((content) => (
+                <View style={{ flexDirection: 'row' }} key={content}>
+                  <Text style={styles.text}>{'\u2022'}</Text>
+                  <Text style={[styles.text, styles.unorderedList]}>
+                    {content.trim()}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
+          {example !== '' ? (
+            <View style={{ paddingBottom: 24 }}>
+              <Text style={styles.heading}>Example</Text>
+              <Text style={styles.text}>{example}</Text>
+            </View>
+          ) : null}
+          {synonyms !== null ? (
+            <View style={{ paddingBottom: 24 }}>
+              <Text style={styles.heading}>Synonyms</Text>
+              {synonyms.map((synonym) => (
+                <View style={{ flexDirection: 'row' }} key={synonym}>
+                  <Text style={styles.text}>{'\u2022'}</Text>
+                  <Text style={[styles.text, styles.unorderedList]}>
+                    {synonym.trim()}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
         </ScrollView>
       </View>
       <View style={styles.buttonGroup}>
