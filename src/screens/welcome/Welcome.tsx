@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   level: {
-    width: 240,
+    width: 290,
     textAlign: 'center',
     borderBottomWidth: 1,
     borderBottomColor: theme.dark,
