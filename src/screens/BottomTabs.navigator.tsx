@@ -27,25 +27,23 @@ export const FIRST_LAUNCH_KEY = 'isFirstLaunch';
 export const HomeStackScreen = () => {
   const [isFirstLaunch, setIsFirstLaunch] = useState(true);
 
-  const getIsFirstLaunch = async () => {
-    return await AsyncStorage.getItem(FIRST_LAUNCH_KEY);
-  };
-
   useEffect(() => {
-    getIsFirstLaunch().then((firstLaunch) => {
+    const getIsFirstLaunch = async () => {
+      const firstLaunch = await AsyncStorage.getItem(FIRST_LAUNCH_KEY);
       if (firstLaunch === null) {
-        AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'false');
+        await AsyncStorage.setItem(FIRST_LAUNCH_KEY, 'false');
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);
       }
-    });
-  }, [isFirstLaunch]);
+    };
+    getIsFirstLaunch();
+  }, []);
 
-  // TODO : might need to do a switch navigator with resetRoot (see latest added link)
   return (
     <HomeStack.Navigator
-      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}>
+      screenOptions={{ headerStyle: { backgroundColor: theme.background } }}
+      initialRouteName={isFirstLaunch ? 'Welcome' : 'Overview'}>
       {isFirstLaunch ? (
         <HomeStack.Screen name="Welcome" component={Welcome} />
       ) : null}
