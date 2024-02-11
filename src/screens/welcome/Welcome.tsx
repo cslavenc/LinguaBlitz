@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { theme } from '../../theme';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
@@ -80,9 +80,23 @@ export const Name = () => {
   );
 };
 
+// Function to reset the navigation stack
+function resetNavigationStack(navigation, screenName) {
+  const resetAction = CommonActions.reset({
+    index: 0,
+    routes: [{ name: screenName }],
+  });
+  navigation.dispatch(resetAction);
+}
+
 export const Level = () => {
   const navigation = useNavigation();
   const [level, setLevel] = useState('');
+
+  const handleNavigation = () => {
+    navigation.navigate('Overview');
+    resetNavigationStack(navigation, 'Overview');
+  };
 
   const saveLevel = async (level: string) => {
     setLevel(level);
@@ -105,7 +119,7 @@ export const Level = () => {
         itemTextStyle={{ fontSize: 20 }}
         showsVerticalScrollIndicator={false}
       />
-      <TouchableOpacity onPress={() => navigation.navigate('Overview')}>
+      <TouchableOpacity onPress={() => handleNavigation()}>
         <Text style={[styles.button, level === '' ? styles.disabled : null]}>
           Next
         </Text>
@@ -153,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   level: {
-    width: 220,
+    width: 240,
     textAlign: 'center',
     borderBottomWidth: 1,
     borderBottomColor: theme.dark,
