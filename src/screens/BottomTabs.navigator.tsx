@@ -108,16 +108,6 @@ export const BookStackScreen = () => {
   );
 };
 
-export const WelcomeStackScreen = () => {
-  return (
-    <WelcomeStack.Navigator>
-      <WelcomeStack.Screen name="Welcome" component={Welcome} />
-      <WelcomeStack.Screen name="Name" component={Name} />
-      <WelcomeStack.Screen name="Level" component={Level} />
-    </WelcomeStack.Navigator>
-  );
-};
-
 const BottomTabs = createBottomTabNavigator();
 
 export const BottomTabsNavigator = () => {
@@ -142,7 +132,6 @@ export const BottomTabsNavigator = () => {
           }
         },
       })}>
-      {/*<BottomTabs.Screen name="WELCOME" component={WelcomeStackScreen} />*/}
       <BottomTabs.Screen
         name="Home"
         component={HomeStackScreen}
