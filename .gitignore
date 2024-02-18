@@ -2,6 +2,7 @@
 ### Custom ###
 .idea
 temp*.json
+raw*.json
 
 # dependencies
 node_modules/
