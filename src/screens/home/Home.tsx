@@ -47,7 +47,7 @@ export const Home = () => {
 
   useEffect(() => {
     const showRecommendedBook = () => {
-      const cutoff = 0.5;
+      const cutoff = 0.67;
       const show = Math.random();
       show > cutoff ? setShowModal(true) : setShowModal(false);
     };
