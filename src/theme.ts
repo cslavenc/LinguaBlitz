@@ -8,6 +8,7 @@ export const theme = {
   primaryRed: '#CF142B',
   secondaryRed: '#ed4545',
   primaryButton: '#eeb011',
+  darkYellow: '#b38600',
   disabled: '#f6d788',
   background: '#f1efe7',
 };
