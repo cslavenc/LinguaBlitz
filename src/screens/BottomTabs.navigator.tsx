@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from './Home';
+import { Home } from './home/Home';
 import { CategoryOverview } from './category/CategoryOverview';
 import { BookIcon, CategoryOverviewTab, HomeIcon } from '../components/Icons';
 import { theme } from '../theme';

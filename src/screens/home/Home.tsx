@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { theme } from '../theme';
+import { theme } from '../../theme';
 import {
   DownArrow,
   EditIcon,
@@ -13,11 +13,11 @@ import {
   RightArrow,
   UserIcon,
   VocabularyIcon,
-} from '../components/Icons';
+} from '../../components/Icons';
 import { useNavigation } from '@react-navigation/native';
-import { CUSTOM_WORDS_KEY } from '../utils';
+import { CUSTOM_WORDS_KEY } from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from './welcome/Welcome';
+import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 
