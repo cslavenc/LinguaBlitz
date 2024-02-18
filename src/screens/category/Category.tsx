@@ -41,7 +41,8 @@ export const Category = ({ route }) => {
         activeOpacity={1}
         style={styles.wordList}
         onPress={() =>
-          category !== CategoryEnum.MY_VOCABULARY
+          category !== CategoryEnum.MY_VOCABULARY ||
+          category !== CategoryEnum.OTHERS
             ? navigation.navigate('Word list', { category })
             : navigation.navigate('My Vocabulary', {
                 databaseKey: CUSTOM_WORDS_KEY,

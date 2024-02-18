@@ -15,7 +15,7 @@ export const CategoryItem = ({ category }) => {
         onPress={() => navigation.navigate('Category', { category })}>
         <View style={{ alignSelf: 'center' }}>{categoryIcon}</View>
       </TouchableOpacity>
-      {category !== Category.MY_VOCABULARY ? (
+      {category !== Category.MY_VOCABULARY || category !== Category.OTHERS ? (
         <Text style={styles.name}>{category}</Text>
       ) : null}
     </View>
