@@ -46,10 +46,10 @@ export const WordList = ({ route }) => {
     const filteredVocabulary = allVocabularyData
       .filter((word: WordDetail) => word.level.includes(level.split(' ')[0]))
       .filter((word: WordDetail) => word.category.includes(category));
-    // set the filtered vocabulary by level
+
     setFilteredWords(filteredVocabulary);
     setVocabulary(filteredVocabulary);
-  }, [level, category]); // TODO : also track category
+  }, [level, category]);
 
   const handleSetFilteredWords = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
