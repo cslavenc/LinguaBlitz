@@ -20,7 +20,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const HomeStack = createStackNavigator();
 const CategoryStack = createStackNavigator();
 const BookStack = createStackNavigator();
-const WelcomeStack = createStackNavigator();
 
 export const FIRST_LAUNCH_KEY = 'isFirstLaunch';
 
