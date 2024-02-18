@@ -18,7 +18,8 @@ import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LEVEL_KEY } from '../welcome/Welcome';
 
-export const WordList = () => {
+export const WordList = ({ route }) => {
+  const { category } = route.params;
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const [level, setLevel] = useState('');
@@ -41,13 +42,14 @@ export const WordList = () => {
   }, [level, isFocused]);
 
   useEffect(() => {
-    const filteredVocabulary = allVocabularyData.filter((word: WordDetail) => {
-      return word.level.includes(level.split(' ')[0]);
-    });
+    console.log(category);
+    const filteredVocabulary = allVocabularyData
+      .filter((word: WordDetail) => word.level.includes(level.split(' ')[0]))
+      .filter((word: WordDetail) => word.category.includes(category));
     // set the filtered vocabulary by level
     setFilteredWords(filteredVocabulary);
     setVocabulary(filteredVocabulary);
-  }, [level]);
+  }, [level, category]); // TODO : also track category
 
   const handleSetFilteredWords = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
