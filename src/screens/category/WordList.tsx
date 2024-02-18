@@ -42,7 +42,6 @@ export const WordList = ({ route }) => {
   }, [level, isFocused]);
 
   useEffect(() => {
-    console.log(category);
     const filteredVocabulary = allVocabularyData
       .filter((word: WordDetail) => word.level.includes(level.split(' ')[0]))
       .filter((word: WordDetail) => word.category.includes(category));
