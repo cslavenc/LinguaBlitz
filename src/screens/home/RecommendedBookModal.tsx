@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   crossButton: {
+    width: 24,
+    height: 24,
     alignSelf: 'flex-end',
     display: 'flex',
     textAlign: 'right',
