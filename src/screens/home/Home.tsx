@@ -20,11 +20,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
+import { RecommendedBookModal } from './RecommendedBookModal';
 
 export const Home = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const maxNameLength = 15;
 
@@ -41,6 +43,15 @@ export const Home = () => {
   useEffect(() => {
     getName().then((name) => setName(name));
     getLevel().then((level) => setLevel(level));
+  }, []);
+
+  useEffect(() => {
+    const showRecommendedBook = () => {
+      const cutoff = 0.5;
+      const show = Math.random();
+      show > cutoff ? setShowModal(true) : setShowModal(false);
+    };
+    showRecommendedBook();
   }, []);
 
   const saveName = async (name: string) => {
@@ -60,6 +71,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
+      {showModal ? <RecommendedBookModal /> : null}
       <View style={styles.user}>
         <UserIcon size={100} color="grey" />
       </View>
