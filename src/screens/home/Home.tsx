@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
-import { RecommendedBookModal } from './RecommendedBookModal';
+import { RecommendedBookModal } from '../book/RecommendedBookModal';
 
 export const Home = () => {
   const navigation = useNavigation();

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { BookData } from '../book/BookData';
+import { BookData } from './BookData';
 import { useState } from 'react';
 
 export const RecommendedBookModal = () => {
