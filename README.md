@@ -12,6 +12,12 @@ For Android:
 
 - `npx depcheck` to check for unused dependencies
 
+## Submissions to stores
+
+- [Prerequisites and setup](https://docs.expo.dev/build/setup/#prerequisites)
+- [Submit to Play Store](https://docs.expo.dev/submit/android/)
+- [Automate submissions](https://docs.expo.dev/build/automate-submissions/)
+
 ## Troubleshooting
 
 - press "r" to reload
