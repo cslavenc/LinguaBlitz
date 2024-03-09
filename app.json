@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.expo.x30x5.LinguaBlitz",
-      "versionCode": 2
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +30,17 @@
       "eas": {
         "projectId": "de06ebc2-3256-47b5-a2ee-f908b9355517"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": false,
+            "extraProguardRules": "-keepattributes LineNumberTable,SourceFile -renamesourcefileattribute SourceFile"
+          }
+        }
+      ]
+    ]
   }
 }
