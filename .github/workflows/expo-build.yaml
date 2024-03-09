@@ -1,0 +1,31 @@
+#name: Expo Build
+#
+#on:
+#  push:
+#    branches:
+#      - master
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 16.x
+#
+#      - name: Install dependencies
+#        run: npm ci
+#
+#      - name: Login to Expo
+#        uses: expo/expo-github-action@v7
+#        with:
+#          expo-version: latest
+#          eas-version: latest
+#          token: ${{ secrets.EXPO_TOKEN }}
+#
+#      - name: Build on Expo
+#        run: eas build --platform android --profile production
