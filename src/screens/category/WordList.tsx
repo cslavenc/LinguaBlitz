@@ -43,8 +43,8 @@ export const WordList = ({ route }) => {
 
   useEffect(() => {
     const filteredVocabulary = allVocabularyData
-      .filter((word: WordDetail) => word.level.includes(level.split(' ')[0]))
-      .filter((word: WordDetail) => word.category.includes(category));
+      .filter((word: WordDetail) => word?.level.includes(level.split(' ')[0]))
+      .filter((word: WordDetail) => word?.category.includes(category));
 
     setFilteredWords(filteredVocabulary);
     setVocabulary(filteredVocabulary);
