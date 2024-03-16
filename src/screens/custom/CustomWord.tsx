@@ -18,18 +18,6 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { CategoryData, CUSTOM_WORDS_KEY } from '../../utils';
 import { WordDetail } from '../category/WordDetail';
 
-export interface WordDetail {
-  id: string;
-  word: string;
-  partOfSpeech: string;
-  description: string;
-  example: string;
-  category: string;
-  level: string;
-  bookmark: boolean;
-  flashcard: boolean;
-}
-
 const customWordValidationSchema = yup.object().shape({
   word: yup.string().required('Word is required'),
   description: yup.string().required('Description is required'),
