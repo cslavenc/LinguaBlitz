@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FlashcardsIcon, VocabularyListIcon } from './CategoryIcons';
 import { theme } from '../../theme';
 import {
@@ -8,14 +8,33 @@ import {
   categoryValues,
   CUSTOM_WORDS_KEY,
 } from '../../utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CATEGORY_KEY } from './CategoryItem';
 
-export const Category = ({ route }) => {
+export const Category = () => {
   const navigation = useNavigation();
-  const { category } = route.params;
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
-    navigation.setOptions({ headerTitle: category });
+    const getCurrentCategory = async () => {
+      try {
+        const currentCategory = await AsyncStorage.getItem(CATEGORY_KEY);
+        if (currentCategory != null) {
+          setCategory(currentCategory);
+          navigation.setOptions({ headerTitle: category });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getCurrentCategory();
   }, [category]);
+
+  const handleNavigate = async (location, newCategory) => {
+    await AsyncStorage.setItem(CATEGORY_KEY, newCategory);
+    setCategory(newCategory);
+    navigation.navigate(location, { category: newCategory });
+  };
 
   const handleNext = () => {
     const idx = categoryValues.findIndex((current) => current === category);
@@ -23,7 +42,7 @@ export const Category = ({ route }) => {
       idx + 1 < categoryValues.length
         ? categoryValues[idx + 1]
         : categoryValues[0];
-    navigation.navigate('Category', { category: next });
+    handleNavigate('Category', next);
   };
 
   const handlePrevious = () => {
@@ -32,7 +51,7 @@ export const Category = ({ route }) => {
       idx - 1 > 0
         ? categoryValues[idx - 1]
         : categoryValues[categoryValues.length - 1];
-    navigation.navigate('Category', { category: previous });
+    handleNavigate('Category', previous);
   };
 
   return (
@@ -43,7 +62,7 @@ export const Category = ({ route }) => {
         onPress={() =>
           category !== CategoryEnum.MY_VOCABULARY ||
           category !== CategoryEnum.OTHERS
-            ? navigation.navigate('Word list', { category })
+            ? handleNavigate('Word list', category)
             : navigation.navigate('My Vocabulary', {
                 databaseKey: CUSTOM_WORDS_KEY,
               })

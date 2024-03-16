@@ -17,15 +17,30 @@ import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LEVEL_KEY } from '../welcome/Welcome';
+import { CATEGORY_KEY } from './CategoryItem';
 
-export const WordList = ({ route }) => {
-  const { category } = route.params;
+export const WordList = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const [level, setLevel] = useState('');
+  const [category, setCategory] = useState('');
   const [vocabulary, setVocabulary] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
   const maxWordLength = 32;
+
+  useEffect(() => {
+    const getCurrentCategory = async () => {
+      try {
+        const currentCategory = await AsyncStorage.getItem(CATEGORY_KEY);
+        if (currentCategory != null) {
+          setCategory(currentCategory);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getCurrentCategory();
+  }, [category, isFocused]);
 
   useEffect(() => {
     const getCurrentLevel = async () => {
@@ -42,12 +57,15 @@ export const WordList = ({ route }) => {
   }, [level, isFocused]);
 
   useEffect(() => {
-    const filteredVocabulary = allVocabularyData
-      .filter((word: WordDetail) => word?.level.includes(level.split(' ')[0]))
-      .filter((word: WordDetail) => word?.category.includes(category));
-
-    setFilteredWords(filteredVocabulary);
-    setVocabulary(filteredVocabulary);
+    if (!!allVocabularyData) {
+      const filteredVocabulary = allVocabularyData
+        .filter((word: WordDetail) => word?.level.includes(level.split(' ')[0]))
+        .filter((word: WordDetail) => word?.category?.includes(category));
+      setFilteredWords(filteredVocabulary);
+      setVocabulary(filteredVocabulary);
+    } else {
+      console.error('Failed to load vocabulary data');
+    }
   }, [level, category]);
 
   const handleSetFilteredWords = (

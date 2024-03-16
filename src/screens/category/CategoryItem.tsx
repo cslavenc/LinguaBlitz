@@ -2,17 +2,25 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Category, getCategoryIcon } from '../../utils';
 import { theme } from '../../theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const CATEGORY_KEY = 'currentCategory';
 
 export const CategoryItem = ({ category }) => {
   const navigation = useNavigation();
   const categoryIcon = getCategoryIcon(category);
+
+  const handleNavigate = async (category: string) => {
+    await AsyncStorage.setItem(CATEGORY_KEY, category);
+    navigation.navigate('Category');
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         activeOpacity={1}
         style={styles.image}
-        onPress={() => navigation.navigate('Category', { category })}>
+        onPress={() => handleNavigate(category)}>
         <View style={{ alignSelf: 'center' }}>{categoryIcon}</View>
       </TouchableOpacity>
       {category !== Category.MY_VOCABULARY || category !== Category.OTHERS ? (
