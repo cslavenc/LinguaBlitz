@@ -37,7 +37,7 @@ export const Home = () => {
 
   const getLevel = async () => {
     const rawLevel = await AsyncStorage.getItem(LEVEL_KEY);
-    return rawLevel ? JSON.parse(rawLevel) : '';
+    return rawLevel ? JSON.parse(rawLevel) : 'B2 (Upper-Intermediate)';
   };
 
   useEffect(() => {
@@ -69,6 +69,7 @@ export const Home = () => {
     await AsyncStorage.setItem(LEVEL_KEY, JSON.stringify(level));
   };
 
+  // TODO : make name placeholder text fit the box better
   return (
     <View style={styles.container}>
       {showModal ? <RecommendedBookModal /> : null}
@@ -79,6 +80,7 @@ export const Home = () => {
         <TextInput
           style={styles.name}
           value={name}
+          placeholder="Add your name "
           underlineColorAndroid="transparent"
           onChangeText={(name) => saveName(name)}
         />
