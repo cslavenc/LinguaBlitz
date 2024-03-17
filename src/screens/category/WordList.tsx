@@ -18,6 +18,7 @@ import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LEVEL_KEY } from '../welcome/Welcome';
 import { CATEGORY_KEY } from './CategoryItem';
+import { CUSTOM_WORDS_KEY } from '../../utils';
 
 export const WordList = () => {
   const navigation = useNavigation();
@@ -56,16 +57,35 @@ export const WordList = () => {
     getCurrentLevel();
   }, [level, isFocused]);
 
-  useEffect(() => {
-    if (!!allVocabularyData) {
-      const filteredVocabulary = allVocabularyData
-        .filter((word: WordDetail) => word?.level.includes(level.split(' ')[0]))
-        .filter((word: WordDetail) => word?.category?.includes(category));
-      setFilteredWords(filteredVocabulary);
-      setVocabulary(filteredVocabulary);
-    } else {
-      console.error('Failed to load vocabulary data');
+  const getCustomWords = async () => {
+    try {
+      const raw = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
+      const words: WordDetail[] = raw ? JSON.parse(raw) : [];
+      return words;
+    } catch (e) {
+      console.error(e);
     }
+  };
+
+  useEffect(() => {
+    const initializeVocabulary = async () => {
+      if (!!allVocabularyData) {
+        const filteredVocabulary: WordDetail[] = allVocabularyData
+          .filter((word: WordDetail) =>
+            word?.level.includes(level.split(' ')[0])
+          )
+          .filter((word: WordDetail) => word?.category?.includes(category));
+
+        const customWords = await getCustomWords();
+        filteredVocabulary.push(...customWords);
+
+        setFilteredWords(filteredVocabulary);
+        setVocabulary(filteredVocabulary);
+      } else {
+        console.error('Failed to load vocabulary data');
+      }
+    };
+    initializeVocabulary();
   }, [level, category]);
 
   const handleSetFilteredWords = (
@@ -73,7 +93,7 @@ export const WordList = () => {
   ): void => {
     if (event.nativeEvent.text.length > 1) {
       let filtered = filteredWords.filter((item: WordDetail) =>
-        item.word.startsWith(event.nativeEvent.text)
+        item.word.toLowerCase().startsWith(event.nativeEvent.text.toLowerCase())
       );
       setFilteredWords(filtered);
     } else {
