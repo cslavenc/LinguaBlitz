@@ -15,6 +15,7 @@ import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { WordDetail } from '../category/WordDetail';
 import { styles } from '../category/WordList';
+import { theme } from '../../theme';
 
 export const CustomWordList = ({ route }) => {
   const { databaseKey } = route.params;
@@ -28,7 +29,7 @@ export const CustomWordList = ({ route }) => {
     if (databaseKey) {
       const result = await AsyncStorage.getItem(databaseKey);
       parsed = result ? JSON.parse(result) : [];
-      parsed = parsed.filter((item) => item.bookmark);
+      //parsed = parsed.filter((item) => item.bookmark);
     } else {
       parsed = [];
     }
@@ -89,6 +90,15 @@ export const CustomWordList = ({ route }) => {
           <Text style={noWordsStyles.text}>
             You haven't added any words yet. Add your first word!
           </Text>
+          <TouchableOpacity
+            style={[
+              noWordsStyles.button,
+              { marginBottom: -40, marginRight: 14 },
+            ]}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate('Custom word')}>
+            <Text style={noWordsStyles.plus}>+</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -99,5 +109,22 @@ const noWordsStyles = StyleSheet.create({
   text: {
     fontSize: 18,
     textAlign: 'center',
+  },
+  button: {
+    width: 50,
+    height: 50,
+    elevation: 3,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 0,
+    bottom: 0,
+    borderRadius: 45,
+    color: 'black',
+    backgroundColor: theme.primaryButton,
+  },
+  plus: {
+    fontSize: 32,
+    fontWeight: 'bold',
   },
 });
