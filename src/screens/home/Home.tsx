@@ -55,7 +55,11 @@ export const Home = () => {
   }, []);
 
   const saveName = async (name: string) => {
-    if (name.length <= maxNameLength) {
+    if (name.length === 0) {
+      setErrorMessage('Enter a name');
+      setName(name);
+      await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
+    } else if (name.length <= maxNameLength) {
       setErrorMessage('');
       setName(name);
       await AsyncStorage.setItem(ACCOUNT_NAME_KEY, JSON.stringify(name));
@@ -80,7 +84,6 @@ export const Home = () => {
         <TextInput
           style={styles.name}
           value={name}
-          placeholder="Add your name "
           underlineColorAndroid="transparent"
           onChangeText={(name) => saveName(name)}
         />
