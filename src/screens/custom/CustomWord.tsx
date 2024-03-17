@@ -33,7 +33,7 @@ const initialValues: WordDetail = {
   category: '',
   level: 'custom',
   synonyms: [],
-  bookmark: true,
+  bookmark: false,
   flashcard: false,
 };
 
@@ -46,7 +46,7 @@ export const CustomWord = () => {
     navigation.setOptions({ headerTitle: 'Add your own word' });
   }, []);
 
-  const handleSave = async (values: WordDetail) => {
+  const handleSave = async (values: WordDetail, resetForm) => {
     values.id = uuid();
     Object.keys(values).map((key) => {
       if (typeof values[key] === 'string') {
@@ -56,15 +56,21 @@ export const CustomWord = () => {
 
     try {
       const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-      const customWords: WordDetail[] = rawCustomWords
-        ? JSON.parse(rawCustomWords)
-        : [];
+      const customWords = rawCustomWords ? JSON.parse(rawCustomWords) : [];
       customWords.push(values);
+      const item = values;
       await AsyncStorage.setItem(CUSTOM_WORDS_KEY, JSON.stringify(customWords));
+
+      navigation.navigate('Word', {
+        item: item,
+        data: customWords,
+      });
     } catch (error) {
       throw new Error(error);
     } finally {
-      values.id = ''; // reset so that the next entry does not carry the id over
+      // reset so that the next entry does not carry over the values
+      resetForm();
+      setCategoryValue(null);
     }
   };
 
@@ -74,7 +80,7 @@ export const CustomWord = () => {
         style={styles.form}
         initialValues={initialValues}
         validationSchema={customWordValidationSchema}
-        onSubmit={(values) => handleSave(values)}>
+        onSubmit={(values, { resetForm }) => handleSave(values, resetForm)}>
         {({
           handleChange,
           handleBlur,

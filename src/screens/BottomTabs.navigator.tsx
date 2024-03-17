@@ -54,6 +54,7 @@ export const HomeStackScreen = () => {
       ) : null}
       <HomeStack.Screen name="Overview" component={Home} />
       <HomeStack.Screen name="My Vocabulary" component={CustomWordList} />
+      <HomeStack.Screen name="Custom word" component={CustomWord} />
       <HomeStack.Screen name="My Flashcards" component={Flashcard} />
       <HomeStack.Screen name="Word" component={WordDetail} />
     </HomeStack.Navigator>
