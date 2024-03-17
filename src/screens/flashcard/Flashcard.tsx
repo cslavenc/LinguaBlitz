@@ -293,7 +293,12 @@ export const Flashcard = ({ route }) => {
                 </Text>
               </View>
             </Animated.View>
-            <Animated.View style={[styles.animation, backAnimatedStyle]}>
+            <Animated.View
+              style={[
+                styles.animation,
+                backAnimatedStyle,
+                { position: 'absolute', width: '100%' },
+              ]}>
               <View style={styles.title}>
                 <View style={styles.icons}>
                   <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
@@ -345,7 +350,6 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 26,
     display: 'flex',
-    //flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
