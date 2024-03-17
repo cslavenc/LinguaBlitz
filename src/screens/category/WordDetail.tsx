@@ -47,14 +47,12 @@ export const WordDetail = ({ route }) => {
       try {
         const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
         const words: WordDetail[] = rawWords ? JSON.parse(rawWords) : [];
-        const fragmentIdx = words.findIndex(
-          (fragment) => fragment.id === item.id
-        );
+        const wordIdx = words.findIndex((word) => word.id === item.id);
 
-        if (fragmentIdx >= 0) {
+        if (wordIdx >= 0) {
           // if bookmarks or flashcards were saved previously
-          setFlashcard(words[fragmentIdx].flashcard);
-          setBookmark(words[fragmentIdx].bookmark);
+          setFlashcard(words[wordIdx].flashcard);
+          setBookmark(words[wordIdx].bookmark);
         } else {
           setFlashcard(item.flashcard);
           setBookmark(item.bookmark);
