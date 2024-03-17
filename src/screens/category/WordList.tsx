@@ -119,7 +119,7 @@ export const WordList = () => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     display: 'flex',
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
   searchBox: {
     borderRadius: 10,
     marginBottom: 24,
+    paddingVertical: 6,
     paddingHorizontal: 12,
     backgroundColor: theme.white,
     display: 'flex',

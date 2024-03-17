@@ -2,7 +2,6 @@ import {
   FlatList,
   ListRenderItemInfo,
   NativeSyntheticEvent,
-  StyleSheet,
   Text,
   TextInput,
   TextInputChangeEventData,
@@ -11,10 +10,10 @@ import {
 } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { theme } from '../../theme';
 import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { WordDetail } from './CustomWord';
+import { WordDetail } from '../category/WordDetail';
+import { styles } from '../category/WordList';
 
 export const CustomWordList = ({ route }) => {
   const { databaseKey } = route.params;
@@ -84,41 +83,3 @@ export const CustomWordList = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-  },
-  searchBox: {
-    borderRadius: 10,
-    marginBottom: 24,
-    paddingHorizontal: 12,
-    backgroundColor: theme.white,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  input: {
-    flex: 1,
-    fontSize: 18,
-  },
-  item: {
-    paddingVertical: 10,
-    borderBottomWidth: 0.25,
-    borderStyle: 'solid',
-    borderColor: theme.dark,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  word: { textAlign: 'left', fontSize: 18, fontWeight: 'normal' },
-  partOfSpeech: {
-    color: theme.grey,
-    fontStyle: 'italic',
-  },
-});
