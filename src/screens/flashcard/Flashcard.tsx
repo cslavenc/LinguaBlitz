@@ -57,12 +57,6 @@ export const Flashcard = ({ route }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    if (item) {
-      navigation.setOptions({ headerTitle: item.word.split(' (')[0] });
-    }
-  }, [item]);
-
-  useEffect(() => {
     const initializeData = async () => {
       let customWords: WordDetail[];
       let preloadedWords: WordDetail[];
@@ -84,9 +78,6 @@ export const Flashcard = ({ route }) => {
         setSeenFlashcards([shuffledWords[0]]);
         setBookmark(shuffledWords[0].bookmark);
         setFlashcard(shuffledWords[0].flashcard);
-        navigation.setOptions({
-          headerTitle: shuffledWords[0].word.split(' (')[0],
-        });
       }
     };
     initializeData();
