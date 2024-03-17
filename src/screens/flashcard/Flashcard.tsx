@@ -89,6 +89,7 @@ export const Flashcard = ({ route }) => {
       setCurrentFlashcard(item);
       setBookmark(item.bookmark);
       setFlashcard(item.flashcard);
+      setIsFlipped(false);
       if (!seenFlashcards.find((flashcard) => flashcard.id === item.id)) {
         seenFlashcards.push(item);
         setSeenFlashcards(seenFlashcards);
@@ -266,6 +267,29 @@ export const Flashcard = ({ route }) => {
             {seenFlashcards.length}/{data.length}
           </Text>
           <TouchableOpacity onPress={isFlipped ? flipToFront : flipToBack}>
+            <Animated.View
+              style={[
+                styles.animation,
+                backAnimatedStyle,
+                { position: 'absolute', width: '100%' },
+              ]}>
+              <View style={styles.title}>
+                <View style={styles.icons}>
+                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
+                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.word}>{currentFlashcard.word}</Text>
+                <Text style={styles.partOfSpeech}>
+                  {currentFlashcard.partOfSpeech
+                    ? `(${currentFlashcard.partOfSpeech})`
+                    : ''}
+                </Text>
+              </View>
+            </Animated.View>
             <Animated.View style={[styles.animation, frontAnimatedStyle]}>
               <View style={styles.title}>
                 <View style={styles.icons}>
@@ -285,29 +309,6 @@ export const Flashcard = ({ route }) => {
                     </Text>
                   )}
                 </Text>
-                <Text style={styles.partOfSpeech}>
-                  {currentFlashcard.partOfSpeech
-                    ? `(${currentFlashcard.partOfSpeech})`
-                    : ''}
-                </Text>
-              </View>
-            </Animated.View>
-            <Animated.View
-              style={[
-                styles.animation,
-                backAnimatedStyle,
-                { position: 'absolute', width: '100%' },
-              ]}>
-              <View style={styles.title}>
-                <View style={styles.icons}>
-                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.word}>{currentFlashcard.word}</Text>
                 <Text style={styles.partOfSpeech}>
                   {currentFlashcard.partOfSpeech
                     ? `(${currentFlashcard.partOfSpeech})`
