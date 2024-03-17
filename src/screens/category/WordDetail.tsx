@@ -30,12 +30,6 @@ export interface WordDetail {
   bookmark: boolean;
 }
 
-export interface WordFragment {
-  id: string;
-  flashcard: boolean;
-  bookmark: boolean;
-}
-
 export const WordDetail = ({ route }) => {
   const { item, data } = route.params;
   const navigation = useNavigation();
