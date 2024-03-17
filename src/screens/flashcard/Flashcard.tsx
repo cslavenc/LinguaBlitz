@@ -40,7 +40,6 @@ export const shuffle = (original) => {
   return array;
 };
 
-// TODO : if there are no flashcards, add a hint to go to a word list and flashcard some of them (add the icon as a hint)
 export const Flashcard = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
@@ -249,17 +248,6 @@ export const Flashcard = ({ route }) => {
           </View>
           <View style={styles.information}>
             <ScrollView showsVerticalScrollIndicator={false}>
-              {/*<View style={{ paddingBottom: 18 }}>*/}
-              {/*  <Text style={styles.heading}>Description</Text>*/}
-              {/*  {descriptions.map((content) => (*/}
-              {/*    <View style={{ flexDirection: 'row' }} key={content}>*/}
-              {/*      <Text style={styles.text}>{'\u2022'}</Text>*/}
-              {/*      <Text style={[styles.text, styles.unorderedList]}>*/}
-              {/*        {content.trim()}*/}
-              {/*      </Text>*/}
-              {/*    </View>*/}
-              {/*  ))}*/}
-              {/*</View>*/}
               <View style={{ paddingBottom: 24 }}>
                 <Text style={styles.heading}>Example</Text>
                 <Text style={styles.text}>{currentFlashcard.example}</Text>
