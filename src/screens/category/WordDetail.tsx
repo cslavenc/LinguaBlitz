@@ -52,7 +52,7 @@ export const WordDetail = ({ route }) => {
     const getBookmarkAndFlashcard = async () => {
       try {
         const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
-        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+        const words: WordDetail[] = rawWords ? JSON.parse(rawWords) : [];
         const fragmentIdx = words.findIndex(
           (fragment) => fragment.id === item.id
         );
@@ -109,15 +109,13 @@ export const WordDetail = ({ route }) => {
     } else {
       try {
         const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
-        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+        const words: WordDetail[] = rawWords ? JSON.parse(rawWords) : [];
 
         const present = words.find((word) => word.id === item.id);
         if (!present) {
-          words.push({
-            id: item.id,
-            bookmark: !bookmark,
-            flashcard: flashcard,
-          });
+          item.bookmark = !bookmark;
+          item.flashcard = flashcard;
+          words.push(item);
         } else {
           words.map((word) => {
             if (word.id === item.id) {
@@ -159,15 +157,13 @@ export const WordDetail = ({ route }) => {
     } else {
       try {
         const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
-        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+        const words: WordDetail[] = rawWords ? JSON.parse(rawWords) : [];
 
         const present = words.find((word) => word.id === item.id);
         if (!present) {
-          words.push({
-            id: item.id,
-            bookmark: bookmark,
-            flashcard: !flashcard,
-          });
+          item.bookmark = !bookmark;
+          item.flashcard = flashcard;
+          words.push(item);
         } else {
           words.map((word) => {
             if (word.id === item.id) {

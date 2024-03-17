@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { WordDetail } from '../category/WordDetail';
 import { styles } from '../category/WordList';
 import { theme } from '../../theme';
+import { PRELOADED_WORDS_KEY } from '../../utils';
 
 export const CustomWordList = ({ route }) => {
   const { databaseKey } = route.params;
@@ -26,12 +27,19 @@ export const CustomWordList = ({ route }) => {
 
   const fetchData = async () => {
     let parsed: WordDetail[];
+    let preloadedParsed: WordDetail[];
     if (databaseKey) {
       const result = await AsyncStorage.getItem(databaseKey);
       parsed = result ? JSON.parse(result) : [];
-      //parsed = parsed.filter((item) => item.bookmark);
+
+      const preloaded = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
+      preloadedParsed = preloaded ? JSON.parse(preloaded) : [];
+      preloadedParsed = preloadedParsed.filter((item) => item.bookmark);
+
+      parsed.push(...preloadedParsed);
     } else {
       parsed = [];
+      preloadedParsed = [];
     }
     setData(parsed);
     setFilteredWords(parsed);
