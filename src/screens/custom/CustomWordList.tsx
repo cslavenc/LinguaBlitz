@@ -54,7 +54,7 @@ export const CustomWordList = ({ route }) => {
   ): void => {
     if (event.nativeEvent.text.length > 1) {
       let filtered = data.filter((item: WordDetail) =>
-        item.word.startsWith(event.nativeEvent.text)
+        item.word.toLowerCase().startsWith(event.nativeEvent.text.toLowerCase())
       );
       setFilteredWords(filtered);
     } else {
