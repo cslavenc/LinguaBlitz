@@ -2,6 +2,7 @@ import {
   FlatList,
   ListRenderItemInfo,
   NativeSyntheticEvent,
+  StyleSheet,
   Text,
   TextInput,
   TextInputChangeEventData,
@@ -65,21 +66,38 @@ export const CustomWordList = ({ route }) => {
           placeholder="Search for a word"
         />
       </View>
-      <FlatList
-        data={filteredWords}
-        keyExtractor={(item: WordDetail) => item.id}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
-          <View>
-            <TouchableOpacity
-              style={styles.item}
-              onPress={() => navigation.navigate('Word', { item, data: data })}>
-              <Text style={styles.word}>{item.word}</Text>
-              <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+      {data.length > 0 ? (
+        <FlatList
+          data={filteredWords}
+          keyExtractor={(item: WordDetail) => item.id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }: ListRenderItemInfo<WordDetail>) => (
+            <View>
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() =>
+                  navigation.navigate('Word', { item, data: data })
+                }>
+                <Text style={styles.word}>{item.word}</Text>
+                <Text style={styles.partOfSpeech}>{item.partOfSpeech}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+      ) : (
+        <View>
+          <Text style={noWordsStyles.text}>
+            You haven't added any words yet. Add your first word!
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
+
+const noWordsStyles = StyleSheet.create({
+  text: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+});
