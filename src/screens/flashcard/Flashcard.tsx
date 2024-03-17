@@ -77,6 +77,8 @@ export const Flashcard = ({ route }) => {
       setData(shuffledWords);
       setCurrentFlashcard(shuffledWords[0]);
       setSeenFlashcards([shuffledWords[0]]);
+      setBookmark(shuffledWords[0].bookmark);
+      setFlashcard(shuffledWords[0].flashcard);
       navigation.setOptions({
         headerTitle: shuffledWords[0].word.split(' (')[0],
       });
@@ -88,6 +90,9 @@ export const Flashcard = ({ route }) => {
     // executes only when pressing "Next" or "Previous" button
     if (item) {
       setCurrentFlashcard(item);
+      setBookmark(item.bookmark);
+      console.log('from navigation: ', item.bookmark);
+      setFlashcard(item.flashcard);
       if (!seenFlashcards.find((flashcard) => flashcard.id === item.id)) {
         seenFlashcards.push(item);
         setSeenFlashcards(seenFlashcards);
@@ -113,6 +118,8 @@ export const Flashcard = ({ route }) => {
 
   const handleBookmark = async () => {
     setBookmark(!bookmark);
+    const idx = data.findIndex((word) => word.id === currentFlashcard.id);
+    data[idx].bookmark = !bookmark;
 
     if (currentFlashcard.level.toLowerCase().includes('custom')) {
       try {
@@ -160,6 +167,8 @@ export const Flashcard = ({ route }) => {
 
   const handleFlashcard = async () => {
     setFlashcard(!flashcard);
+    const idx = data.findIndex((word) => word.id === currentFlashcard.id);
+    data[idx].flashcard = !flashcard;
 
     if (currentFlashcard.level.toLowerCase().includes('custom')) {
       try {
@@ -221,18 +230,10 @@ export const Flashcard = ({ route }) => {
       <View style={styles.title}>
         <View style={styles.icons}>
           <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-            {currentFlashcard.flashcard ? (
-              <FlashcardFilledIcon />
-            ) : (
-              <FlashcardIcon />
-            )}
+            {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
           </TouchableOpacity>
           <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-            {currentFlashcard.bookmark ? (
-              <BookmarkFilledIcon />
-            ) : (
-              <BookmarkPlusIcon />
-            )}
+            {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
           </TouchableOpacity>
         </View>
         <Text style={styles.word}>{currentFlashcard.word}</Text>
