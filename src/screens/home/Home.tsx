@@ -37,12 +37,18 @@ export const Home = () => {
 
   const getLevel = async () => {
     const rawLevel = await AsyncStorage.getItem(LEVEL_KEY);
-    return rawLevel ? JSON.parse(rawLevel) : 'B2 (Upper-Intermediate)';
+    if (rawLevel) {
+      setLevel(JSON.parse(rawLevel));
+    } else {
+      const placeholderLevel = 'B2 (Upper-Intermediate)';
+      await AsyncStorage.setItem(LEVEL_KEY, JSON.stringify(placeholderLevel));
+      setLevel(placeholderLevel);
+    }
   };
 
   useEffect(() => {
     getName().then((name) => setName(name));
-    getLevel().then((level) => setLevel(level));
+    getLevel();
   }, []);
 
   useEffect(() => {
