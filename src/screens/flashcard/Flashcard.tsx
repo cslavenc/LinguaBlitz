@@ -75,13 +75,15 @@ export const Flashcard = ({ route }) => {
       const shuffledWords: WordDetail[] = shuffle(preloadedWords);
 
       setData(shuffledWords);
-      setCurrentFlashcard(shuffledWords[0]);
-      setSeenFlashcards([shuffledWords[0]]);
-      setBookmark(shuffledWords[0].bookmark);
-      setFlashcard(shuffledWords[0].flashcard);
-      navigation.setOptions({
-        headerTitle: shuffledWords[0].word.split(' (')[0],
-      });
+      if (shuffledWords.length > 0) {
+        setCurrentFlashcard(shuffledWords[0]);
+        setSeenFlashcards([shuffledWords[0]]);
+        setBookmark(shuffledWords[0].bookmark);
+        setFlashcard(shuffledWords[0].flashcard);
+        navigation.setOptions({
+          headerTitle: shuffledWords[0].word.split(' (')[0],
+        });
+      }
     };
     initializeData();
   }, [isFocused]);
@@ -223,53 +225,64 @@ export const Flashcard = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>
-        {seenFlashcards.length}/{data.length}
-      </Text>
-      <View style={styles.title}>
-        <View style={styles.icons}>
-          <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-            {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-            {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.word}>{currentFlashcard.word}</Text>
-        <Text style={styles.partOfSpeech}>
-          {currentFlashcard.partOfSpeech
-            ? `(${currentFlashcard.partOfSpeech})`
-            : ''}
-        </Text>
-      </View>
-      <View style={styles.information}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {/*<View style={{ paddingBottom: 18 }}>*/}
-          {/*  <Text style={styles.heading}>Description</Text>*/}
-          {/*  {descriptions.map((content) => (*/}
-          {/*    <View style={{ flexDirection: 'row' }} key={content}>*/}
-          {/*      <Text style={styles.text}>{'\u2022'}</Text>*/}
-          {/*      <Text style={[styles.text, styles.unorderedList]}>*/}
-          {/*        {content.trim()}*/}
-          {/*      </Text>*/}
-          {/*    </View>*/}
-          {/*  ))}*/}
-          {/*</View>*/}
-          <View style={{ paddingBottom: 24 }}>
-            <Text style={styles.heading}>Example</Text>
-            <Text style={styles.text}>{currentFlashcard.example}</Text>
+    <View>
+      {data.length > 0 ? (
+        <View style={styles.container}>
+          <Text>
+            {seenFlashcards.length}/{data.length}
+          </Text>
+          <View style={styles.title}>
+            <View style={styles.icons}>
+              <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+                {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
+                {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.word}>{currentFlashcard.word}</Text>
+            <Text style={styles.partOfSpeech}>
+              {currentFlashcard.partOfSpeech
+                ? `(${currentFlashcard.partOfSpeech})`
+                : ''}
+            </Text>
           </View>
-        </ScrollView>
-      </View>
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity onPress={() => handlePrevious()}>
-          <Text style={styles.button}>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleNext()}>
-          <Text style={styles.button}>Next</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.information}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {/*<View style={{ paddingBottom: 18 }}>*/}
+              {/*  <Text style={styles.heading}>Description</Text>*/}
+              {/*  {descriptions.map((content) => (*/}
+              {/*    <View style={{ flexDirection: 'row' }} key={content}>*/}
+              {/*      <Text style={styles.text}>{'\u2022'}</Text>*/}
+              {/*      <Text style={[styles.text, styles.unorderedList]}>*/}
+              {/*        {content.trim()}*/}
+              {/*      </Text>*/}
+              {/*    </View>*/}
+              {/*  ))}*/}
+              {/*</View>*/}
+              <View style={{ paddingBottom: 24 }}>
+                <Text style={styles.heading}>Example</Text>
+                <Text style={styles.text}>{currentFlashcard.example}</Text>
+              </View>
+            </ScrollView>
+          </View>
+          <View style={styles.buttonGroup}>
+            <TouchableOpacity onPress={() => handlePrevious()}>
+              <Text style={styles.button}>Previous</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleNext()}>
+              <Text style={styles.button}>Next</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <View>
+          <Text style={styles.noFlashcards}>
+            You haven't added any flashcards yet! Head over to Categories and
+            add flashcards from a word list.
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -348,5 +361,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     verticalAlign: 'middle',
+  },
+  noFlashcards: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginHorizontal: 12,
   },
 });
