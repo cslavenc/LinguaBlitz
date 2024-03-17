@@ -18,7 +18,8 @@ import {
 } from './screens/category/CategoryIcons';
 import { StyleSheet, Text, View } from 'react-native';
 
-export const CUSTOM_WORDS_KEY = 'custom:words';
+export const CUSTOM_WORDS_KEY = 'CUSTOM_WORDS';
+export const PRELOADED_WORDS_KEY = 'PRELOADED_WORDS';
 
 export enum Category {
   ART = 'Art',

@@ -15,7 +15,7 @@ import {
 } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { theme } from '../../theme';
-import { CUSTOM_WORDS_KEY } from '../../utils';
+import { CUSTOM_WORDS_KEY, PRELOADED_WORDS_KEY } from '../../utils';
 
 export interface WordDetail {
   id: string;
@@ -30,6 +30,12 @@ export interface WordDetail {
   bookmark: boolean;
 }
 
+export interface WordFragment {
+  id: string;
+  flashcard: boolean;
+  bookmark: boolean;
+}
+
 export const WordDetail = ({ route }) => {
   const { item, data } = route.params;
   const navigation = useNavigation();
@@ -39,8 +45,32 @@ export const WordDetail = ({ route }) => {
   const descriptions = item.description.split('\n');
   const example = item.example.trim();
   const synonyms = item.synonyms;
-  const [bookmark, setBookmark] = useState<boolean>(item.bookmark);
-  const [flashcard, setFlashcard] = useState<boolean>(item.flashcard);
+  const [bookmark, setBookmark] = useState<boolean>(false);
+  const [flashcard, setFlashcard] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getBookmarkAndFlashcard = async () => {
+      try {
+        const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
+        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+        const fragmentIdx = words.findIndex(
+          (fragment) => fragment.id === item.id
+        );
+
+        if (fragmentIdx >= 0) {
+          // if bookmarks or flashcards were saved previously
+          setFlashcard(words[fragmentIdx].flashcard);
+          setBookmark(words[fragmentIdx].bookmark);
+        } else {
+          setFlashcard(item.flashcard);
+          setBookmark(item.bookmark);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getBookmarkAndFlashcard();
+  }, [route]);
 
   useEffect(() => {
     navigation.setOptions({ headerTitle: word.split(' (')[0] });
@@ -54,7 +84,7 @@ export const WordDetail = ({ route }) => {
 
   const handlePrevious = () => {
     const idx = data.findIndex((current: WordDetail) => current.id === item.id);
-    const previous = idx - 1 > 0 ? data[idx - 1] : data[data.length - 1];
+    const previous = idx - 1 >= 0 ? data[idx - 1] : data[data.length - 1];
     navigation.navigate('Word', { item: previous, data });
   };
 
@@ -63,21 +93,40 @@ export const WordDetail = ({ route }) => {
 
     if (item.level.toLowerCase().includes('custom')) {
       try {
-        const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-        const customWords: WordDetail[] = rawCustomWords
-          ? JSON.parse(rawCustomWords)
-          : [];
+        const rawWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
+        const words: WordDetail[] = rawWords ? JSON.parse(rawWords) : [];
 
-        customWords.map((word) => {
+        words.map((word) => {
           if (word.id === item.id) {
             word.bookmark = !bookmark;
           }
         });
 
-        await AsyncStorage.setItem(
-          CUSTOM_WORDS_KEY,
-          JSON.stringify(customWords)
-        );
+        await AsyncStorage.setItem(CUSTOM_WORDS_KEY, JSON.stringify(words));
+      } catch (error) {
+        throw new Error(error);
+      }
+    } else {
+      try {
+        const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
+        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+
+        const present = words.find((word) => word.id === item.id);
+        if (!present) {
+          words.push({
+            id: item.id,
+            bookmark: !bookmark,
+            flashcard: flashcard,
+          });
+        } else {
+          words.map((word) => {
+            if (word.id === item.id) {
+              word.bookmark = !bookmark;
+            }
+          });
+        }
+
+        await AsyncStorage.setItem(PRELOADED_WORDS_KEY, JSON.stringify(words));
       } catch (error) {
         throw new Error(error);
       }
@@ -104,6 +153,30 @@ export const WordDetail = ({ route }) => {
           CUSTOM_WORDS_KEY,
           JSON.stringify(customWords)
         );
+      } catch (error) {
+        throw new Error(error);
+      }
+    } else {
+      try {
+        const rawWords = await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
+        const words: WordFragment[] = rawWords ? JSON.parse(rawWords) : [];
+
+        const present = words.find((word) => word.id === item.id);
+        if (!present) {
+          words.push({
+            id: item.id,
+            bookmark: bookmark,
+            flashcard: !flashcard,
+          });
+        } else {
+          words.map((word) => {
+            if (word.id === item.id) {
+              word.flashcard = !flashcard;
+            }
+          });
+        }
+
+        await AsyncStorage.setItem(PRELOADED_WORDS_KEY, JSON.stringify(words));
       } catch (error) {
         throw new Error(error);
       }
