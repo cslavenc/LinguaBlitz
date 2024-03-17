@@ -48,7 +48,7 @@ export const Category = () => {
   const handlePrevious = () => {
     const idx = categoryValues.findIndex((current) => current === category);
     const previous =
-      idx - 1 > 0
+      idx - 1 >= 0
         ? categoryValues[idx - 1]
         : categoryValues[categoryValues.length - 1];
     handleNavigate('Category', previous);
