@@ -1,4 +1,5 @@
 import {
+  Animated,
   ScrollView,
   StyleSheet,
   Text,
@@ -6,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   BookmarkFilledIcon,
   BookmarkPlusIcon,
@@ -50,6 +51,10 @@ export const Flashcard = ({ route }) => {
     useState<WordDetail>(initialState);
   const [bookmark, setBookmark] = useState<boolean>(false);
   const [flashcard, setFlashcard] = useState<boolean>(false);
+
+  // card flip animation states
+  const flipAnimation = useRef(new Animated.Value(0)).current;
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     if (item) {
@@ -214,6 +219,46 @@ export const Flashcard = ({ route }) => {
     }
   };
 
+  const flipToFront = () => {
+    Animated.timing(flipAnimation, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+    setIsFlipped(false);
+  };
+
+  const flipToBack = () => {
+    Animated.timing(flipAnimation, {
+      toValue: 180,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+    setIsFlipped(true);
+  };
+
+  const frontAnimatedStyle = {
+    transform: [
+      {
+        rotateY: flipAnimation.interpolate({
+          inputRange: [0, 180],
+          outputRange: ['0deg', '180deg'],
+        }),
+      },
+    ],
+  };
+
+  const backAnimatedStyle = {
+    transform: [
+      {
+        rotateY: flipAnimation.interpolate({
+          inputRange: [0, 180],
+          outputRange: ['180deg', '360deg'],
+        }),
+      },
+    ],
+  };
+
   // TODO : use shuffle function
   const resetFlashcards = () => {
     setSeenFlashcards([]);
@@ -229,22 +274,44 @@ export const Flashcard = ({ route }) => {
           <Text>
             {seenFlashcards.length}/{data.length}
           </Text>
-          <View style={styles.title}>
-            <View style={styles.icons}>
-              <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-                {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-                {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.word}>{currentFlashcard.word}</Text>
-            <Text style={styles.partOfSpeech}>
-              {currentFlashcard.partOfSpeech
-                ? `(${currentFlashcard.partOfSpeech})`
-                : ''}
-            </Text>
-          </View>
+          <TouchableOpacity onPress={isFlipped ? flipToFront : flipToBack}>
+            <Animated.View style={[styles.animation, frontAnimatedStyle]}>
+              <View style={styles.title}>
+                <View style={styles.icons}>
+                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
+                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.word}>{currentFlashcard.word}</Text>
+                <Text style={styles.partOfSpeech}>
+                  {currentFlashcard.partOfSpeech
+                    ? `(${currentFlashcard.partOfSpeech})`
+                    : ''}
+                </Text>
+              </View>
+            </Animated.View>
+            <Animated.View style={[styles.animation, backAnimatedStyle]}>
+              <View style={styles.title}>
+                <View style={styles.icons}>
+                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
+                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
+                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.word}>{currentFlashcard.word}</Text>
+                <Text style={styles.partOfSpeech}>
+                  {currentFlashcard.partOfSpeech
+                    ? `(${currentFlashcard.partOfSpeech})`
+                    : ''}
+                </Text>
+              </View>
+            </Animated.View>
+          </TouchableOpacity>
           <View style={styles.information}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View style={{ paddingBottom: 24 }}>
@@ -278,7 +345,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 26,
     display: 'flex',
-    flex: 1,
+    //flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },
@@ -288,6 +355,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '7%',
     right: '4%',
+  },
+  animation: {
+    backfaceVisibility: 'hidden',
   },
   title: {
     backgroundColor: theme.secondaryBlue,
