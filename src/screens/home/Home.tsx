@@ -73,7 +73,6 @@ export const Home = () => {
     await AsyncStorage.setItem(LEVEL_KEY, JSON.stringify(level));
   };
 
-  // TODO : make name placeholder text fit the box better
   return (
     <View style={styles.container}>
       {showModal ? <RecommendedBookModal /> : null}
