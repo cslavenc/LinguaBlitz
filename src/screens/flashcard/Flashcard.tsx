@@ -285,7 +285,15 @@ export const Flashcard = ({ route }) => {
                     {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
                   </TouchableOpacity>
                 </View>
-                <Text style={styles.word}>{currentFlashcard.word}</Text>
+                <Text style={styles.word}>
+                  {currentFlashcard.description ? (
+                    currentFlashcard.description
+                  ) : (
+                    <Text style={{ fontStyle: 'italic' }}>
+                      no description available
+                    </Text>
+                  )}
+                </Text>
                 <Text style={styles.partOfSpeech}>
                   {currentFlashcard.partOfSpeech
                     ? `(${currentFlashcard.partOfSpeech})`
