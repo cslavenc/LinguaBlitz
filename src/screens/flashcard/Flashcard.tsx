@@ -50,7 +50,13 @@ export const Flashcard = ({ route }) => {
   const [currentFlashcard, setCurrentFlashcard] =
     useState<WordDetail>(initialState);
   const [bookmark, setBookmark] = useState<boolean>(false);
-  const [flashcard, setFlashcard] = useState<boolean>(true);
+  const [flashcard, setFlashcard] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (item) {
+      navigation.setOptions({ headerTitle: item.word.split(' (')[0] });
+    }
+  }, [item]);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -66,11 +72,14 @@ export const Flashcard = ({ route }) => {
       preloadedWords = preloadedWords.filter((word) => word.flashcard);
 
       preloadedWords.push(...customWords);
-      const shuffledWords = shuffle(preloadedWords);
+      const shuffledWords: WordDetail[] = shuffle(preloadedWords);
 
       setData(shuffledWords);
       setCurrentFlashcard(shuffledWords[0]);
       setSeenFlashcards([shuffledWords[0]]);
+      navigation.setOptions({
+        headerTitle: shuffledWords[0].word.split(' (')[0],
+      });
     };
     initializeData();
   }, [isFocused]);
@@ -200,12 +209,8 @@ export const Flashcard = ({ route }) => {
   const resetFlashcards = () => {
     setSeenFlashcards([]);
     let nextFlashcard: WordDetail;
-    do {
-      let idx = getRandomInteger(0, data.length - 1);
-      nextFlashcard = data[idx];
-    } while (seenFlashcards.some((card) => card.id === nextFlashcard.id));
-    setSeenFlashcards(seenFlashcards.push(nextFlashcard));
-    setCurrentFlashcard(nextFlashcard);
+    setSeenFlashcards([]);
+    //setCurrentFlashcard({});
   };
 
   return (
