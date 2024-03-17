@@ -92,7 +92,6 @@ export const Flashcard = ({ route }) => {
     if (item) {
       setCurrentFlashcard(item);
       setBookmark(item.bookmark);
-      console.log('from navigation: ', item.bookmark);
       setFlashcard(item.flashcard);
       if (!seenFlashcards.find((flashcard) => flashcard.id === item.id)) {
         seenFlashcards.push(item);
