@@ -153,8 +153,8 @@ export const WordDetail = ({ route }) => {
 
         const present = words.find((word) => word.id === item.id);
         if (!present) {
-          item.bookmark = !bookmark;
-          item.flashcard = flashcard;
+          item.bookmark = bookmark;
+          item.flashcard = !flashcard;
           words.push(item);
         } else {
           words.map((word) => {
