@@ -89,7 +89,6 @@ export const Flashcard = ({ route }) => {
       setCurrentFlashcard(item);
       setBookmark(item.bookmark);
       setFlashcard(item.flashcard);
-      setIsFlipped(false);
       if (!seenFlashcards.find((flashcard) => flashcard.id === item.id)) {
         seenFlashcards.push(item);
         setSeenFlashcards(seenFlashcards);
