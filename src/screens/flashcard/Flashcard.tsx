@@ -265,7 +265,9 @@ export const Flashcard = ({ route }) => {
           <Text>
             {seenFlashcards.length}/{data.length}
           </Text>
-          <TouchableOpacity onPress={isFlipped ? flipToFront : flipToBack}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={isFlipped ? flipToFront : flipToBack}>
             <Animated.View
               style={[
                 styles.animation,
