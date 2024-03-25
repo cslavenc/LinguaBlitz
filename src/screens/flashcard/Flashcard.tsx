@@ -336,9 +336,9 @@ export const Flashcard = ({ route }) => {
           </View>
         </View>
       ) : (
-        <View>
+        <View style={styles.noFlashcardsContainer}>
           <Text style={styles.noFlashcards}>
-            You haven't added any flashcards yet! Head over to Categories and
+            You haven't added any flashcards yet! Head over to <Text style={{fontWeight: 'bold'}}>Categories</Text> and
             add flashcards from a word list.
           </Text>
         </View>
@@ -347,6 +347,7 @@ export const Flashcard = ({ route }) => {
   );
 };
 
+// TODO : move to the middle
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 26,
@@ -424,7 +425,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     verticalAlign: 'middle',
   },
+  noFlashcardsContainer: {
+    height: '75%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
   noFlashcards: {
+    lineHeight: 30,
     fontSize: 20,
     textAlign: 'center',
     marginHorizontal: 12,
