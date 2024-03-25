@@ -275,14 +275,6 @@ export const Flashcard = ({ route }) => {
                 { position: 'absolute', width: '100%' },
               ]}>
               <View style={styles.title}>
-                <View style={styles.icons}>
-                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
-                  </TouchableOpacity>
-                </View>
                 <Text style={styles.word}>{currentFlashcard.word}</Text>
                 <Text style={styles.partOfSpeech}>
                   {currentFlashcard.partOfSpeech
@@ -293,14 +285,6 @@ export const Flashcard = ({ route }) => {
             </Animated.View>
             <Animated.View style={[styles.animation, frontAnimatedStyle]}>
               <View style={styles.title}>
-                <View style={styles.icons}>
-                  <TouchableOpacity onPress={handleFlashcard} activeOpacity={1}>
-                    {flashcard ? <FlashcardFilledIcon /> : <FlashcardIcon />}
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={handleBookmark} activeOpacity={1}>
-                    {bookmark ? <BookmarkFilledIcon /> : <BookmarkPlusIcon />}
-                  </TouchableOpacity>
-                </View>
                 <Text style={styles.word}>
                   {currentFlashcard.description ? (
                     currentFlashcard.description
@@ -347,20 +331,12 @@ export const Flashcard = ({ route }) => {
   );
 };
 
-// TODO : move to the middle
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 26,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-  },
-  icons: {
-    display: 'flex',
-    flexDirection: 'row',
-    position: 'absolute',
-    top: '7%',
-    right: '4%',
   },
   animation: {
     backfaceVisibility: 'hidden',
