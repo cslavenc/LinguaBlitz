@@ -211,7 +211,7 @@ export const WordDetail = ({ route }) => {
               <Text style={styles.text}>{example}</Text>
             </View>
           ) : null}
-          {synonyms !== null ? (
+          {synonyms !== null && synonyms.length > 0 ? (
             <View style={{ paddingBottom: 24 }}>
               <Text style={styles.heading}>Synonyms</Text>
               {synonyms.map((synonym) => (
