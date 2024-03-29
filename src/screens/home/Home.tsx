@@ -51,9 +51,10 @@ export const Home = () => {
     getLevel();
   }, []);
 
+  // TODO : do not show popup
   useEffect(() => {
     const showRecommendedBook = () => {
-      const cutoff = 0.67;
+      const cutoff = 1.01;
       const show = Math.random();
       show > cutoff ? setShowModal(true) : setShowModal(false);
     };
