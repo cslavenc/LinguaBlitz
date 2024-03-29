@@ -113,7 +113,10 @@ export const Home = () => {
       <TouchableOpacity
         style={styles.card}
         onPress={() => {
-          navigation.navigate('My Flashcards');
+          navigation.navigate('My Flashcards', {
+            color: 'white',
+            databaseKey: CUSTOM_WORDS_KEY,
+          });
         }}>
         <View style={styles.icon}>
           <FlashcardFilledIcon color={theme.primaryButton} />
