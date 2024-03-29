@@ -42,7 +42,7 @@ export const shuffle = (original) => {
 };
 
 export const Flashcard = ({ route }) => {
-  const { item } = route.params;
+  const { item, category } = route.params;
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const [data, setData] = useState([]);
@@ -70,6 +70,9 @@ export const Flashcard = ({ route }) => {
       preloadedWords = preloadedWords.filter((word) => word.flashcard);
 
       preloadedWords.push(...customWords);
+      if (category) {
+        preloadedWords = preloadedWords.filter(word => word.category === category)
+      }
       const shuffledWords: WordDetail[] = shuffle(preloadedWords);
 
       setData(shuffledWords);

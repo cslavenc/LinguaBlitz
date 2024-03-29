@@ -75,7 +75,7 @@ export const Category = () => {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.wordList}
-        onPress={() => navigation.navigate('Word list')}>
+        onPress={() => navigation.navigate('My Flashcards', {category: category})}>
         <FlashcardsIcon />
         <Text style={[styles.text, { color: theme.primaryRed }]}>
           Flashcards
