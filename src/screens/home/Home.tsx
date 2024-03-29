@@ -7,8 +7,9 @@ import {
 } from 'react-native';
 import { theme } from '../../theme';
 import {
+  BookmarkFilledIcon,
   DownArrow,
-  EditIcon,
+  EditIcon, FlashcardFilledIcon,
   LevelIcon,
   RightArrow,
   UserIcon,
@@ -108,7 +109,7 @@ export const Home = () => {
           });
         }}>
         <View style={styles.icon}>
-          <VocabularyIcon />
+          <BookmarkFilledIcon color={theme.primaryButton} />
         </View>
         <Text style={styles.text}>My Vocabulary</Text>
         <View style={styles.arrow}>
@@ -124,7 +125,7 @@ export const Home = () => {
           });
         }}>
         <View style={styles.icon}>
-          <VocabularyIcon />
+          <FlashcardFilledIcon color={theme.primaryButton} />
         </View>
         <Text style={styles.text}>My Flashcards</Text>
         <View style={styles.arrow}>
