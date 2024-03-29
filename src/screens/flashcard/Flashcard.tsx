@@ -250,14 +250,6 @@ export const Flashcard = ({ route }) => {
     ],
   };
 
-  // TODO : use shuffle function
-  const resetFlashcards = () => {
-    setSeenFlashcards([]);
-    let nextFlashcard: WordDetail;
-    setSeenFlashcards([]);
-    //setCurrentFlashcard({});
-  };
-
   return (
     <View>
       {data.length > 0 ? (
