@@ -150,6 +150,7 @@ export const Flashcard = ({ route }) => {
     setData(shuffled);
     setCurrentFlashcard(shuffled[0])
     setSeenFlashcards([shuffled[0]]);
+    flipToFront(0);
     setEndIsReached(false);
   }
 
