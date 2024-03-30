@@ -37,6 +37,7 @@ export const Flashcard = ({ route }) => {
   const [seenFlashcards, setSeenFlashcards] = useState<WordDetail[]>([]);
   const [currentFlashcard, setCurrentFlashcard] =
     useState<WordDetail>(initialState);
+  const [endIsReached, setEndIsReached] = useState(false)
 
   // card flip animation states
   const flipAnimation = useRef(new Animated.Value(0)).current;
@@ -86,8 +87,14 @@ export const Flashcard = ({ route }) => {
     const idx = data.findIndex(
       (current: WordDetail) => current.id === currentFlashcard.id
     );
-    const next = idx + 1 < data.length ? data[idx + 1] : data[0];
-    navigation.navigate('My Flashcards', { item: next });
+
+    if (idx + 1 < data.length) {
+    //const next = idx + 1 < data.length ? data[idx + 1] : data[0];
+      const next = data[idx + 1];
+      navigation.navigate('My Flashcards', { item: next });
+    } else {
+      setEndIsReached(true)
+    }
   };
 
   const handlePrevious = () => {
@@ -138,9 +145,18 @@ export const Flashcard = ({ route }) => {
     ],
   };
 
+  const restart = () => {
+    const shuffled = shuffle(seenFlashcards);
+    setData(shuffled);
+    setCurrentFlashcard(shuffled[0])
+    setSeenFlashcards([shuffled[0]]);
+    setEndIsReached(false);
+  }
+
   return (
     <View>
-      {data.length > 0 ? (
+      {!endIsReached ?
+      data.length > 0 ? (
         <View style={styles.container}>
           <Text>
             {seenFlashcards.length}/{data.length}
@@ -208,7 +224,16 @@ export const Flashcard = ({ route }) => {
             add flashcards from a word list.
           </Text>
         </View>
-      )}
+      )
+      : <View style={[styles.container, { marginTop: 12 }]}>
+          <Text style={styles.text}>You have reached the end! Do you want to try again?</Text>
+          <View style={[styles.buttonGroup, { justifyContent: "center", marginTop: 24 }]}>
+            <TouchableOpacity onPress={restart}>
+              <Text style={[styles.button, { width: 160 }]}>Start again</Text>
+            </TouchableOpacity>
+          </View>
+      </View>
+      }
     </View>
   );
 };
