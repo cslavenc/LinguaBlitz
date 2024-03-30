@@ -252,8 +252,6 @@ const styles = StyleSheet.create({
   hint: {
     fontWeight: "normal",
     fontSize: 24,
-    //width: "100%", /* Ensure the container takes the full width */
-    //textAlign: "justify", /* Align text to both edges */
   },
   partOfSpeech: {
     paddingTop: 18,
