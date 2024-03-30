@@ -1,19 +1,6 @@
-import {
-  Animated,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect, useRef, useState } from 'react';
-import {
-  BookmarkFilledIcon,
-  BookmarkPlusIcon,
-  FlashcardFilledIcon,
-  FlashcardIcon,
-} from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { WordDetail } from '../category/WordDetail';
 import { CUSTOM_WORDS_KEY, PRELOADED_WORDS_KEY } from '../../utils';
@@ -105,6 +92,7 @@ export const Flashcard = ({ route }) => {
       (current: WordDetail) => current.id === currentFlashcard.id
     );
     const next = idx + 1 < data.length ? data[idx + 1] : data[0];
+    flipToFront(0);
     navigation.navigate('My Flashcards', { item: next });
   };
 
@@ -113,6 +101,7 @@ export const Flashcard = ({ route }) => {
       (current: WordDetail) => current.id === currentFlashcard.id
     );
     const previous = idx - 1 >= 0 ? data[idx - 1] : data[data.length - 1];
+    flipToFront(0);
     navigation.navigate('My Flashcards', { item: previous });
   };
 
@@ -214,10 +203,10 @@ export const Flashcard = ({ route }) => {
     }
   };
 
-  const flipToFront = () => {
+  const flipToFront = (duration: number) => {
     Animated.timing(flipAnimation, {
       toValue: 0,
-      duration: 300,
+      duration: duration,
       useNativeDriver: true,
     }).start();
     setIsFlipped(false);
@@ -263,7 +252,9 @@ export const Flashcard = ({ route }) => {
           </Text>
           <TouchableOpacity
             activeOpacity={1}
-            onPress={isFlipped ? flipToFront : flipToBack}>
+            onPress={() => {
+              isFlipped ? flipToFront(300) : flipToBack();
+            }}>
             <Animated.View
               style={[
                 styles.animation,
