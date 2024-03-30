@@ -1,5 +1,5 @@
-import {StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
-import {theme} from '../../theme';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { theme } from '../../theme';
 import {
   BookmarkFilledIcon,
   DownArrow,
@@ -9,19 +9,17 @@ import {
   RightArrow,
   UserIcon,
 } from '../../components/Icons';
-import {useNavigation} from '@react-navigation/native';
-import {CUSTOM_WORDS_KEY} from '../../utils';
+import { useNavigation } from '@react-navigation/native';
+import { CUSTOM_WORDS_KEY } from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {ACCOUNT_NAME_KEY, LEVEL_KEY, Levels} from '../welcome/Welcome';
-import {useEffect, useState} from 'react';
-import {Dropdown} from 'react-native-element-dropdown';
-import {RecommendedBookModal} from '../book/RecommendedBookModal';
+import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
+import { useEffect, useState } from 'react';
+import { Dropdown } from 'react-native-element-dropdown';
 
 export const Home = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
-  const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const maxNameLength = 15;
 
@@ -46,16 +44,6 @@ export const Home = () => {
     getLevel();
   }, []);
 
-  // TODO : do not show popup
-  useEffect(() => {
-    const showRecommendedBook = () => {
-      const cutoff = 1.01;
-      const show = Math.random();
-      show > cutoff ? setShowModal(true) : setShowModal(false);
-    };
-    showRecommendedBook();
-  }, []);
-
   const saveName = async (name: string) => {
     if (name.length === 0) {
       setErrorMessage('Enter a name');
@@ -77,7 +65,6 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      {showModal ? <RecommendedBookModal /> : null}
       <View style={styles.user}>
         <UserIcon size={100} color="grey" />
       </View>
