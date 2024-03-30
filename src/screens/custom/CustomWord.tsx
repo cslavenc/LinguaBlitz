@@ -30,6 +30,7 @@ const initialValues: WordDetail = {
   partOfSpeech: '',
   description: '',
   example: '',
+  hint: '',
   category: '',
   level: 'custom',
   synonyms: [],

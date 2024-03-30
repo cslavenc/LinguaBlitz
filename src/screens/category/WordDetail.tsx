@@ -23,6 +23,7 @@ export interface WordDetail {
   level: string;
   description: string;
   example: string;
+  hint: string;
   partOfSpeech: string;
   category: string;
   synonyms: string[];

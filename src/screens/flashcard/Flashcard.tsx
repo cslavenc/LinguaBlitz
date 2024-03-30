@@ -25,6 +25,7 @@ const initialState: WordDetail = {
   partOfSpeech: '',
   description: '',
   example: '',
+  hint: '',
   category: '',
   level: 'custom',
   synonyms: [],
@@ -281,11 +282,11 @@ export const Flashcard = ({ route }) => {
             <Animated.View style={[styles.animation, frontAnimatedStyle]}>
               <View style={styles.title}>
                 <Text style={styles.word}>
-                  {currentFlashcard.description ? (
-                    currentFlashcard.description
+                  {currentFlashcard.hint ? (
+                    <Text style={styles.hint}>{currentFlashcard.hint}</Text>
                   ) : (
-                    <Text style={{ fontStyle: 'italic' }}>
-                      no description available
+                    <Text style={{ fontStyle: 'italic', fontSize: 24, }}>
+                      no hint available
                     </Text>
                   )}
                 </Text>
@@ -361,6 +362,12 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     fontSize: 28,
     fontWeight: 'bold',
+  },
+  hint: {
+    fontWeight: "normal",
+    fontSize: 24,
+    //width: "100%", /* Ensure the container takes the full width */
+    //textAlign: "justify", /* Align text to both edges */
   },
   partOfSpeech: {
     paddingTop: 18,
