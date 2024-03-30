@@ -37,8 +37,6 @@ export const Flashcard = ({ route }) => {
   const [seenFlashcards, setSeenFlashcards] = useState<WordDetail[]>([]);
   const [currentFlashcard, setCurrentFlashcard] =
     useState<WordDetail>(initialState);
-  const [bookmark, setBookmark] = useState<boolean>(false);
-  const [flashcard, setFlashcard] = useState<boolean>(false);
 
   // card flip animation states
   const flipAnimation = useRef(new Animated.Value(0)).current;
@@ -67,8 +65,6 @@ export const Flashcard = ({ route }) => {
       if (shuffledWords.length > 0) {
         setCurrentFlashcard(shuffledWords[0]);
         setSeenFlashcards([shuffledWords[0]]);
-        setBookmark(shuffledWords[0].bookmark);
-        setFlashcard(shuffledWords[0].flashcard);
       }
     };
     initializeData();
@@ -79,8 +75,6 @@ export const Flashcard = ({ route }) => {
     if (item) {
       flipToFront(0);
       setCurrentFlashcard(item);
-      setBookmark(item.bookmark);
-      setFlashcard(item.flashcard);
       if (!seenFlashcards.find((flashcard) => flashcard.id === item.id)) {
         seenFlashcards.push(item);
         setSeenFlashcards(seenFlashcards);
@@ -102,104 +96,6 @@ export const Flashcard = ({ route }) => {
     );
     const previous = idx - 1 >= 0 ? data[idx - 1] : data[data.length - 1];
     navigation.navigate('My Flashcards', { item: previous });
-  };
-
-  const handleBookmark = async () => {
-    setBookmark(!bookmark);
-    const idx = data.findIndex((word) => word.id === currentFlashcard.id);
-    data[idx].bookmark = !bookmark;
-
-    if (currentFlashcard.level.toLowerCase().includes('custom')) {
-      try {
-        const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-        const customWords: WordDetail[] = rawCustomWords
-          ? JSON.parse(rawCustomWords)
-          : [];
-
-        customWords.map((word) => {
-          if (word.id === currentFlashcard.id) {
-            word.bookmark = !bookmark;
-          }
-        });
-
-        await AsyncStorage.setItem(
-          CUSTOM_WORDS_KEY,
-          JSON.stringify(customWords)
-        );
-      } catch (error) {
-        throw new Error(error);
-      }
-    } else {
-      try {
-        const rawPreloadedWords =
-          await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
-        const preloadedWords: WordDetail[] = rawPreloadedWords
-          ? JSON.parse(rawPreloadedWords)
-          : [];
-
-        preloadedWords.map((word) => {
-          if (word.id === currentFlashcard.id) {
-            word.bookmark = !bookmark;
-          }
-        });
-
-        await AsyncStorage.setItem(
-          PRELOADED_WORDS_KEY,
-          JSON.stringify(preloadedWords)
-        );
-      } catch (error) {
-        throw new Error(error);
-      }
-    }
-  };
-
-  const handleFlashcard = async () => {
-    setFlashcard(!flashcard);
-    const idx = data.findIndex((word) => word.id === currentFlashcard.id);
-    data[idx].flashcard = !flashcard;
-
-    if (currentFlashcard.level.toLowerCase().includes('custom')) {
-      try {
-        const rawCustomWords = await AsyncStorage.getItem(CUSTOM_WORDS_KEY);
-        const customWords: WordDetail[] = rawCustomWords
-          ? JSON.parse(rawCustomWords)
-          : [];
-
-        customWords.map((word) => {
-          if (word.id === currentFlashcard.id) {
-            word.flashcard = !flashcard;
-          }
-        });
-
-        await AsyncStorage.setItem(
-          CUSTOM_WORDS_KEY,
-          JSON.stringify(customWords)
-        );
-      } catch (error) {
-        throw new Error(error);
-      }
-    } else {
-      try {
-        const rawPreloadedWords =
-          await AsyncStorage.getItem(PRELOADED_WORDS_KEY);
-        const preloadedWords: WordDetail[] = rawPreloadedWords
-          ? JSON.parse(rawPreloadedWords)
-          : [];
-
-        preloadedWords.map((word) => {
-          if (word.id === currentFlashcard.id) {
-            word.flashcard = !flashcard;
-          }
-        });
-
-        await AsyncStorage.setItem(
-          PRELOADED_WORDS_KEY,
-          JSON.stringify(preloadedWords)
-        );
-      } catch (error) {
-        throw new Error(error);
-      }
-    }
   };
 
   const flipToFront = (duration: number) => {
