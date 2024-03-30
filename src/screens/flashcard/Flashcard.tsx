@@ -77,6 +77,7 @@ export const Flashcard = ({ route }) => {
   useEffect(() => {
     // executes only when pressing "Next" or "Previous" button
     if (item) {
+      flipToFront(0);
       setCurrentFlashcard(item);
       setBookmark(item.bookmark);
       setFlashcard(item.flashcard);
@@ -92,7 +93,6 @@ export const Flashcard = ({ route }) => {
       (current: WordDetail) => current.id === currentFlashcard.id
     );
     const next = idx + 1 < data.length ? data[idx + 1] : data[0];
-    flipToFront(0);
     navigation.navigate('My Flashcards', { item: next });
   };
 
@@ -101,7 +101,6 @@ export const Flashcard = ({ route }) => {
       (current: WordDetail) => current.id === currentFlashcard.id
     );
     const previous = idx - 1 >= 0 ? data[idx - 1] : data[data.length - 1];
-    flipToFront(0);
     navigation.navigate('My Flashcards', { item: previous });
   };
 
