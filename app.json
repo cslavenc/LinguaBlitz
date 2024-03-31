@@ -23,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.expo.x30x5.LinguaBlitz",
-      "versionCode": 16
+      "versionCode": 17
     },
     "web": {
       "favicon": "./assets/favicon.png"
