@@ -15,6 +15,7 @@ const customWordValidationSchema = yup.object().shape({
   word: yup.string().required('Word is required'),
   description: yup.string().required('Description is required'),
   category: yup.string().required('Category is required'),
+  hint: yup.string().max(50, 'Hint is too long'),
 });
 
 const initialValues: WordDetail = {
@@ -134,6 +135,27 @@ export const CustomWord = () => {
               />
               {errors.description && touched.description && (
                 <Text style={styles.error}>{errors.description}</Text>
+              )}
+            </View>
+            <View style={styles.inputGroup}>
+              <Text style={styles.heading}>Hint for Flashcard</Text>
+              <TextInput
+                textAlignVertical="top"
+                multiline={true}
+                style={[
+                  styles.input,
+                  errors.hint && touched.hint
+                    ? styles.errorInput
+                    : null,
+                ]}
+                underlineColorAndroid="transparent"
+                name="hint"
+                onChangeText={handleChange('hint')}
+                onBlur={handleBlur('hint')}
+                value={values.hint}
+              />
+              {errors.hint && touched.hint && (
+                <Text style={styles.error}>{errors.hint}</Text>
               )}
             </View>
             <View style={styles.inputGroup}>
