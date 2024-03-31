@@ -1,13 +1,6 @@
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
@@ -214,7 +207,7 @@ export const CustomWord = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    marginHorizontal: 36,
+    marginHorizontal: 26,
     display: 'flex',
     flexDirection: 'column',
   },
