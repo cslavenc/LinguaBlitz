@@ -51,7 +51,7 @@ export const WordList = () => {
           setLevel(JSON.parse(currentLevel).split(' ')[0]);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     getCurrentLevel();
