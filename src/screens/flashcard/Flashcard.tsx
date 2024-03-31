@@ -87,10 +87,11 @@ export const Flashcard = ({ route }) => {
     const idx = data.findIndex(
       (current: WordDetail) => current.id === currentFlashcard.id
     );
+    console.log(idx)
 
     if (idx + 1 < data.length) {
-    //const next = idx + 1 < data.length ? data[idx + 1] : data[0];
       const next = data[idx + 1];
+      console.log(next)
       navigation.navigate('My Flashcards', { item: next });
     } else {
       setEndIsReached(true)
@@ -98,10 +99,10 @@ export const Flashcard = ({ route }) => {
   };
 
   const handlePrevious = () => {
-    const idx = data.findIndex(
-      (current: WordDetail) => current.id === currentFlashcard.id
+    const idx = seenFlashcards.findIndex(
+      (seen: WordDetail) => seen.id === currentFlashcard.id
     );
-    const previous = idx - 1 >= 0 ? data[idx - 1] : data[data.length - 1];
+    const previous = idx - 1 >= 0 ? seenFlashcards[idx - 1] : seenFlashcards[0];
     navigation.navigate('My Flashcards', { item: previous });
   };
 
@@ -147,6 +148,7 @@ export const Flashcard = ({ route }) => {
 
   const restart = () => {
     const shuffled = shuffle(seenFlashcards);
+    console.log("restart: ", shuffled)
     setData(shuffled);
     setCurrentFlashcard(shuffled[0])
     setSeenFlashcards([shuffled[0]]);
@@ -160,7 +162,9 @@ export const Flashcard = ({ route }) => {
       data.length > 0 ? (
         <View style={styles.container}>
           <Text>
-            {seenFlashcards.length}/{data.length}
+            {seenFlashcards.findIndex(
+              (seen: WordDetail) => seen.id === currentFlashcard.id
+            ) + 1}/{data.length}
           </Text>
           <TouchableOpacity
             activeOpacity={1}
