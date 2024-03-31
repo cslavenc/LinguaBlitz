@@ -15,8 +15,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
-import { vw } from 'react-native-expo-viewport-units';
-
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -85,7 +83,7 @@ export const Home = () => {
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       )}
       <TouchableOpacity
-        style={styles.card}
+        style={[styles.card, { justifyContent: 'flex-start' }]}
         onPress={() => {
           navigation.navigate('My Vocabulary', {
             databaseKey: CUSTOM_WORDS_KEY,
@@ -100,7 +98,7 @@ export const Home = () => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.card}
+        style={[styles.card, { justifyContent: 'flex-start' }]}
         onPress={() => {
           navigation.navigate('My Flashcards', {
             color: 'white',
@@ -127,10 +125,10 @@ export const Home = () => {
           search={false}
           onChange={(item) => saveLevel(item.value)}
           placeholder={level}
-          placeholderStyle={{ fontSize: 22, paddingLeft: 5 }}
-          selectedTextStyle={{ fontSize: 22, paddingLeft: 5 }}
+          placeholderStyle={{ fontSize: 22, paddingLeft: 0 }}
+          selectedTextStyle={{ fontSize: 22, paddingLeft: 0 }}
           iconColor={theme.dark}
-          itemContainerStyle={[styles.level, { paddingHorizontal: 2 }]}
+          itemContainerStyle={[styles.level, { width: "100%", paddingHorizontal: 0 }]}
           itemTextStyle={{ fontSize: 20 }}
           showsVerticalScrollIndicator={false}
           renderRightIcon={DownArrow}
@@ -175,20 +173,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    marginLeft: 12,
+    width: "12%",
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   text: {
-    marginLeft: -vw(26), // -108, // TODO : is there a better way to move text to the left?
+    width: "80%",
     fontSize: 22,
   },
   arrow: {
-    marginRight: 12,
+    width: "5%"
   },
   level: {
-    width: '90%',
+    width: '88%',
     textAlign: 'center',
     borderBottomColor: theme.dark,
-    paddingHorizontal: 12,
+    paddingRight: 12,
   },
   errorMessage: {
     textAlign: 'center',
