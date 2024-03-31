@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: theme.white,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
