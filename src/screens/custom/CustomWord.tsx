@@ -202,6 +202,7 @@ export const CustomWord = () => {
             <View style={styles.buttonGroup}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Text
+                  allowFontScaling={false}
                   style={[
                     styles.button,
                     { backgroundColor: theme.secondaryRed },
@@ -211,6 +212,7 @@ export const CustomWord = () => {
               </TouchableOpacity>
               <TouchableOpacity onPress={handleSubmit}>
                 <Text
+                  allowFontScaling={false}
                   style={[
                     styles.button,
                     { backgroundColor: theme.secondaryBlue },
