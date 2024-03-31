@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   text: {
-    marginLeft: -108, // TODO : is there a better way to move text to the left?
+    marginLeft: "-33%", // -108, // TODO : is there a better way to move text to the left?
     fontSize: 22,
   },
   arrow: {
