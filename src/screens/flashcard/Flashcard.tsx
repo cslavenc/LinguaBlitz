@@ -213,26 +213,26 @@ export const Flashcard = ({ route }) => {
           </View>
           <View style={styles.buttonGroup}>
             <TouchableOpacity onPress={() => handlePrevious()}>
-              <Text style={styles.button}>Previous</Text>
+              <Text allowFontScaling={false} style={styles.button}>Previous</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleNext()}>
-              <Text style={styles.button}>Next</Text>
+              <Text allowFontScaling={false} style={styles.button}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
       ) : (
         <View style={styles.noFlashcardsContainer}>
-          <Text style={styles.noFlashcards}>
+          <Text allowFontScaling={false} style={styles.noFlashcards}>
             You haven't added any flashcards yet! Head over to <Text style={{fontWeight: 'bold'}}>Categories</Text> and
             add flashcards from a word list.
           </Text>
         </View>
       )
       : <View style={[styles.container, { marginTop: 12 }]}>
-          <Text style={styles.text}>You have reached the end! Do you want to try again?</Text>
+          <Text allowFontScaling={false} style={styles.text}>You have reached the end! Do you want to try again?</Text>
           <View style={[styles.buttonGroup, { justifyContent: "center", marginTop: 24 }]}>
             <TouchableOpacity onPress={restart}>
-              <Text style={[styles.button, { width: 160 }]}>Start again</Text>
+              <Text allowFontScaling={false} style={[styles.button, { width: 160 }]}>Start again</Text>
             </TouchableOpacity>
           </View>
       </View>
