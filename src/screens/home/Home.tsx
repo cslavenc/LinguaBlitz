@@ -15,6 +15,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ACCOUNT_NAME_KEY, LEVEL_KEY, Levels } from '../welcome/Welcome';
 import { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
+import { vw } from 'react-native-expo-viewport-units';
+
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
   card: {
     height: 48,
     backgroundColor: theme.white,
-    marginHorizontal: 24,
+    marginHorizontal: 18,  // previously: 24
     borderRadius: 10,
     display: 'flex',
     flexDirection: 'row',
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   text: {
-    marginLeft: "-33%", // -108, // TODO : is there a better way to move text to the left?
+    marginLeft: -vw(22), // -108, // TODO : is there a better way to move text to the left?
     fontSize: 22,
   },
   arrow: {
