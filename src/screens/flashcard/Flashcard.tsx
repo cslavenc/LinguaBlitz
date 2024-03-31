@@ -87,11 +87,9 @@ export const Flashcard = ({ route }) => {
     const idx = data.findIndex(
       (current: WordDetail) => current.id === currentFlashcard.id
     );
-    console.log(idx)
 
     if (idx + 1 < data.length) {
       const next = data[idx + 1];
-      console.log(next)
       navigation.navigate('My Flashcards', { item: next });
     } else {
       setEndIsReached(true)
@@ -148,12 +146,12 @@ export const Flashcard = ({ route }) => {
 
   const restart = () => {
     const shuffled = shuffle(seenFlashcards);
-    console.log("restart: ", shuffled)
     setData(shuffled);
     setCurrentFlashcard(shuffled[0])
     setSeenFlashcards([shuffled[0]]);
     flipToFront(0);
     setEndIsReached(false);
+    navigation.navigate('My Flashcards', { item: shuffled[0] });
   }
 
   return (
