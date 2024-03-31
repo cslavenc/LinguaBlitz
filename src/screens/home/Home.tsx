@@ -130,7 +130,7 @@ export const Home = () => {
           placeholderStyle={{ fontSize: 22, paddingLeft: 5 }}
           selectedTextStyle={{ fontSize: 22, paddingLeft: 5 }}
           iconColor={theme.dark}
-          itemContainerStyle={styles.level}
+          itemContainerStyle={[styles.level, { paddingHorizontal: 2 }]}
           itemTextStyle={{ fontSize: 20 }}
           showsVerticalScrollIndicator={false}
           renderRightIcon={DownArrow}
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   text: {
-    marginLeft: -vw(22), // -108, // TODO : is there a better way to move text to the left?
+    marginLeft: -vw(26), // -108, // TODO : is there a better way to move text to the left?
     fontSize: 22,
   },
   arrow: {
