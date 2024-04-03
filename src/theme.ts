@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 export const theme = {
   // brand colors
   white: '#fff',

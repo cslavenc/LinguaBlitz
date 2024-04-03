@@ -1,4 +1,15 @@
-import { Animated, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -37,7 +48,7 @@ export const Flashcard = ({ route }) => {
   const [seenFlashcards, setSeenFlashcards] = useState<WordDetail[]>([]);
   const [currentFlashcard, setCurrentFlashcard] =
     useState<WordDetail>(initialState);
-  const [endIsReached, setEndIsReached] = useState(false)
+  const [endIsReached, setEndIsReached] = useState(false);
 
   // card flip animation states
   const flipAnimation = useRef(new Animated.Value(0)).current;
@@ -58,7 +69,9 @@ export const Flashcard = ({ route }) => {
 
       preloadedWords.push(...customWords);
       if (category) {
-        preloadedWords = preloadedWords.filter(word => word.category === category)
+        preloadedWords = preloadedWords.filter(
+          (word) => word.category === category
+        );
       }
       const shuffledWords: WordDetail[] = shuffle(preloadedWords);
 
@@ -92,7 +105,7 @@ export const Flashcard = ({ route }) => {
       const next = data[idx + 1];
       navigation.navigate('My Flashcards', { item: next });
     } else {
-      setEndIsReached(true)
+      setEndIsReached(true);
     }
   };
 
@@ -147,96 +160,113 @@ export const Flashcard = ({ route }) => {
   const restart = () => {
     const shuffled = shuffle(seenFlashcards);
     setData(shuffled);
-    setCurrentFlashcard(shuffled[0])
+    setCurrentFlashcard(shuffled[0]);
     setSeenFlashcards([shuffled[0]]);
     flipToFront(0);
     setEndIsReached(false);
     navigation.navigate('My Flashcards', { item: shuffled[0] });
-  }
+  };
 
   return (
     <View>
-      {!endIsReached ?
-      data.length > 0 ? (
-        <View style={styles.container}>
-          <Text>
-            {seenFlashcards.findIndex(
-              (seen: WordDetail) => seen.id === currentFlashcard.id
-            ) + 1}/{data.length}
-          </Text>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => {
-              isFlipped ? flipToFront(300) : flipToBack();
-            }}>
-            <Animated.View
-              style={[
-                styles.animation,
-                backAnimatedStyle,
-                { position: 'absolute', width: '100%' },
-              ]}>
-              <View style={styles.title}>
-                <Text style={styles.word}>{currentFlashcard.word}</Text>
-                <Text style={styles.partOfSpeech}>
-                  {currentFlashcard.partOfSpeech
-                    ? `(${currentFlashcard.partOfSpeech})`
-                    : ''}
-                </Text>
-              </View>
-            </Animated.View>
-            <Animated.View style={[styles.animation, frontAnimatedStyle]}>
-              <View style={styles.title}>
-                <Text style={styles.word}>
-                  {currentFlashcard.hint ? (
-                    <Text style={styles.hint}>{currentFlashcard.hint}</Text>
-                  ) : (
-                    <Text style={{ fontStyle: 'italic', fontSize: 24, }}>
-                      no hint available
-                    </Text>
-                  )}
-                </Text>
-                <Text style={styles.partOfSpeech}>
-                  {currentFlashcard.partOfSpeech
-                    ? `(${currentFlashcard.partOfSpeech})`
-                    : ''}
-                </Text>
-              </View>
-            </Animated.View>
-          </TouchableOpacity>
-          <View style={styles.information}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={{ paddingBottom: 24 }}>
-                <Text style={styles.heading}>Example</Text>
-                <Text style={styles.text}>{currentFlashcard.example}</Text>
-              </View>
-            </ScrollView>
-          </View>
-          <View style={styles.buttonGroup}>
-            <TouchableOpacity onPress={() => handlePrevious()}>
-              <Text allowFontScaling={false} style={styles.button}>Previous</Text>
+      {!endIsReached ? (
+        data.length > 0 ? (
+          <View style={styles.container}>
+            <Text>
+              {seenFlashcards.findIndex(
+                (seen: WordDetail) => seen.id === currentFlashcard.id
+              ) + 1}
+              /{data.length}
+            </Text>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                isFlipped ? flipToFront(300) : flipToBack();
+              }}>
+              <Animated.View
+                style={[
+                  styles.animation,
+                  backAnimatedStyle,
+                  { position: 'absolute', width: '100%' },
+                ]}>
+                <View style={styles.title}>
+                  <Text style={styles.word}>{currentFlashcard.word}</Text>
+                  <Text style={styles.partOfSpeech}>
+                    {currentFlashcard.partOfSpeech
+                      ? `(${currentFlashcard.partOfSpeech})`
+                      : ''}
+                  </Text>
+                </View>
+              </Animated.View>
+              <Animated.View style={[styles.animation, frontAnimatedStyle]}>
+                <View style={styles.title}>
+                  <Text style={styles.word}>
+                    {currentFlashcard.hint ? (
+                      <Text style={styles.hint}>{currentFlashcard.hint}</Text>
+                    ) : (
+                      <Text style={{ fontStyle: 'italic', fontSize: 24 }}>
+                        no hint available
+                      </Text>
+                    )}
+                  </Text>
+                  <Text style={styles.partOfSpeech}>
+                    {currentFlashcard.partOfSpeech
+                      ? `(${currentFlashcard.partOfSpeech})`
+                      : ''}
+                  </Text>
+                </View>
+              </Animated.View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleNext()}>
-              <Text allowFontScaling={false} style={styles.button}>Next</Text>
-            </TouchableOpacity>
+            <View style={styles.information}>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{ paddingBottom: 24 }}>
+                  <Text style={styles.heading}>Example</Text>
+                  <Text style={styles.text}>{currentFlashcard.example}</Text>
+                </View>
+              </ScrollView>
+            </View>
+            <View style={styles.buttonGroup}>
+              <TouchableOpacity onPress={() => handlePrevious()}>
+                <Text allowFontScaling={false} style={styles.button}>
+                  Previous
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleNext()}>
+                <Text allowFontScaling={false} style={styles.button}>
+                  Next
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        ) : (
+          <View style={styles.noFlashcardsContainer}>
+            <Text allowFontScaling={false} style={styles.noFlashcards}>
+              You haven't added any flashcards yet! Head over to{' '}
+              <Text style={{ fontWeight: 'bold' }}>Categories</Text> and add
+              flashcards from a word list.
+            </Text>
+          </View>
+        )
       ) : (
-        <View style={styles.noFlashcardsContainer}>
-          <Text allowFontScaling={false} style={styles.noFlashcards}>
-            You haven't added any flashcards yet! Head over to <Text style={{fontWeight: 'bold'}}>Categories</Text> and
-            add flashcards from a word list.
+        <View style={[styles.container, { marginTop: 12 }]}>
+          <Text allowFontScaling={false} style={styles.text}>
+            You have reached the end! Do you want to try again?
           </Text>
-        </View>
-      )
-      : <View style={[styles.container, { marginTop: 12 }]}>
-          <Text allowFontScaling={false} style={styles.text}>You have reached the end! Do you want to try again?</Text>
-          <View style={[styles.buttonGroup, { justifyContent: "center", marginTop: 24 }]}>
+          <View
+            style={[
+              styles.buttonGroup,
+              { justifyContent: 'center', marginTop: 24 },
+            ]}>
             <TouchableOpacity onPress={restart}>
-              <Text allowFontScaling={false} style={[styles.button, { width: 160 }]}>Start again</Text>
+              <Text
+                allowFontScaling={false}
+                style={[styles.button, { width: 160 }]}>
+                Start again
+              </Text>
             </TouchableOpacity>
           </View>
-      </View>
-      }
+        </View>
+      )}
     </View>
   );
 };
@@ -278,7 +308,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   hint: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
     fontSize: 24,
   },
   partOfSpeech: {
@@ -319,7 +349,7 @@ const styles = StyleSheet.create({
     height: '75%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   noFlashcards: {
     lineHeight: 30,

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from './home/Home';
 import { CategoryOverview } from './category/CategoryOverview';

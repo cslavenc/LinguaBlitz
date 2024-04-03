@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
@@ -75,7 +79,9 @@ export const Category = () => {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.wordList}
-        onPress={() => navigation.navigate('My Flashcards', {category: category})}>
+        onPress={() =>
+          navigation.navigate('My Flashcards', { category: category })
+        }>
         <FlashcardsIcon />
         <Text style={[styles.text, { color: theme.primaryRed }]}>
           Flashcards

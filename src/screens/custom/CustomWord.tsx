@@ -1,6 +1,17 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { theme } from '../../theme';
@@ -144,9 +155,7 @@ export const CustomWord = () => {
                 multiline={true}
                 style={[
                   styles.input,
-                  errors.hint && touched.hint
-                    ? styles.errorInput
-                    : null,
+                  errors.hint && touched.hint ? styles.errorInput : null,
                 ]}
                 underlineColorAndroid="transparent"
                 name="hint"

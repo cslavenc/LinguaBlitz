@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import React from 'react';
 import Svg, { Circle, ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
 import { Icon } from '../../components/Icons';

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import { StyleSheet, View } from 'react-native';
 import { BookItem } from './BookItem';
 import { BookData } from './BookData';

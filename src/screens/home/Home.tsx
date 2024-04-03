@@ -1,4 +1,14 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { theme } from '../../theme';
 import {
   BookmarkFilledIcon,
@@ -128,7 +138,10 @@ export const Home = () => {
           placeholderStyle={{ fontSize: 22, paddingLeft: 0 }}
           selectedTextStyle={{ fontSize: 22, paddingLeft: 0 }}
           iconColor={theme.dark}
-          itemContainerStyle={[styles.level, { width: "100%", paddingHorizontal: 0 }]}
+          itemContainerStyle={[
+            styles.level,
+            { width: '100%', paddingHorizontal: 0 },
+          ]}
           itemTextStyle={{ fontSize: 20 }}
           showsVerticalScrollIndicator={false}
           renderRightIcon={DownArrow}
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
   card: {
     height: 48,
     backgroundColor: theme.white,
-    marginHorizontal: 18,  // previously: 24
+    marginHorizontal: 18, // previously: 24
     borderRadius: 10,
     display: 'flex',
     flexDirection: 'row',
@@ -173,16 +186,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: "12%",
+    width: '12%',
     paddingLeft: 12,
     paddingRight: 12,
   },
   text: {
-    width: "80%",
+    width: '80%',
     fontSize: 22,
   },
   arrow: {
-    width: "5%"
+    width: '5%',
   },
   level: {
     width: '88%',

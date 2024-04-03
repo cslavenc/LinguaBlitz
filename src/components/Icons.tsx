@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import React from 'react';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { theme } from '../theme';
@@ -168,8 +172,8 @@ export const BookmarkPlusIcon = () => {
   );
 };
 
-export const BookmarkFilledIcon = ({color}) => {
-  const fill = color ?? "red"
+export const BookmarkFilledIcon = ({ color }) => {
+  const fill = color ?? 'red';
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -196,9 +200,9 @@ export const FlashcardIcon = () => {
   );
 };
 
-export const FlashcardFilledIcon = ({color}) => {
-    const fill = color ?? "red"
-    return (
+export const FlashcardFilledIcon = ({ color }) => {
+  const fill = color ?? 'red';
+  return (
     <Svg
       fill={fill}
       width="26"
