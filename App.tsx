@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024 LinguaBlitz.
+ */
+
 import 'react-native-gesture-handler';
 import {
   Dimensions,
