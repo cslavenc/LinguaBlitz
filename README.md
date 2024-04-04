@@ -8,6 +8,12 @@ For Android:
   it not in the list yet) and press "a" (for Android)
   &rarr; this will automatically display your app when you run it from IntelliJ
 
+Using your own Android device:
+
+- download "expo go" from the play store onto the device
+- run "npm run start:tunnel" which will create a QR code that a physical device can scan with the expo go app.
+  The project will be loaded on that device.
+
 ## Development
 
 - `npx depcheck` to check for unused dependencies
