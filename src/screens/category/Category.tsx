@@ -65,7 +65,7 @@ export const Category = () => {
         style={styles.wordList}
         onPress={() =>
           category !== CategoryEnum.MY_VOCABULARY ||
-          category !== CategoryEnum.OTHERS
+          category !== CategoryEnum.ALL
             ? handleNavigate('Word list', category)
             : navigation.navigate('My Vocabulary', {
                 databaseKey: CUSTOM_WORDS_KEY,

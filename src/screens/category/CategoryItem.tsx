@@ -27,7 +27,7 @@ export const CategoryItem = ({ category }) => {
         onPress={() => handleNavigate(category)}>
         <View style={{ alignSelf: 'center' }}>{categoryIcon}</View>
       </TouchableOpacity>
-      {category !== Category.MY_VOCABULARY || category !== Category.OTHERS ? (
+      {category !== Category.MY_VOCABULARY || category !== Category.ALL ? (
         <Text style={styles.name}>{category}</Text>
       ) : null}
     </View>

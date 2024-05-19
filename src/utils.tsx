@@ -42,7 +42,7 @@ export enum Category {
   TRAVEL = 'Travel',
   HEALTH = 'Health',
   EMOTIONS = 'Emotions',
-  OTHERS = 'Other',
+  ALL = 'All Words',
   MY_VOCABULARY = 'My Vocabulary',
 }
 
@@ -96,10 +96,10 @@ export const getCategoryIcon = (course: string) => {
           <Text style={styles.text}>My Vocabulary</Text>
         </View>
       );
-    case Category.OTHERS:
+    case Category.ALL:
       return (
         <View>
-          <Text style={styles.text}>Other Words</Text>
+          <Text style={styles.text}>All Words</Text>
         </View>
       );
     default:

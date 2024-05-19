@@ -22,7 +22,7 @@ import { SearchIcon } from '../../components/Icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LEVEL_KEY } from '../welcome/Welcome';
 import { CATEGORY_KEY } from './CategoryItem';
-import { CUSTOM_WORDS_KEY } from '../../utils';
+import { Category, CUSTOM_WORDS_KEY } from '../../utils';
 
 export const WordList = () => {
   const navigation = useNavigation();
@@ -74,11 +74,16 @@ export const WordList = () => {
   useEffect(() => {
     const initializeVocabulary = async () => {
       if (!!allVocabularyData) {
-        const filteredVocabulary: WordDetail[] = allVocabularyData
-          .filter((word: WordDetail) =>
-            word?.level.includes(level.split(' ')[0])
-          )
-          .filter((word: WordDetail) => word?.category?.includes(category));
+        const filteredVocabulary: WordDetail[] =
+          category !== Category.ALL
+            ? allVocabularyData
+                .filter((word: WordDetail) =>
+                  word?.level.includes(level.split(' ')[0])
+                )
+                .filter((word: WordDetail) =>
+                  word?.category?.includes(category)
+                )
+            : allVocabularyData;
 
         const customWords = await getCustomWords();
         filteredVocabulary.push(...customWords);
@@ -96,7 +101,7 @@ export const WordList = () => {
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     if (event.nativeEvent.text.length > 1) {
-      let filtered = filteredWords.filter((item: WordDetail) =>
+      let filtered = vocabulary.filter((item: WordDetail) =>
         item.word.toLowerCase().startsWith(event.nativeEvent.text.toLowerCase())
       );
       setFilteredWords(filtered);
