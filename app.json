@@ -3,6 +3,7 @@
     "name": "LinguaBlitz",
     "slug": "LinguaBlitz",
     "version": "1.0.0",
+    "sdkVersion": "51.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -23,7 +24,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.expo.x30x5.LinguaBlitz",
-      "versionCode": 21
+      "versionCode": 25
     },
     "web": {
       "favicon": "./assets/favicon.png"
