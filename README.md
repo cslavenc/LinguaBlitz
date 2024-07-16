@@ -26,6 +26,13 @@ Make sure, the eas cli is installed: `npm install -g eas-cli`
 - [Submit to Play Store](https://docs.expo.dev/submit/android/)
 - [Automate submissions](https://docs.expo.dev/build/automate-submissions/)
 
+## Update target android SDK version with expo
+
+- update with `npm i expo` to the latest or a suitable version
+- update dependencies with `expo install --fix`
+- in `app.json` update the `sdkVersion` property which defines the `expo` version
+- build with `eas build -p android` which will based on the `sdkVersion` of expo target the correct android SDK version
+
 ## Troubleshooting
 
 - press "r" to reload
